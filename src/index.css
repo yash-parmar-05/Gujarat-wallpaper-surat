@@ -1,0 +1,375 @@
+/* Local Font Declarations — Instant Paint on Refresh (Zero FOUT / Font Jump) */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 400;
+  font-display: block;
+  src: url('/fonts/cormorant-garamond-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: block;
+  src: url('/fonts/cormorant-garamond-600.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: block;
+  src: url('/fonts/cormorant-garamond-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 300 400;
+  font-display: block;
+  src: url('/fonts/plus-jakarta-sans-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('/fonts/plus-jakarta-sans-500.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: block;
+  src: url('/fonts/plus-jakarta-sans-600.ttf') format('truetype');
+}
+
+/* GLOBAL LUXURY THEME TOKENS */
+:root,
+:root[data-theme="dark"] {
+  --bg-primary: #121110;
+  --bg-secondary: #171614;
+  --bg-surface: #1B1A17;
+  --bg-card: #1E1D1B;
+  --bg-card-hover: #252320;
+  --bg-alt: #161513;
+
+  --text-primary: #F7F4EE;
+  --text-secondary: #C8C2B7;
+  --text-muted: #948E85;
+  --text-inverse: #141312;
+
+  --accent-gold: #C5A880;
+  --accent-gold-hover: #DFCAAD;
+  --accent-gold-light: rgba(197, 168, 128, 0.12);
+  --accent-gold-glow: rgba(197, 168, 128, 0.25);
+
+  --border-subtle: rgba(245, 242, 236, 0.08);
+  --border-card: rgba(197, 168, 128, 0.22);
+  --border-card-hover: rgba(197, 168, 128, 0.45);
+
+  --navbar-bg: rgba(20, 19, 18, 0.95);
+  --navbar-blur-border: rgba(245, 242, 236, 0.08);
+  --drawer-bg: rgba(18, 17, 16, 0.98);
+
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(245, 242, 236, 0.12);
+  --input-text: #F7F4EE;
+  --input-placeholder: #8A857E;
+
+  --font-serif: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme="light"] {
+  --bg-primary: #FBF9F5;
+  --bg-secondary: #F4EFEA;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FAF7F2;
+  --bg-alt: #F0EAE1;
+
+  --text-primary: #1C1917;
+  --text-secondary: #57534E;
+  --text-muted: #8C827A;
+  --text-inverse: #F7F4EE;
+
+  --accent-gold: #A68353;
+  --accent-gold-hover: #8D6B3C;
+  --accent-gold-light: rgba(166, 131, 83, 0.12);
+  --accent-gold-glow: rgba(166, 131, 83, 0.25);
+
+  --border-subtle: rgba(28, 25, 23, 0.09);
+  --border-card: rgba(166, 131, 83, 0.22);
+  --border-card-hover: rgba(166, 131, 83, 0.45);
+
+  --navbar-bg: rgba(251, 249, 245, 0.95);
+  --navbar-blur-border: rgba(28, 25, 23, 0.08);
+  --drawer-bg: rgba(251, 249, 245, 0.98);
+
+  --input-bg: #FFFFFF;
+  --input-border: rgba(28, 25, 23, 0.16);
+  --input-text: #1C1917;
+  --input-placeholder: #A8A29E;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header, footer, section, .theme-transition {
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Luxury utilities */
+.container-luxury {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 1024px) {
+  .container-luxury {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-luxury {
+    padding: 0 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-luxury {
+    padding: 0 1rem;
+  }
+}
+
+/* Touch-friendly minimum tap target */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Prevent horizontal overflow globally */
+*, *::before, *::after {
+  min-width: 0;
+}
+
+.sub-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-gold);
+}
+
+.sub-tag::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background-color: var(--accent-gold);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  padding: 0.9rem 2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  border: 1px solid var(--text-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-gold-glow);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: transparent;
+  color: var(--text-primary);
+  padding: 0.9rem 2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-medium);
+  transition: all var(--transition-normal);
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.btn-light {
+  background-color: var(--text-light);
+  color: var(--bg-dark);
+  border: 1px solid var(--text-light);
+}
+
+.btn-light:hover {
+  background-color: var(--accent-gold);
+  color: #FFFFFF;
+  border-color: var(--accent-gold);
+}
+
+.btn-light-secondary {
+  background-color: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+}
+
+.btn-light-secondary:hover {
+  background-color: var(--text-light);
+  color: var(--bg-dark);
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold-hover);
+}
+
+/* Image zoom effect */
+.img-zoom-container {
+  overflow: hidden;
+}
+
+.img-zoom-container img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-zoom-container:hover img {
+  transform: scale(1.06);
+}
+
+/* Accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

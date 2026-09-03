@@ -1,0 +1,90 @@
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Lenis from 'lenis';
+
+import ScrollToTop from './components/ScrollToTop';
+import Preloader from './components/Preloader';
+import Layout from './components/Layout';
+
+import Home from './pages/Home';
+
+import ProductsPage from './pages/ProductsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import GalleryPage from './pages/GalleryPage';
+import WhyChooseUsPage from './pages/WhyChooseUsPage';
+import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
+import { ThemeProvider } from './context/ThemeContext';
+
+export default function App() {
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  // Initial site load timer — ensures fonts & assets are ready only once on first load
+  useEffect(() => {
+    let isMounted = true;
+    const minTimer = new Promise((resolve) => setTimeout(resolve, 1100));
+    const fontsPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+
+    Promise.all([minTimer, fontsPromise]).then(() => {
+      if (isMounted) {
+        setInitialLoading(false);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.5,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    const rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
+
+  return (
+    <ThemeProvider>
+      {/* Site-wide preloader runs only once on initial website visit */}
+      <Preloader isLoading={initialLoading} />
+
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<Layout />}>
+            {/* Root redirect to /home */}
+            <Route path="/" element={<Navigate to="/home" replace />} />
+
+            {/* Individual Page Routes */}
+            <Route path="/home" element={<Home />} />
+            <Route path="/collections" element={<Navigate to="/products" replace />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
+
+            <Route path="/contact" element={<ContactPage />} />
+
+            {/* 404 Fallback */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+}
