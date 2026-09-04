@@ -50,9 +50,6 @@ export default function Navbar() {
     return location.pathname === path;
   };
 
-  const isDarkHeroPage = location.pathname === '/home' || location.pathname === '/';
-  const hasSolidBg = scrolled || !isDarkHeroPage;
-
   return (
     <>
       <header
@@ -62,18 +59,17 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 100,
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          backgroundColor: hasSolidBg 
-            ? (isDark ? 'rgba(20, 19, 18, 0.95)' : 'rgba(251, 249, 245, 0.96)')
-            : (isDark 
-                ? 'linear-gradient(to bottom, rgba(20, 19, 18, 0.7) 0%, rgba(20, 19, 18, 0) 100%)' 
-                : 'linear-gradient(to bottom, rgba(251, 249, 245, 0.88) 0%, rgba(251, 249, 245, 0) 100%)'),
-          backdropFilter: hasSolidBg ? 'blur(16px)' : 'none',
-          WebkitBackdropFilter: hasSolidBg ? 'blur(16px)' : 'none',
-          borderBottom: hasSolidBg 
-            ? (isDark ? '1px solid rgba(245, 242, 236, 0.08)' : '1px solid rgba(28, 25, 23, 0.08)') 
-            : '1px solid transparent',
-          padding: scrolled ? '0.9rem 0' : '1.35rem 0',
+          transition: 'background-color 0.35s ease, border-color 0.35s ease, padding 0.3s ease',
+          backgroundColor: isDark ? 'rgba(18, 17, 16, 0.92)' : 'rgba(251, 249, 245, 0.94)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: isDark 
+            ? '1px solid rgba(245, 242, 236, 0.08)' 
+            : '1px solid rgba(28, 25, 23, 0.08)',
+          boxShadow: isDark 
+            ? (scrolled ? '0 4px 20px rgba(0, 0, 0, 0.4)' : 'none')
+            : (scrolled ? '0 4px 20px rgba(0, 0, 0, 0.06)' : 'none'),
+          padding: scrolled ? '0.85rem 0' : '1.15rem 0',
         }}
       >
         <div className="container-luxury" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
