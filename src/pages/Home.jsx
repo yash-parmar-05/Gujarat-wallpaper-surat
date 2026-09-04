@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  ArrowUpRight, 
-  Sparkles, 
-  MapPin, 
-  MessageCircle, 
-  ShieldCheck, 
-  Award, 
-  Layers, 
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  MapPin,
+  MessageCircle,
+  ShieldCheck,
+  Award,
+  Layers,
   Navigation,
   Eye,
   CheckCircle2,
@@ -17,13 +19,33 @@ import {
 
 import { useTheme } from '../context/ThemeContext';
 
+// 6 actual showroom photos converted from HEIC to JPEG (browser-compatible)
+const HERO_SLIDES = [
+  '/showroom/showroom-01.jpg',
+  '/showroom/showroom-02.jpg',
+  '/showroom/showroom-03.jpg',
+  '/showroom/showroom-04.jpg',
+  '/showroom/showroom-05.jpg',
+  '/showroom/showroom-06.jpg',
+];
+
+// Slide captions for accessibility and UX
+const HERO_SLIDE_LABELS = [
+  'Showroom Interiors – View 1',
+  'Showroom Interiors – View 2',
+  'Showroom Interiors – View 3',
+  'Showroom Interiors – View 4',
+  'Showroom Interiors – View 5',
+  'Showroom Interiors – View 6',
+];
+
 // Custom SVG Icons for Instagram & YouTube for precision luxury styling
 function InstagramIcon({ size = 22, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </svg>
   );
 }
@@ -31,28 +53,50 @@ function InstagramIcon({ size = 22, color = 'currentColor' }) {
 function YouTubeIcon({ size = 22, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
     </svg>
   );
 }
 
 export default function Home() {
   const navigate = useNavigate();
-  const { theme, isDark } = useTheme();
+  const { isDark } = useTheme();
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
 
-  // Dynamic Theme Colors
+  // Pre-cache all 6 showroom images once on mount
+  useEffect(() => {
+    HERO_SLIDES.forEach((slide) => {
+      const img = new Image();
+      img.src = slide;
+    });
+  }, []);
+
+  // Smooth automatic slideshow rotation
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const changeHeroSlide = (direction) => {
+    setActiveHeroSlide((prev) => (prev + direction + HERO_SLIDES.length) % HERO_SLIDES.length);
+  };
+
+  // Signature Luxury Dark Theme Colors
   const colors = {
-    bgMain: isDark ? '#121110' : '#FBF9F5',
-    bgSectionAlt: isDark ? '#161513' : '#F4EFEA',
-    bgCard: isDark ? '#181715' : '#FFFFFF',
-    bgCardHover: isDark ? '#201E1B' : '#FAF7F2',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#57534E',
-    textMuted: isDark ? '#948E85' : '#78716C',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    accentGoldHover: isDark ? '#DFCAAD' : '#8D6B3C',
-    borderSubtle: isDark ? 'rgba(245, 242, 236, 0.08)' : 'rgba(28, 25, 23, 0.08)',
-    borderCard: isDark ? 'rgba(197, 168, 128, 0.22)' : 'rgba(166, 131, 83, 0.25)',
+    bgMain: '#121110',
+    bgSectionAlt: '#161513',
+    bgCard: '#181715',
+    bgCardHover: '#201E1B',
+    textPrimary: '#F7F4EE',
+    textSecondary: '#C8C2B7',
+    textMuted: '#948E85',
+    accentGold: '#C5A880',
+    accentGoldHover: '#DFCAAD',
+    borderSubtle: 'rgba(245, 242, 236, 0.08)',
+    borderCard: 'rgba(197, 168, 128, 0.22)',
   };
 
   // 5 Curated Collections
@@ -119,120 +163,134 @@ export default function Home() {
   ];
 
   return (
-    <div 
-      style={{ 
-        position: 'relative', 
-        width: '100%', 
-        overflowX: 'hidden', 
-        backgroundColor: colors.bgMain, 
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        overflowX: 'hidden',
+        backgroundColor: colors.bgMain,
         color: colors.textPrimary,
         transition: 'background-color 0.35s ease, color 0.3s ease',
       }}
     >
 
+      {/* =========================================
+          HERO SECTION — Unified Luxury Showroom Slideshow
+          ========================================= */}
       <section
         id="hero"
         style={{
           position: 'relative',
           minHeight: '100vh',
+          width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          paddingTop: '7.5rem',
-          paddingBottom: '3.5rem',
+          justifyContent: 'space-between',
           backgroundColor: colors.bgMain,
           overflow: 'hidden',
           transition: 'background-color 0.35s ease',
         }}
+        aria-label="Gujarat Wallpaper Showroom Hero Section"
       >
-        {/* Full-Bleed Wallpaper Visual Background */}
-        <motion.div
-          className="hero-wallpaper-layer"
-          initial={{ scale: 1.05, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: 'url(/assets/products/wallpaper-showcase.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'right 35%',
-            filter: isDark 
-              ? 'brightness(0.64) contrast(1.06) saturate(0.95)' 
-              : 'brightness(0.98) contrast(1.02) saturate(1.02)',
-            transition: 'filter 0.35s ease',
-          }}
-        />
-
-        {/* Master Theme-Aware Gradient Blend Overlays for Impeccable Readability */}
-        <div
-          className="hero-gradient-overlay"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: isDark
-              ? `
-                linear-gradient(to right, 
-                  rgba(20, 19, 18, 0.98) 0%, 
-                  rgba(20, 19, 18, 0.94) 38%, 
-                  rgba(20, 19, 18, 0.65) 58%, 
-                  rgba(20, 19, 18, 0.2) 80%, 
-                  rgba(20, 19, 18, 0.08) 100%),
-                linear-gradient(to top, 
-                  rgba(20, 19, 18, 0.98) 0%, 
-                  rgba(20, 19, 18, 0.4) 30%, 
-                  transparent 60%),
-                linear-gradient(to bottom, 
-                  rgba(20, 19, 18, 0.75) 0%, 
-                  transparent 22%)
-              `
-              : `
-                linear-gradient(to right, 
-                  rgba(251, 249, 245, 0.97) 0%, 
-                  rgba(251, 249, 245, 0.88) 30%, 
-                  rgba(251, 249, 245, 0.45) 50%, 
-                  rgba(251, 249, 245, 0.05) 70%, 
-                  transparent 85%),
-                linear-gradient(to top, 
-                  rgba(251, 249, 245, 0.85) 0%, 
-                  rgba(251, 249, 245, 0.25) 25%, 
-                  transparent 50%),
-                linear-gradient(to bottom, 
-                  rgba(251, 249, 245, 0.95) 0%, 
-                  rgba(251, 249, 245, 0.6) 12%, 
-                  transparent 28%)
-              `,
-            pointerEvents: 'none',
-            transition: 'background 0.35s ease',
-          }}
-        />
-
-        {/* Subtle Architectural Grid Accent Line */}
+        {/* ── 1. Full-Width Background Slideshow Stack ── */}
         <div
           style={{
             position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: '6%',
-            width: '1px',
-            backgroundColor: isDark ? 'rgba(247, 244, 238, 0.03)' : 'rgba(20, 19, 18, 0.03)',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 0,
+            overflow: 'hidden',
             pointerEvents: 'none',
           }}
-        />
+          aria-hidden="true"
+        >
+          {HERO_SLIDES.map((slide, slideIndex) => (
+            <motion.div
+              key={`hero-bg-${slide}`}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: slideIndex === activeHeroSlide ? 1 : 0,
+                scale: slideIndex === activeHeroSlide ? 1 : 1.025,
+              }}
+              transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                willChange: 'opacity, transform',
+              }}
+            >
+              <img
+                src={slide}
+                alt={HERO_SLIDE_LABELS[slideIndex]}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center 40%',
+                  display: 'block',
+                }}
+                loading={slideIndex === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </motion.div>
+          ))}
 
-        <div className="container-luxury" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <div style={{ maxWidth: '680px' }}>
-            {/* Eyebrow badge */}
+          {/* ── Seamless Multi-Directional Luxury Gradient Overlay (Subtle & Natural) ── */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: `linear-gradient(90deg, rgba(18, 17, 16, 0.78) 0%, rgba(18, 17, 16, 0.52) 36%, rgba(18, 17, 16, 0.18) 68%, rgba(18, 17, 16, 0.04) 100%), linear-gradient(180deg, rgba(18, 17, 16, 0.45) 0%, transparent 16%, transparent 78%, rgba(18, 17, 16, 0.75) 100%)`,
+              zIndex: 1,
+            }}
+          />
+        </div>
+
+        {/* ── 2. Unified Hero Content Canvas ── */}
+        <div
+          className="hero-main-container"
+          style={{
+            position: 'relative',
+            zIndex: 2,
+            width: '100%',
+            maxWidth: '1440px',
+            margin: '0 auto',
+            padding: '6.5rem 2rem 2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            flex: 1,
+          }}
+        >
+          {/* Upper Row: Left Brand Narrative & Right Minimal Luxury Slider Controls */}
+          <div
+            className="hero-upper-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'minmax(0, 1.25fr) minmax(0, 0.75fr)',
+              gap: '2.5rem',
+              alignItems: 'center',
+              marginBottom: '2.5rem',
+            }}
+          >
+            {/* Left Column: Brand Content */}
+            <div style={{ maxWidth: '640px' }} className="hero-text-block">
+              {/* Eyebrow badge */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
+                className="hero-eyebrow"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
                   padding: '0.4rem 0.95rem',
-                  backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.12)',
+                  backgroundColor: 'rgba(197, 168, 128, 0.12)',
+                  backdropFilter: 'blur(8px)',
                   border: `1px solid ${colors.borderCard}`,
                   borderRadius: '9999px',
                   fontSize: '0.72rem',
@@ -240,11 +298,12 @@ export default function Home() {
                   textTransform: 'uppercase',
                   color: colors.accentGold,
                   fontWeight: 600,
-                  marginBottom: '1.5rem',
+                  marginBottom: '1.4rem',
+                  width: 'fit-content',
                 }}
               >
                 <Sparkles size={13} />
-                SURAT SHOWROOM • GUJARAT WALLPAPER & DECOR
+                SURAT SHOWROOM • GUJARAT WALLPAPER &amp; DECOR
               </motion.div>
 
               {/* Main Heading */}
@@ -252,14 +311,16 @@ export default function Home() {
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="hero-heading"
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: 'clamp(2.75rem, 4.8vw, 4.4rem)',
+                  fontSize: 'clamp(2.6rem, 4.4vw, 4.4rem)',
                   lineHeight: 1.1,
                   color: colors.textPrimary,
                   fontWeight: 500,
                   letterSpacing: '0.01em',
-                  marginBottom: '1.5rem',
+                  marginBottom: '1.4rem',
+                  textShadow: '0 2px 16px rgba(0, 0, 0, 0.7)',
                 }}
               >
                 Transform Your Walls.
@@ -272,13 +333,15 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="hero-description"
                 style={{
                   fontSize: '1.08rem',
                   color: colors.textSecondary,
                   lineHeight: 1.7,
-                  maxWidth: '540px',
+                  maxWidth: '520px',
                   fontWeight: 300,
-                  marginBottom: '2.5rem',
+                  marginBottom: '2.2rem',
+                  textShadow: '0 1px 10px rgba(0, 0, 0, 0.6)',
                 }}
               >
                 Premium wallpapers, wall panels, carpets and decor solutions for homes, offices and commercial spaces.
@@ -293,9 +356,10 @@ export default function Home() {
                   display: 'flex',
                   alignItems: 'center',
                   flexWrap: 'wrap',
-                  gap: '1.25rem',
-                  marginBottom: '2.5rem',
+                  gap: '1.15rem',
+                  marginBottom: '2.2rem',
                 }}
+                className="hero-cta-buttons"
               >
                 <button
                   onClick={() => navigate('/products')}
@@ -305,7 +369,7 @@ export default function Home() {
                     gap: '0.65rem',
                     padding: '0.95rem 2rem',
                     backgroundColor: colors.accentGold,
-                    color: isDark ? '#141312' : '#FFFFFF',
+                    color: '#141312',
                     fontSize: '0.82rem',
                     fontWeight: 600,
                     letterSpacing: '0.12em',
@@ -318,10 +382,12 @@ export default function Home() {
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = colors.accentGoldHover;
                     e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(197,168,128,0.35)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = colors.accentGold;
                     e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
                   <span>EXPLORE COLLECTIONS</span>
@@ -335,7 +401,8 @@ export default function Home() {
                     alignItems: 'center',
                     gap: '0.65rem',
                     padding: '0.95rem 2rem',
-                    backgroundColor: 'transparent',
+                    backgroundColor: 'rgba(18, 17, 16, 0.6)',
+                    backdropFilter: 'blur(8px)',
                     color: colors.textPrimary,
                     fontSize: '0.82rem',
                     fontWeight: 500,
@@ -348,12 +415,12 @@ export default function Home() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = colors.accentGold;
-                    e.currentTarget.style.backgroundColor = isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)';
+                    e.currentTarget.style.backgroundColor = 'rgba(197, 168, 128, 0.15)';
                     e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = colors.borderCard;
-                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.backgroundColor = 'rgba(18, 17, 16, 0.6)';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
@@ -361,225 +428,218 @@ export default function Home() {
                 </button>
               </motion.div>
 
-            {/* 3 Value-Prop Highlights matching user reference mockup */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-                gap: '1.25rem',
-                maxWidth: '620px',
-                paddingTop: '1.25rem',
-                borderTop: `1px solid ${colors.borderSubtle}`,
-                marginBottom: '1.5rem',
-              }}
-              className="hero-badges-row"
-            >
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                <Award size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
-                    Premium Quality
-                  </div>
-                  <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
-                    Carefully curated materials
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                <Users size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
-                    Expert Guidance
-                  </div>
-                  <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
-                    Personalized support at every step
+              {/* 3 Value-Prop Highlights */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                  gap: '1.25rem',
+                  maxWidth: '560px',
+                  paddingTop: '1.25rem',
+                  borderTop: `1px solid ${colors.borderSubtle}`,
+                  marginBottom: '1.25rem',
+                }}
+                className="hero-badges-row"
+              >
+                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                  <Award size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
+                      Premium Quality
+                    </div>
+                    <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
+                      Carefully curated materials
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                <Layers size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
-                    Complete Solutions
-                  </div>
-                  <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
-                    Everything you need under one roof
+                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                  <Users size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
+                      Expert Guidance
+                    </div>
+                    <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
+                      Personalized support
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
 
-            {/* Showroom Location Hint */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.45 }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                fontSize: '0.78rem',
-                color: colors.textMuted,
-                fontWeight: 400,
-              }}
-            >
-              <MapPin size={14} color={colors.accentGold} />
-              <span>Showroom: Mangaldas Shopping Centre, Near Navjivan Circle, Surat</span>
-            </motion.div>
+                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                  <Layers size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
+                      Complete Solutions
+                    </div>
+                    <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
+                      Everything under one roof
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Showroom Location Hint */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.45 }}
+                className="hero-location-text"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  fontSize: '0.78rem',
+                  color: colors.textMuted,
+                  fontWeight: 400,
+                }}
+              >
+                <MapPin size={14} color={colors.accentGold} style={{ flexShrink: 0 }} />
+                <span>Showroom: Mangaldas Shopping Centre, Near Navjivan Circle, Surat</span>
+              </motion.div>
+            </div>
           </div>
 
-          {/* Floating Trust Strip Card — full width below content */}
+          {/* ── 3. Bottom Integrated Bar: Statistics ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            style={{ marginTop: '2.5rem' }}
+            className="hero-bottom-bar"
+            style={{
+              marginTop: '2.5rem',
+              padding: '1.2rem 1.8rem',
+              borderRadius: '16px',
+              backgroundColor: 'rgba(22, 20, 19, 0.85)',
+              backdropFilter: 'blur(20px)',
+              border: `1px solid rgba(197, 168, 128, 0.22)`,
+              boxShadow: '0 20px 48px rgba(0, 0, 0, 0.55)',
+            }}
           >
+            {/* Integrated Stats Grid */}
             <div
-              style={{
-                  borderRadius: '20px',
-                  backgroundColor: isDark ? 'rgba(24, 22, 21, 0.88)' : 'rgba(255, 255, 255, 0.94)',
-                  backdropFilter: 'blur(16px)',
-                  border: `1px solid ${isDark ? 'rgba(197, 168, 128, 0.25)' : 'rgba(215, 204, 188, 0.75)'}`,
-                  boxShadow: isDark ? '0 20px 50px rgba(0, 0, 0, 0.55)' : '0 20px 45px rgba(0, 0, 0, 0.07)',
-                  padding: '1.4rem 2rem',
-                }}
-              >
-            <div
+              className="hero-stats-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: '1.5rem',
                 alignItems: 'center',
               }}
-              className="trust-strip-grid"
             >
               {/* Stat 1: Instagram */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+              <div className="hero-stat-card" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                 <div
+                  className="hero-stat-icon"
                   style={{
-                    width: '44px',
-                    height: '44px',
+                    width: '42px',
+                    height: '42px',
                     borderRadius: '12px',
-                    border: `1px solid ${isDark ? 'rgba(197, 168, 128, 0.3)' : 'rgba(166, 131, 83, 0.3)'}`,
+                    border: '1px solid rgba(197, 168, 128, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: isDark ? 'rgba(197, 168, 128, 0.08)' : 'rgba(166, 131, 83, 0.08)',
+                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
                   }}
                 >
-                  <InstagramIcon size={20} color={colors.accentGold} />
+                  <InstagramIcon size={19} color={colors.accentGold} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.75rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
                     100K+
                   </div>
-                  <div style={{ fontSize: '0.66rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
-                    Instagram Community
-                  </div>
-                  <div style={{ fontSize: '0.72rem', color: colors.textMuted, marginTop: '2px' }}>
-                    Growing community of design lovers
+                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                    Instagram
                   </div>
                 </div>
               </div>
 
               {/* Stat 2: YouTube */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }} className="trust-strip-item">
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }}>
                 <div
+                  className="hero-stat-icon"
                   style={{
-                    width: '44px',
-                    height: '44px',
+                    width: '42px',
+                    height: '42px',
                     borderRadius: '12px',
-                    border: `1px solid ${isDark ? 'rgba(197, 168, 128, 0.3)' : 'rgba(166, 131, 83, 0.3)'}`,
+                    border: '1px solid rgba(197, 168, 128, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: isDark ? 'rgba(197, 168, 128, 0.08)' : 'rgba(166, 131, 83, 0.08)',
+                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
                   }}
                 >
-                  <YouTubeIcon size={20} color={colors.accentGold} />
+                  <YouTubeIcon size={19} color={colors.accentGold} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.75rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
                     160K+
                   </div>
-                  <div style={{ fontSize: '0.66rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
-                    YouTube Subscribers
-                  </div>
-                  <div style={{ fontSize: '0.72rem', color: colors.textMuted, marginTop: '2px' }}>
-                    Your trust and support are our strength
+                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                    YouTube
                   </div>
                 </div>
               </div>
 
               {/* Stat 3: Customers */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }} className="trust-strip-item">
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }}>
                 <div
+                  className="hero-stat-icon"
                   style={{
-                    width: '44px',
-                    height: '44px',
+                    width: '42px',
+                    height: '42px',
                     borderRadius: '12px',
-                    border: `1px solid ${isDark ? 'rgba(197, 168, 128, 0.3)' : 'rgba(166, 131, 83, 0.3)'}`,
+                    border: '1px solid rgba(197, 168, 128, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: isDark ? 'rgba(197, 168, 128, 0.08)' : 'rgba(166, 131, 83, 0.08)',
+                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
                   }}
                 >
-                  <Users size={20} color={colors.accentGold} />
+                  <Users size={19} color={colors.accentGold} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.75rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
                     10K+
                   </div>
-                  <div style={{ fontSize: '0.66rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
-                    Happy Customers
-                  </div>
-                  <div style={{ fontSize: '0.72rem', color: colors.textMuted, marginTop: '2px' }}>
-                    Helping transform homes and spaces
+                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                    Customers
                   </div>
                 </div>
               </div>
 
               {/* Stat 4: Excellence */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }} className="trust-strip-item">
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }}>
                 <div
+                  className="hero-stat-icon"
                   style={{
-                    width: '44px',
-                    height: '44px',
+                    width: '42px',
+                    height: '42px',
                     borderRadius: '12px',
-                    border: `1px solid ${isDark ? 'rgba(197, 168, 128, 0.3)' : 'rgba(166, 131, 83, 0.3)'}`,
+                    border: '1px solid rgba(197, 168, 128, 0.3)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: isDark ? 'rgba(197, 168, 128, 0.08)' : 'rgba(166, 131, 83, 0.08)',
+                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
                   }}
                 >
-                  <Award size={20} color={colors.accentGold} />
+                  <Award size={19} color={colors.accentGold} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.75rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
-                    5+ Years
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                    5+ Yrs
                   </div>
-                  <div style={{ fontSize: '0.66rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
-                    Of Trust &amp; Excellence
-                  </div>
-                  <div style={{ fontSize: '0.72rem', color: colors.textMuted, marginTop: '2px' }}>
-                    Delivering quality and commitment always
+                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                    Excellence
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </motion.div>
         </div>
       </section>
@@ -692,7 +752,7 @@ export default function Home() {
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      background: isDark 
+                      background: isDark
                         ? 'linear-gradient(to top, rgba(24, 23, 21, 0.95) 0%, transparent 60%)'
                         : 'linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 60%)',
                       pointerEvents: 'none',
@@ -1459,6 +1519,17 @@ export default function Home() {
 
       {/* Scoped CSS for Home Page Interactive Elements & Responsiveness */}
       <style>{`
+        /* -- Unified Full-Width Hero Styling -- */
+        .hero-main-container {
+          box-sizing: border-box;
+        }
+
+        /* Value badges transition */
+        .hero-badges-row {
+          transition: all 0.3s ease;
+        }
+
+        /* Card hover effects */
         .collection-preview-card:hover {
           transform: translateY(-6px);
           border-color: ${colors.accentGold} !important;
@@ -1466,10 +1537,6 @@ export default function Home() {
         }
         .collection-preview-card:hover .col-card-img {
           transform: scale(1.05);
-        }
-
-        .hero-badges-row {
-          transition: all 0.3s ease;
         }
 
         .why-preview-card:hover {
@@ -1500,7 +1567,9 @@ export default function Home() {
           color: #FFFFFF !important;
         }
 
-        /* Responsive Breakpoints */
+        /* -- Responsive Breakpoints -- */
+
+        /* Tablet Landscape */
         @media (max-width: 1024px) {
           .collections-grid {
             grid-template-columns: repeat(3, 1fr) !important;
@@ -1512,54 +1581,71 @@ export default function Home() {
           .why-preview-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
-          .trust-strip-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 1.5rem !important;
-          }
-          .trust-strip-item {
-            border-left: none !important;
-            padding-left: 0 !important;
-          }
           .social-cta-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
 
+        /* Tablet Portrait & Large Mobile */
+        @media (max-width: 991px) {
+          .hero-upper-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          .hero-text-block {
+            max-width: 100% !important;
+          }
+        }
+
+        /* Tablet Portrait */
         @media (max-width: 768px) {
-          #hero {
-            padding-top: 6rem !important;
-            padding-bottom: 2.5rem !important;
+          .hero-main-container {
+            padding: 5.75rem 1.5rem 1.75rem !important;
           }
-          .hero-wallpaper-layer {
-            background-position: 70% center !important;
-            opacity: 1 !important;
+          .hero-heading {
+            font-size: clamp(2.1rem, 6.5vw, 2.75rem) !important;
+            line-height: 1.15 !important;
+            margin-bottom: 1rem !important;
           }
-          .hero-gradient-overlay {
-            background: ${isDark
-              ? `
-                linear-gradient(to bottom, 
-                  rgba(20, 19, 18, 0.94) 0%, 
-                  rgba(20, 19, 18, 0.76) 35%, 
-                  rgba(20, 19, 18, 0.48) 65%, 
-                  rgba(20, 19, 18, 0.92) 100%),
-                linear-gradient(to right, 
-                  rgba(20, 19, 18, 0.7) 0%, 
-                  transparent 70%)
-              `
-              : `
-                linear-gradient(to bottom, 
-                  rgba(251, 249, 245, 0.94) 0%, 
-                  rgba(251, 249, 245, 0.72) 35%, 
-                  rgba(251, 249, 245, 0.35) 65%, 
-                  rgba(251, 249, 245, 0.92) 100%),
-                linear-gradient(to right, 
-                  rgba(251, 249, 245, 0.75) 0%, 
-                  transparent 70%)
-              `} !important;
+          .hero-description {
+            font-size: 0.98rem !important;
+            line-height: 1.65 !important;
+            margin-bottom: 1.5rem !important;
+            max-width: 100% !important;
+          }
+          .hero-cta-buttons {
+            gap: 0.85rem !important;
+            margin-bottom: 1.75rem !important;
           }
           .hero-badges-row {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 0.75rem !important;
+            padding-top: 1.1rem !important;
+            margin-bottom: 1.25rem !important;
+          }
+          .hero-badge-card {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(245, 242, 236, 0.07) !important;
+            padding: 0.75rem 0.85rem !important;
+            border-radius: 10px !important;
+          }
+          .hero-location-text {
+            font-size: 0.75rem !important;
+            line-height: 1.4 !important;
+          }
+          .hero-bottom-bar {
+            margin-top: 1.75rem !important;
+            padding: 1rem 1.25rem !important;
+            border-radius: 14px !important;
+          }
+          .hero-stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 1rem !important;
+          }
+          .hero-stat-item {
+            border-left: none !important;
+            padding-left: 0 !important;
           }
           .collections-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -1570,14 +1656,6 @@ export default function Home() {
           .why-preview-grid {
             grid-template-columns: 1fr !important;
           }
-          .trust-strip-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 1.25rem !important;
-          }
-          .trust-strip-item {
-            border-left: none !important;
-            padding-left: 0 !important;
-          }
           #collections-preview,
           #showroom-location,
           #social-cta,
@@ -1586,28 +1664,73 @@ export default function Home() {
           }
         }
 
-        @media (max-width: 480px) {
-          #hero {
-            padding-top: 5.5rem !important;
-            padding-bottom: 2rem !important;
-            min-height: auto !important;
-          }
+        /* Mobile Medium */
+        @media (max-width: 580px) {
           .hero-badges-row {
             grid-template-columns: 1fr !important;
+            gap: 0.65rem !important;
+          }
+          .hero-badge-card {
+            display: flex !important;
+            align-items: center !important;
             gap: 0.85rem !important;
+            padding: 0.65rem 0.9rem !important;
+          }
+        }
+
+        /* Mobile Standard */
+        @media (max-width: 480px) {
+          .hero-main-container {
+            padding: 5.25rem 1.15rem 1.5rem !important;
+          }
+          .hero-eyebrow {
+            font-size: 0.64rem !important;
+            letter-spacing: 0.14em !important;
+            padding: 0.32rem 0.75rem !important;
+            margin-bottom: 0.9rem !important;
+          }
+          .hero-heading {
+            font-size: clamp(1.95rem, 8vw, 2.35rem) !important;
+            line-height: 1.18 !important;
+            margin-bottom: 0.85rem !important;
+          }
+          .hero-description {
+            font-size: 0.92rem !important;
+            line-height: 1.6 !important;
+            margin-bottom: 1.35rem !important;
+          }
+          .hero-cta-buttons {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 0.75rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          .hero-cta-buttons button {
+            width: 100% !important;
+            justify-content: center !important;
+            padding: 0.85rem 1.25rem !important;
+            font-size: 0.8rem !important;
+            letter-spacing: 0.1em !important;
+          }
+          .hero-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.75rem 0.85rem !important;
+          }
+          .hero-stat-card {
+            padding: 0.4rem 0 !important;
+          }
+          .hero-stat-number {
+            font-size: 1.35rem !important;
+          }
+          .hero-stat-label {
+            font-size: 0.58rem !important;
+          }
+          .hero-bottom-bar {
+            margin-top: 1.25rem !important;
+            padding: 0.85rem 1rem !important;
           }
           .collections-grid {
             grid-template-columns: 1fr !important;
-          }
-          .trust-strip-grid {
-            grid-template-columns: 1fr !important;
-            gap: 1rem !important;
-          }
-          .trust-strip-item {
-            border-left: none !important;
-            padding-left: 0 !important;
-            padding-top: 1rem !important;
-            border-top: 1px solid ${colors.borderSubtle} !important;
           }
           .why-preview-grid {
             grid-template-columns: 1fr !important;
@@ -1622,7 +1745,25 @@ export default function Home() {
             padding: 4rem 0 !important;
           }
         }
+
+        /* Small Mobile */
+        @media (max-width: 360px) {
+          .hero-main-container {
+            padding: 5rem 0.85rem 1.25rem !important;
+          }
+          .hero-heading {
+            font-size: 1.75rem !important;
+          }
+          .hero-description {
+            font-size: 0.86rem !important;
+          }
+          .hero-stat-number {
+            font-size: 1.2rem !important;
+          }
+        }
       `}</style>
     </div>
   );
 }
+
+

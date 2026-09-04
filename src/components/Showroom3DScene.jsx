@@ -234,11 +234,13 @@ export default function Showroom3DScene() {
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
-    // 7. Animation Loop
+    // 7. Optimized Animation Loop with IntersectionObserver
     let animationFrameId;
     let clock = new THREE.Clock();
+    let isVisible = true;
 
     const animate = () => {
+      if (!isVisible) return;
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
@@ -265,7 +267,19 @@ export default function Showroom3DScene() {
       renderer.render(scene, camera);
     };
 
-    animate();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          clock.start();
+          animate();
+        } else {
+          cancelAnimationFrame(animationFrameId);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     // 8. Resize Handler
     const handleResize = () => {
@@ -281,6 +295,7 @@ export default function Showroom3DScene() {
 
     // 9. Cleanup
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);

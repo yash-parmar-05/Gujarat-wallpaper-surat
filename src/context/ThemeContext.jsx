@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 const ThemeContext = createContext({
   theme: 'dark',
@@ -7,43 +7,21 @@ const ThemeContext = createContext({
 });
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    try {
-      const saved = localStorage.getItem('gwd-theme');
-      if (saved === 'light' || saved === 'dark') {
-        return saved;
-      }
-    } catch (e) {
-      console.warn('Could not read theme from localStorage', e);
-    }
-    return 'dark'; // Default signature luxury dark theme
-  });
-
   useEffect(() => {
-    try {
-      localStorage.setItem('gwd-theme', theme);
-    } catch (e) {
-      console.warn('Could not save theme to localStorage', e);
-    }
-
-    // Apply data-theme attribute and CSS classes to <html>
+    // Apply permanent luxury dark theme
     const root = document.documentElement;
-    root.setAttribute('data-theme', theme);
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
+    root.setAttribute('data-theme', 'dark');
+    root.classList.add('dark');
+    root.classList.remove('light');
+    try {
+      localStorage.setItem('gwd-theme', 'dark');
+    } catch (e) {
+      // Ignore
     }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === 'dark' }}>
+    <ThemeContext.Provider value={{ theme: 'dark', toggleTheme: () => {}, isDark: true }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
-import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { theme, isDark } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 40) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -60,16 +57,12 @@ export default function Navbar() {
           right: 0,
           zIndex: 100,
           transition: 'background-color 0.35s ease, border-color 0.35s ease, padding 0.3s ease',
-          backgroundColor: isDark ? 'rgba(18, 17, 16, 0.92)' : 'rgba(251, 249, 245, 0.94)',
+          backgroundColor: 'rgba(18, 17, 16, 0.92)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: isDark 
-            ? '1px solid rgba(245, 242, 236, 0.08)' 
-            : '1px solid rgba(28, 25, 23, 0.08)',
-          boxShadow: isDark 
-            ? (scrolled ? '0 4px 20px rgba(0, 0, 0, 0.4)' : 'none')
-            : (scrolled ? '0 4px 20px rgba(0, 0, 0, 0.06)' : 'none'),
-          padding: scrolled ? '0.85rem 0' : '1.15rem 0',
+          borderBottom: '1px solid rgba(245, 242, 236, 0.08)',
+          boxShadow: scrolled ? '0 4px 24px rgba(0, 0, 0, 0.5)' : 'none',
+          padding: scrolled ? '0.75rem 0' : '1.1rem 0',
         }}
       >
         <div className="container-luxury" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -85,10 +78,10 @@ export default function Navbar() {
             <span
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: '1.4rem',
+                fontSize: 'clamp(1.2rem, 3.5vw, 1.45rem)',
                 fontWeight: 600,
                 letterSpacing: '0.04em',
-                color: isDark ? '#F7F4EE' : '#1C1917',
+                color: '#F7F4EE',
                 lineHeight: 1.1,
                 transition: 'color 0.3s ease',
               }}
@@ -100,7 +93,7 @@ export default function Navbar() {
                 fontSize: '0.65rem',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: isDark ? '#C5A880' : '#A68353',
+                color: '#C5A880',
                 fontWeight: 500,
                 marginTop: '2px',
                 transition: 'color 0.3s ease',
@@ -121,10 +114,8 @@ export default function Navbar() {
           >
             {navLinks.map((link) => {
               const active = isLinkActive(link.path);
-              const linkColor = active 
-                ? (isDark ? '#C5A880' : '#A68353') 
-                : (isDark ? '#E5E1D8' : '#44403C');
-              const hoverColor = isDark ? '#C5A880' : '#A68353';
+              const linkColor = active ? '#C5A880' : '#E5E1D8';
+              const hoverColor = '#C5A880';
 
               return (
                 <Link
@@ -154,7 +145,7 @@ export default function Navbar() {
                         left: 0,
                         right: 0,
                         height: '2px',
-                        backgroundColor: isDark ? '#C5A880' : '#A68353',
+                        backgroundColor: '#C5A880',
                         borderRadius: '1px',
                       }}
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
@@ -165,13 +156,8 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop Theme Toggle, CTA & Mobile Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            {/* Desktop Theme Toggle (Logo -> Navigation -> Theme Toggle -> CTA) */}
-            <div className="desktop-theme-toggle">
-              <ThemeToggle variant="desktop" />
-            </div>
-
+          {/* Desktop CTA & Mobile Hamburger */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
             <Link
               to="/products"
               className="desktop-cta"
@@ -184,29 +170,24 @@ export default function Navbar() {
                 fontWeight: 600,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                color: isDark ? '#141312' : '#FFFFFF',
-                backgroundColor: isDark ? '#C5A880' : '#A68353',
+                color: '#141312',
+                backgroundColor: '#C5A880',
                 borderRadius: '4px',
                 textDecoration: 'none',
                 transition: 'all 0.3s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = isDark ? '#DFCAAD' : '#8D6B3C';
+                e.currentTarget.style.backgroundColor = '#DFCAAD';
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = isDark ? '#C5A880' : '#A68353';
+                e.currentTarget.style.backgroundColor = '#C5A880';
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               <span>Explore Collection</span>
               <ArrowUpRight size={14} />
             </Link>
-
-            {/* Mobile Theme Toggle Button (Next to hamburger) */}
-            <div className="mobile-theme-toggle">
-              <ThemeToggle variant="mobile-nav" />
-            </div>
 
             {/* Mobile Hamburger Button */}
             <button
@@ -217,12 +198,12 @@ export default function Navbar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: isDark ? '#F7F4EE' : '#1C1917',
+                color: '#F7F4EE',
                 width: '42px',
                 height: '42px',
                 borderRadius: '4px',
-                backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)',
-                border: isDark ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.12)',
+                backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
               }}
@@ -241,16 +222,16 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed',
-              top: '70px',
+              top: '64px',
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundColor: isDark ? 'rgba(18, 17, 16, 0.98)' : 'rgba(251, 249, 245, 0.98)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
+              backgroundColor: 'rgba(18, 17, 16, 0.98)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
               zIndex: 99,
               display: 'flex',
               flexDirection: 'column',
@@ -259,18 +240,18 @@ export default function Navbar() {
             }}
           >
             {/* Mobile Navigation Links */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
               {navLinks.map((link, idx) => {
                 const active = isLinkActive(link.path);
-                const activeColor = isDark ? '#C5A880' : '#A68353';
-                const defaultColor = isDark ? '#F7F4EE' : '#1C1917';
+                const activeColor = '#C5A880';
+                const defaultColor = '#F7F4EE';
 
                 return (
                   <motion.div
                     key={link.path}
                     initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 }}
+                    transition={{ delay: idx * 0.04 }}
                   >
                     <Link
                       to={link.path}
@@ -280,7 +261,7 @@ export default function Navbar() {
                         fontSize: '1.85rem',
                         color: active ? activeColor : defaultColor,
                         textDecoration: 'none',
-                        borderBottom: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(0, 0, 0, 0.08)',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                         paddingBottom: '0.65rem',
                         display: 'flex',
                         alignItems: 'center',
@@ -295,18 +276,13 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Mobile Theme Toggle in Menu */}
-            <div style={{ marginBottom: '2rem' }}>
-              <ThemeToggle variant="mobile" />
-            </div>
-
             {/* Mobile Drawer Showroom Footer */}
-            <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.1)' }}>
-              <p style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: isDark ? '#C5A880' : '#A68353', marginBottom: '0.35rem' }}>
+            <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+              <p style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C5A880', marginBottom: '0.35rem' }}>
                 Visit Our Showroom
               </p>
-              <p style={{ fontSize: '0.88rem', color: isDark ? '#A8A29E' : '#57534E', marginBottom: '1.25rem' }}>
-                Mangaldas Complex, Ring Road / Ghod Dod Road, Surat
+              <p style={{ fontSize: '0.88rem', color: '#A8A29E', marginBottom: '1.25rem' }}>
+                Mangaldas Complex, Near Navjivan Circle, Surat
               </p>
               <button
                 onClick={() => {
@@ -316,9 +292,10 @@ export default function Navbar() {
                 className="btn-primary"
                 style={{ 
                   width: '100%', 
-                  backgroundColor: isDark ? '#C5A880' : '#A68353', 
-                  color: isDark ? '#141312' : '#FFFFFF', 
-                  borderColor: isDark ? '#C5A880' : '#A68353' 
+                  backgroundColor: '#C5A880', 
+                  color: '#141312', 
+                  borderColor: '#C5A880',
+                  padding: '0.85rem'
                 }}
               >
                 Schedule Consultation
@@ -336,21 +313,12 @@ export default function Navbar() {
           .desktop-cta {
             display: inline-flex !important;
           }
-          .desktop-theme-toggle {
-            display: inline-flex !important;
-          }
-          .mobile-theme-toggle {
-            display: none !important;
-          }
           .mobile-toggle {
             display: none !important;
           }
         }
         @media (max-width: 991px) {
-          .desktop-theme-toggle {
-            display: none !important;
-          }
-          .mobile-theme-toggle {
+          .mobile-toggle {
             display: flex !important;
           }
         }
