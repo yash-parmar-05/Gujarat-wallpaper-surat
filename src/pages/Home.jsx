@@ -6,7 +6,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
-  MapPin,
   MessageCircle,
   ShieldCheck,
   Award,
@@ -18,25 +17,41 @@ import {
 } from 'lucide-react';
 
 import { useTheme } from '../context/ThemeContext';
+import ShowroomModal from '../components/ShowroomModal';
 
 // 6 actual showroom photos converted from HEIC to JPEG (browser-compatible)
+// showroom-06 is placed first as requested, followed by 01, 02, 03, 04, 05
 const HERO_SLIDES = [
-  '/showroom/showroom-01.jpg',
-  '/showroom/showroom-02.jpg',
-  '/showroom/showroom-03.jpg',
-  '/showroom/showroom-04.jpg',
-  '/showroom/showroom-05.jpg',
-  '/showroom/showroom-06.jpg',
-];
-
-// Slide captions for accessibility and UX
-const HERO_SLIDE_LABELS = [
-  'Showroom Interiors – View 1',
-  'Showroom Interiors – View 2',
-  'Showroom Interiors – View 3',
-  'Showroom Interiors – View 4',
-  'Showroom Interiors – View 5',
-  'Showroom Interiors – View 6',
+  {
+    image: '/showroom/showroom-06.jpg',
+    label: 'Showroom Interiors – Main Gallery & Grand Hallway',
+    position: 'center 62%',
+  },
+  {
+    image: '/showroom/showroom-01.jpg',
+    label: 'Showroom Interiors – Wallpaper Showcase & Consult Area',
+    position: 'center 56%',
+  },
+  {
+    image: '/showroom/showroom-02.jpg',
+    label: 'Showroom Interiors – Grand Wall Display & Signage',
+    position: 'center 52%',
+  },
+  {
+    image: '/showroom/showroom-03.jpg',
+    label: 'Showroom Interiors – Feature Wall & Selection Area',
+    position: 'center 52%',
+  },
+  {
+    image: '/showroom/showroom-04.jpg',
+    label: 'Showroom Interiors – Wallpaper Rolls Gallery',
+    position: 'center 62%',
+  },
+  {
+    image: '/showroom/showroom-05.jpg',
+    label: 'Showroom Interiors – PVC Louvers & Architectural Panels',
+    position: 'center 58%',
+  },
 ];
 
 // Custom SVG Icons for Instagram & YouTube for precision luxury styling
@@ -58,16 +73,32 @@ function YouTubeIcon({ size = 22, color = 'currentColor' }) {
   );
 }
 
+function FacebookIcon({ size = 22, color = 'currentColor' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const navigate = useNavigate();
   const { isDark } = useTheme();
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const [isShowroomModalOpen, setIsShowroomModalOpen] = useState(false);
+
+  // Allow other components/buttons to trigger the showroom modal
+  useEffect(() => {
+    const handleOpenModal = () => setIsShowroomModalOpen(true);
+    window.addEventListener('open-showroom-modal', handleOpenModal);
+    return () => window.removeEventListener('open-showroom-modal', handleOpenModal);
+  }, []);
 
   // Pre-cache all 6 showroom images once on mount
   useEffect(() => {
     HERO_SLIDES.forEach((slide) => {
       const img = new Image();
-      img.src = slide;
+      img.src = slide.image;
     });
   }, []);
 
@@ -207,32 +238,32 @@ export default function Home() {
         >
           {HERO_SLIDES.map((slide, slideIndex) => (
             <motion.div
-              key={`hero-bg-${slide}`}
+              key={`hero-bg-${slide.image}`}
               initial={{ opacity: 0 }}
               animate={{
                 opacity: slideIndex === activeHeroSlide ? 1 : 0,
-                scale: slideIndex === activeHeroSlide ? 1 : 1.025,
               }}
-              transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1.0] }}
               style={{
                 position: 'absolute',
                 inset: 0,
                 width: '100%',
                 height: '100%',
-                willChange: 'opacity, transform',
+                willChange: 'opacity',
               }}
             >
               <img
-                src={slide}
-                alt={HERO_SLIDE_LABELS[slideIndex]}
+                src={slide.image}
+                alt={slide.label}
+                className="hero-slide-img"
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  objectPosition: 'center 40%',
+                  objectPosition: slide.position,
                   display: 'block',
                 }}
-                loading={slideIndex === 0 ? 'eager' : 'lazy'}
+                loading="eager"
                 decoding="async"
               />
             </motion.div>
@@ -395,7 +426,7 @@ export default function Home() {
                 </button>
 
                 <button
-                  onClick={() => navigate('/contact')}
+                  onClick={() => setIsShowroomModalOpen(true)}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -481,24 +512,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Showroom Location Hint */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.45 }}
-                className="hero-location-text"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  fontSize: '0.78rem',
-                  color: colors.textMuted,
-                  fontWeight: 400,
-                }}
-              >
-                <MapPin size={14} color={colors.accentGold} style={{ flexShrink: 0 }} />
-                <span>Showroom: Mangaldas Shopping Centre, Near Navjivan Circle, Surat</span>
-              </motion.div>
+
             </div>
           </div>
 
@@ -523,8 +537,8 @@ export default function Home() {
               className="hero-stats-grid"
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: '1.5rem',
+                gridTemplateColumns: 'repeat(5, 1fr)',
+                gap: '1.25rem',
                 alignItems: 'center',
               }}
             >
@@ -557,7 +571,7 @@ export default function Home() {
               </div>
 
               {/* Stat 2: YouTube */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }}>
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
@@ -584,8 +598,36 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Stat 3: Customers */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }}>
+              {/* Stat 3: Facebook */}
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
+                <div
+                  className="hero-stat-icon"
+                  style={{
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(197, 168, 128, 0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
+                  }}
+                >
+                  <FacebookIcon size={19} color={colors.accentGold} />
+                </div>
+                <div>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                    300K+
+                  </div>
+                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                    Facebook
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat 4: Customers */}
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
@@ -612,8 +654,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Stat 4: Excellence */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.5rem' }}>
+              {/* Stat 5: Excellence */}
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
@@ -1257,13 +1299,13 @@ export default function Home() {
             </p>
           </div>
 
-          {/* TWO PREMIUM SOCIAL CTA CARDS */}
+          {/* THREE PREMIUM SOCIAL CTA CARDS */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
+              gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '1.5rem',
-              maxWidth: '920px',
+              maxWidth: '1160px',
               margin: '0 auto',
             }}
             className="social-cta-grid"
@@ -1397,6 +1439,71 @@ export default function Home() {
                 <ArrowUpRight size={18} />
               </div>
             </a>
+
+            {/* FACEBOOK */}
+            <a
+              href="https://www.facebook.com/gujrat_wallpaper_decor/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecoration: 'none',
+                backgroundColor: colors.bgCard,
+                border: '1px solid rgba(24, 119, 242, 0.3)',
+                borderRadius: '12px',
+                padding: '1.5rem 1.85rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.04)',
+                transition: 'all 0.35s ease',
+              }}
+              className="social-strip-card facebook-strip-card"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+                <div
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '12px',
+                    backgroundColor: '#1877F2',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#FFFFFF',
+                    flexShrink: 0,
+                  }}
+                >
+                  <FacebookIcon size={22} color="#FFFFFF" />
+                </div>
+                <div>
+                  <div style={{ fontSize: '1.05rem', fontWeight: 600, color: colors.textPrimary, marginBottom: '0.15rem' }}>
+                    Follow Us on Facebook
+                  </div>
+                  <div style={{ fontSize: '0.82rem', color: colors.accentGold }}>
+                    @gujrat_wallpaper_decor
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '50%',
+                  backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
+                  border: `1px solid ${colors.borderCard}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: colors.textPrimary,
+                  flexShrink: 0,
+                }}
+                className="social-strip-arrow"
+              >
+                <ArrowUpRight size={18} />
+              </div>
+            </a>
           </div>
         </div>
       </section>
@@ -1483,7 +1590,7 @@ export default function Home() {
             </a>
 
             <button
-              onClick={() => navigate('/contact')}
+              onClick={() => setIsShowroomModalOpen(true)}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -1516,6 +1623,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Showroom Location Modal */}
+      <ShowroomModal
+        isOpen={isShowroomModalOpen}
+        onClose={() => setIsShowroomModalOpen(false)}
+      />
 
       {/* Scoped CSS for Home Page Interactive Elements & Responsiveness */}
       <style>{`
@@ -1566,6 +1679,15 @@ export default function Home() {
           border-color: #FF0000 !important;
           color: #FFFFFF !important;
         }
+        .facebook-strip-card:hover {
+          border-color: rgba(24, 119, 242, 0.7) !important;
+          background-color: ${isDark ? 'rgba(18, 30, 48, 0.95)' : '#F0F5FF'} !important;
+        }
+        .facebook-strip-card:hover .social-strip-arrow {
+          background-color: #1877F2 !important;
+          border-color: #1877F2 !important;
+          color: #FFFFFF !important;
+        }
 
         /* -- Responsive Breakpoints -- */
 
@@ -1582,8 +1704,21 @@ export default function Home() {
             grid-template-columns: repeat(2, 1fr) !important;
           }
           .social-cta-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-columns: 1fr !important;
+            max-width: 520px !important;
           }
+        }
+
+        .hero-stat-card {
+          transition: transform 0.25s ease;
+        }
+        .hero-stat-icon {
+          transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+        }
+        .hero-stat-card:hover .hero-stat-icon {
+          border-color: rgba(197, 168, 128, 0.55) !important;
+          background-color: rgba(197, 168, 128, 0.16) !important;
+          transform: translateY(-2px);
         }
 
         /* Tablet Portrait & Large Mobile */
@@ -1596,10 +1731,21 @@ export default function Home() {
           .hero-text-block {
             max-width: 100% !important;
           }
+          .hero-stats-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 1rem !important;
+          }
+          .hero-stat-item {
+            border-left: none !important;
+            padding-left: 0 !important;
+          }
         }
 
         /* Tablet Portrait */
         @media (max-width: 768px) {
+          .hero-slide-img {
+            object-position: center 50% !important;
+          }
           .hero-main-container {
             padding: 5.75rem 1.5rem 1.75rem !important;
           }
@@ -1630,10 +1776,7 @@ export default function Home() {
             padding: 0.75rem 0.85rem !important;
             border-radius: 10px !important;
           }
-          .hero-location-text {
-            font-size: 0.75rem !important;
-            line-height: 1.4 !important;
-          }
+
           .hero-bottom-bar {
             margin-top: 1.75rem !important;
             padding: 1rem 1.25rem !important;
@@ -1715,6 +1858,10 @@ export default function Home() {
           .hero-stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 0.75rem 0.85rem !important;
+          }
+          .hero-stats-grid > :last-child {
+            grid-column: span 2;
+            justify-content: center;
           }
           .hero-stat-card {
             padding: 0.4rem 0 !important;
