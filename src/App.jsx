@@ -7,7 +7,7 @@ import Preloader from './components/Preloader';
 import Layout from './components/Layout';
 
 import Home from './pages/Home';
-
+import CatalogsPage from './pages/CatalogsPage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import GalleryPage from './pages/GalleryPage';
@@ -72,9 +72,10 @@ export default function App() {
 
             {/* Individual Page Routes */}
             <Route path="/home" element={<Home />} />
-            <Route path="/collections" element={<Navigate to="/products" replace />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/catalogs" element={<CatalogsPage />} />
+            <Route path="/collections" element={<Navigate to="/catalogs" replace />} />
+            <Route path="/products" element={<Navigate to="/catalogs" replace />} />
+            <Route path="/products/:id" element={<Navigate to="/catalogs" replace />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
 

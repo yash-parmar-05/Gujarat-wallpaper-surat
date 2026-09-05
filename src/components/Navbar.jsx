@@ -28,7 +28,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: 'Home', path: '/home' },
-    { label: 'Collections', path: '/products' },
+    { label: 'Catalogs', path: '/catalogs' },
     { label: 'Gallery', path: '/gallery' },
     { label: 'Why Choose Us', path: '/why-choose-us' },
     { label: 'Contact', path: '/contact' },
@@ -38,8 +38,8 @@ export default function Navbar() {
     if (path === '/home') {
       return location.pathname === '/home' || location.pathname === '/';
     }
-    if (path === '/products') {
-      return location.pathname.startsWith('/products') || location.pathname.startsWith('/collections');
+    if (path === '/catalogs') {
+      return location.pathname.startsWith('/catalogs');
     }
     if (path === '/why-choose-us') {
       return location.pathname === '/why-choose-us';
@@ -158,20 +158,21 @@ export default function Navbar() {
 
           {/* Desktop CTA & Mobile Hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            {/* Desktop CTA Button */}
             <Link
-              to="/products"
+              to="/catalogs"
               className="desktop-cta"
               style={{
                 display: 'none',
                 alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.65rem 1.4rem',
-                fontSize: '0.78rem',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: '#141312',
+                gap: '0.55rem',
                 backgroundColor: '#C5A880',
+                color: '#121110',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                padding: '0.75rem 1.6rem',
                 borderRadius: '4px',
                 textDecoration: 'none',
                 transition: 'all 0.3s ease',
@@ -185,7 +186,7 @@ export default function Navbar() {
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              <span>Explore Collection</span>
+              <span>Explore Catalogs</span>
               <ArrowUpRight size={14} />
             </Link>
 

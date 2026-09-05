@@ -137,7 +137,7 @@ export default function Footer() {
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {[
                 { label: 'Home', path: '/home' },
-                { label: 'Collections', path: '/products' },
+                { label: 'Catalogs', path: '/catalogs' },
                 { label: 'Visual Gallery', path: '/gallery' },
                 { label: 'Why Choose Us', path: '/why-choose-us' },
                 { label: 'Contact & Visit', path: '/contact' },

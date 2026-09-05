@@ -18,6 +18,7 @@ import {
 
 import { useTheme } from '../context/ThemeContext';
 import ShowroomModal from '../components/ShowroomModal';
+import CatalogsSection from '../components/CatalogsSection';
 
 // 6 actual showroom photos converted from HEIC to JPEG (browser-compatible)
 // showroom-06 is placed first as requested, followed by 01, 02, 03, 04, 05
@@ -129,50 +130,6 @@ export default function Home() {
     borderSubtle: 'rgba(245, 242, 236, 0.08)',
     borderCard: 'rgba(197, 168, 128, 0.22)',
   };
-
-  // 5 Curated Collections
-  const collections = [
-    {
-      id: 'wallpapers',
-      title: 'Luxury Wallpapers',
-      categoryQuery: 'Luxury Wallpapers',
-      description: 'Designer wallcoverings, metallic relief textures & Pichwai heritage motifs.',
-      image: '/assets/products/wallpaper-card.jpg',
-      badge: 'Heritage & Modern',
-    },
-    {
-      id: 'pvc-panels',
-      title: 'PVC Wall Panels',
-      categoryQuery: 'PVC Wall Panels',
-      description: 'Architectural fluted louvers, 3D geometric textures & acoustic finishes.',
-      image: '/assets/products/pvc-panel-card.jpg',
-      badge: 'Architectural',
-    },
-    {
-      id: 'carpets',
-      title: 'Luxury Carpets',
-      categoryQuery: 'Luxury Carpets',
-      description: 'Hand-tufted transitional carpets, plush runners & bespoke wool floorings.',
-      image: '/assets/products/carpet-card.jpg',
-      badge: 'Hand-Crafted',
-    },
-    {
-      id: 'turf',
-      title: 'Artificial Turf / Grass',
-      categoryQuery: 'Artificial Turf / Grass',
-      description: 'High-density natural feel landscape turf for balconies & terrace gardens.',
-      image: '/assets/products/turf-card.jpg',
-      badge: 'All-Weather',
-    },
-    {
-      id: 'wall-decor',
-      title: 'Wall Decor',
-      categoryQuery: 'Wall Decor',
-      description: 'Artisanal 3D foam panels, metallic wall art & bespoke architectural accents.',
-      image: '/assets/products/wallpaper-showcase.jpg',
-      badge: 'Bespoke Accents',
-    },
-  ];
 
   // 3 Why Choose Us Highlights
   const whyHighlights = [
@@ -393,14 +350,17 @@ export default function Home() {
                 className="hero-cta-buttons"
               >
                 <button
-                  onClick={() => navigate('/products')}
+                  onClick={() => {
+                    const el = document.getElementById('catalogs');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.65rem',
-                    padding: '0.95rem 2rem',
+                    padding: '0.95rem 2.2rem',
                     backgroundColor: colors.accentGold,
-                    color: '#141312',
+                    color: '#121110',
                     fontSize: '0.82rem',
                     fontWeight: 600,
                     letterSpacing: '0.12em',
@@ -408,6 +368,7 @@ export default function Home() {
                     borderRadius: '4px',
                     border: 'none',
                     cursor: 'pointer',
+                    boxShadow: '0 4px 16px rgba(197, 168, 128, 0.25)',
                     transition: 'all 0.3s ease',
                   }}
                   onMouseEnter={(e) => {
@@ -421,7 +382,7 @@ export default function Home() {
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
-                  <span>EXPLORE COLLECTIONS</span>
+                  <span>EXPLORE CATALOGS</span>
                   <ArrowUpRight size={16} />
                 </button>
 
@@ -687,201 +648,10 @@ export default function Home() {
       </section>
 
       {/* ==================================================
-          3. COLLECTION PREVIEW ("Explore Our Collections")
+          3. CATALOGS SECTION (2 EXCLUSIVE WALLPAPER PDFS)
           ================================================== */}
-      <section
-        id="collections-preview"
-        style={{
-          padding: '6.5rem 0',
-          backgroundColor: colors.bgMain,
-          position: 'relative',
-          transition: 'background-color 0.35s ease',
-        }}
-      >
-        <div className="container-luxury">
-          {/* Section Header */}
-          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem' }}>
-            <div
-              style={{
-                fontSize: '0.72rem',
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                color: colors.accentGold,
-                fontWeight: 600,
-                marginBottom: '0.75rem',
-              }}
-            >
-              CURATED PRODUCT VERTICALS
-            </div>
+      <CatalogsSection id="catalogs" />
 
-            <h2
-              style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(2.35rem, 4vw, 3.4rem)',
-                color: colors.textPrimary,
-                fontWeight: 500,
-                marginBottom: '0.85rem',
-                letterSpacing: '0.01em',
-              }}
-            >
-              Explore Our Collections
-            </h2>
-
-            <p
-              style={{
-                fontSize: '0.98rem',
-                color: colors.textSecondary,
-                lineHeight: 1.65,
-                fontWeight: 300,
-              }}
-            >
-              Discover carefully selected wall and interior solutions designed to transform everyday spaces.
-            </p>
-          </div>
-
-          {/* 5 Premium Compact Category Cards */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(5, 1fr)',
-              gap: '1.25rem',
-            }}
-            className="collections-grid"
-          >
-            {collections.map((cat, idx) => (
-              <motion.div
-                key={cat.id}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.08 }}
-                onClick={() => navigate(`/products?category=${encodeURIComponent(cat.categoryQuery)}`)}
-                style={{
-                  backgroundColor: colors.bgCard,
-                  border: `1px solid ${colors.borderSubtle}`,
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  cursor: 'pointer',
-                  boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 6px 20px rgba(0, 0, 0, 0.04)',
-                  transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-                }}
-                className="collection-preview-card"
-              >
-                {/* Visual Thumbnail */}
-                <div
-                  style={{
-                    position: 'relative',
-                    height: '210px',
-                    overflow: 'hidden',
-                    backgroundColor: isDark ? '#0D0C0B' : '#EAE3D9',
-                  }}
-                >
-                  <img
-                    src={cat.image}
-                    alt={cat.title}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)',
-                    }}
-                    className="col-card-img"
-                  />
-                  {/* Subtle Gradient Shadow */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: isDark
-                        ? 'linear-gradient(to top, rgba(24, 23, 21, 0.95) 0%, transparent 60%)'
-                        : 'linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 60%)',
-                      pointerEvents: 'none',
-                    }}
-                  />
-                  {/* Category Pill Tag */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '0.85rem',
-                      left: '0.85rem',
-                      padding: '0.25rem 0.6rem',
-                      backgroundColor: isDark ? 'rgba(20, 19, 18, 0.8)' : 'rgba(255, 255, 255, 0.85)',
-                      backdropFilter: 'blur(8px)',
-                      border: `1px solid ${colors.borderCard}`,
-                      borderRadius: '9999px',
-                      fontSize: '0.65rem',
-                      letterSpacing: '0.1em',
-                      color: colors.accentGold,
-                      textTransform: 'uppercase',
-                      fontWeight: 600,
-                    }}
-                  >
-                    {cat.badge}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div
-                  style={{
-                    padding: '1.4rem 1.25rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    flexGrow: 1,
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <div>
-                    <h3
-                      style={{
-                        fontFamily: "'Cormorant Garamond', Georgia, serif",
-                        fontSize: '1.3rem',
-                        color: colors.textPrimary,
-                        fontWeight: 600,
-                        marginBottom: '0.5rem',
-                      }}
-                    >
-                      {cat.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: '0.82rem',
-                        color: colors.textSecondary,
-                        lineHeight: 1.5,
-                        fontWeight: 300,
-                        margin: 0,
-                      }}
-                    >
-                      {cat.description}
-                    </p>
-                  </div>
-
-                  {/* Explore Link */}
-                  <div
-                    style={{
-                      marginTop: '1.25rem',
-                      paddingTop: '0.85rem',
-                      borderTop: `1px solid ${colors.borderSubtle}`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      fontSize: '0.75rem',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      color: colors.accentGold,
-                      fontWeight: 600,
-                    }}
-                  >
-                    <span>Explore</span>
-                    <ArrowUpRight size={14} />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ==================================================
           4. FEATURED SHOWROOM EXPERIENCE (SPLIT LAYOUT)
@@ -1643,15 +1413,6 @@ export default function Home() {
         }
 
         /* Card hover effects */
-        .collection-preview-card:hover {
-          transform: translateY(-6px);
-          border-color: ${colors.accentGold} !important;
-          box-shadow: ${isDark ? '0 16px 36px rgba(0, 0, 0, 0.55)' : '0 14px 30px rgba(0, 0, 0, 0.08)'};
-        }
-        .collection-preview-card:hover .col-card-img {
-          transform: scale(1.05);
-        }
-
         .why-preview-card:hover {
           transform: translateY(-5px);
           border-color: ${colors.accentGold} !important;
@@ -1693,9 +1454,6 @@ export default function Home() {
 
         /* Tablet Landscape */
         @media (max-width: 1024px) {
-          .collections-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-          }
           .showroom-split-grid {
             grid-template-columns: 1fr !important;
             gap: 2.5rem !important;
@@ -1790,16 +1548,12 @@ export default function Home() {
             border-left: none !important;
             padding-left: 0 !important;
           }
-          .collections-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
           .social-cta-grid {
             grid-template-columns: 1fr !important;
           }
           .why-preview-grid {
             grid-template-columns: 1fr !important;
           }
-          #collections-preview,
           #showroom-location,
           #social-cta,
           #why-preview {
@@ -1876,16 +1630,12 @@ export default function Home() {
             margin-top: 1.25rem !important;
             padding: 0.85rem 1rem !important;
           }
-          .collections-grid {
-            grid-template-columns: 1fr !important;
-          }
           .why-preview-grid {
             grid-template-columns: 1fr !important;
           }
           .social-cta-grid {
             grid-template-columns: 1fr !important;
           }
-          #collections-preview,
           #showroom-location,
           #social-cta,
           #why-preview {
