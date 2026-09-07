@@ -333,66 +333,66 @@ export const PRODUCTS = [
 export const GALLERY_ITEMS = [
   {
     id: "gal-01",
-    title: "Aura of Dwarka Heritage Living Suite",
-    category: "Wallpapers",
-    image: "/assets/products/wallpaper-showcase.jpg",
+    title: "Statuario Imperial Gold Marble Vein",
+    category: "Luxury Wallpaper",
+    image: "/assets/gallery/gallery-wp-01.jpg",
     aspect: "landscape",
-    caption: "Penthouse living room in Surat featuring embossed gold-leaf Pichwai wallpaper and travertine console."
+    caption: "Luxury interior living room showcase featuring Italian Statuario marble pattern wallpaper."
   },
   {
     id: "gal-02",
-    title: "Pichwai Lotus & Peacock Macro Vignette",
-    category: "Wallpapers",
-    image: "/assets/products/wallpaper-card.jpg",
-    aspect: "square",
-    caption: "Tactile relief detail showing gold-leaf lotus blossoms and textured champagne linen weave."
+    title: "Midnight Botanical Foliage Accent",
+    category: "Designer Wallpaper",
+    image: "/assets/gallery/gallery-wp-02.jpg",
+    aspect: "landscape",
+    caption: "Gold foil gilded charcoal tropical botanical foliage wallpaper behind designer sofa."
   },
   {
     id: "gal-03",
-    title: "Veneer Luxe Charcoal Slat Media Feature Wall",
-    category: "PVC Wall Panels",
-    image: "/assets/products/pvc-panel-showcase.jpg",
+    title: "Calacatta Royale Veined Wallcovering",
+    category: "Marble Wallpaper",
+    image: "/assets/gallery/gallery-wp-03.jpg",
     aspect: "landscape",
-    caption: "Acoustic PVC fluted louvers with integrated warm vertical LED accent strips."
+    caption: "Dramatic Calacatta gold-veined architectural wallcovering behind luxury suite bed."
   },
   {
     id: "gal-04",
-    title: "Smoked Oak & Charcoal Slat Architectural Relief",
-    category: "PVC Wall Panels",
-    image: "/assets/products/pvc-panel-card.jpg",
-    aspect: "square",
-    caption: "Close-up of precision interlocking 3D louver slats and warm LED channel."
+    title: "Champagne Alabaster Marble Texture",
+    category: "Texture Wallpaper",
+    image: "/assets/gallery/gallery-wp-04.jpg",
+    aspect: "landscape",
+    caption: "Swirling warm alabaster and champagne gold texture wallpaper in contemporary living room."
   },
   {
     id: "gal-05",
-    title: "Virasat Hand-Tufted Kashmiri Silk-Wool Salon",
-    category: "Carpets",
-    image: "/assets/products/carpet-showcase.jpg",
+    title: "Gilded Spring Branch Classical Motif",
+    category: "Embossed Wallpaper",
+    image: "/assets/gallery/gallery-wp-05.jpg",
     aspect: "landscape",
-    caption: "Plush transitional silk-wool rug seamlessly placed on polished Armani marble floor."
+    caption: "Delicate metallic gold branch and leaf relief wallpaper complementing modern credenza."
   },
   {
     id: "gal-06",
-    title: "High-Low Hand-Carved Silk Highlight Detail",
-    category: "Carpets",
-    image: "/assets/products/carpet-card.jpg",
-    aspect: "square",
-    caption: "Sculpted high-low pile showing individual wool knots and shimmering bamboo silk accents."
+    title: "Lavender Flora & Gilded Vines",
+    category: "Floral Wallpaper",
+    image: "/assets/gallery/gallery-wp-06.jpg",
+    aspect: "landscape",
+    caption: "Romantic botanical wallpaper with soft lavender foliage and fine gold lining."
   },
   {
     id: "gal-07",
-    title: "Emerald Meadow Penthouse Terrace Balcony",
-    category: "Artificial Turf / Grass",
-    image: "/assets/products/turf-showcase.jpg",
+    title: "Terrazzo Starlight Tactile Weave",
+    category: "Italian Texture Wallpaper",
+    image: "/assets/gallery/gallery-wp-07.jpg",
     aspect: "landscape",
-    caption: "45mm luxury turf installed along black granite curb overlooking Surat city skyline."
+    caption: "Deep granite texture with micro-terrazzo gold fleck highlights in cozy lounge setting."
   },
   {
     id: "gal-08",
-    title: "4-Tone Natural Blade & Thatch Macro Focus",
-    category: "Artificial Turf / Grass",
-    image: "/assets/products/turf-card.jpg",
-    aspect: "square",
-    caption: "Close-up showing realistic multi-tone grass fibers and natural thatch under morning sun."
+    title: "Carrara Pure White Marble Relief",
+    category: "Marble Wallpaper",
+    image: "/assets/gallery/gallery-wp-08.jpg",
+    aspect: "landscape",
+    caption: "Refined Italian marble veining wallcovering for luxury credenza focal wall."
   }
 ];

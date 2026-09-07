@@ -30,6 +30,7 @@ export default function Navbar() {
     { label: 'Home', path: '/home' },
     { label: 'Catalogs', path: '/catalogs' },
     { label: 'Gallery', path: '/gallery' },
+    { label: 'Our Work', path: '/our-work' },
     { label: 'Why Choose Us', path: '/why-choose-us' },
     { label: 'Contact', path: '/contact' },
   ];
@@ -40,6 +41,12 @@ export default function Navbar() {
     }
     if (path === '/catalogs') {
       return location.pathname.startsWith('/catalogs');
+    }
+    if (path === '/gallery') {
+      return location.pathname.startsWith('/gallery');
+    }
+    if (path === '/our-work') {
+      return location.pathname.startsWith('/our-work');
     }
     if (path === '/why-choose-us') {
       return location.pathname === '/why-choose-us';

@@ -68,7 +68,7 @@ export default function Gallery() {
               The Visual Gallery
             </h2>
             <p style={{ fontSize: '1.05rem', color: textSecondary, lineHeight: 1.6 }}>
-              A curated visual anthology documenting wallcoverings, acoustic panels, hand-tufted carpets, and terrace landscaping inside a luxury Surat residence.
+              A curated visual anthology of luxury Italian textures, embossed damasks, marble wallcoverings, and designer living room walls from our signature catalogs.
             </p>
           </div>
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Award, 
-  ShieldCheck, 
-  Grid3X3, 
-  Users, 
-  Building2, 
-  ArrowUpRight, 
+import {
+  Award,
+  ShieldCheck,
+  Grid3X3,
+  Users,
+  Building2,
+  ArrowUpRight,
   Sparkles,
   Play
 } from 'lucide-react';
@@ -16,9 +16,9 @@ import { useTheme } from '../context/ThemeContext';
 function InstagramIcon({ size = 24, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </svg>
   );
 }
@@ -26,7 +26,15 @@ function InstagramIcon({ size = 24, color = 'currentColor' }) {
 function YouTubeIcon({ size = 24, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ size = 24, color = 'currentColor' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
   );
 }
@@ -72,7 +80,7 @@ export default function WhyChooseUs() {
       icon: Award,
     },
     {
-      metric: '10K+',
+      metric: '20K+',
       label: 'HAPPY CUSTOMERS',
       description: 'Helping transform homes and spaces with beautiful wall solutions.',
       icon: Users,
@@ -131,7 +139,7 @@ export default function WhyChooseUs() {
           transform: 'translateX(-50%)',
           width: '750px',
           height: '450px',
-          background: isDark 
+          background: isDark
             ? 'radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, rgba(18, 17, 16, 0) 70%)'
             : 'radial-gradient(circle, rgba(166, 131, 83, 0.06) 0%, rgba(251, 249, 245, 0) 70%)',
           pointerEvents: 'none',
@@ -469,12 +477,12 @@ export default function WhyChooseUs() {
         </motion.div>
 
         {/* ==================================================
-            4. SOCIAL MEDIA BUTTONS (TWO LARGE HORIZONTAL CTA CARDS)
+            4. SOCIAL MEDIA BUTTONS (THREE LUXURY CTA CARDS)
             ================================================== */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1.5rem',
             marginBottom: '4.5rem',
           }}
@@ -544,7 +552,7 @@ export default function WhyChooseUs() {
                     letterSpacing: '0.02em',
                   }}
                 >
-                  @gujrat_wallpaper_decor
+                  @arunvala
                 </div>
               </div>
             </div>
@@ -634,6 +642,95 @@ export default function WhyChooseUs() {
                   }}
                 >
                   @Gujaratwallpaper
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
+                border: `1px solid ${colors.borderCard}`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: colors.textPrimary,
+                flexShrink: 0,
+                transition: 'all 0.35s ease',
+              }}
+              className="social-arrow-btn"
+            >
+              <ArrowUpRight size={20} />
+            </div>
+          </motion.a>
+
+          {/* BUTTON 3 — FACEBOOK */}
+          <motion.a
+            href="https://www.facebook.com/arunvala/"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{
+              textDecoration: 'none',
+              backgroundColor: colors.socialBg,
+              border: '1px solid rgba(24, 119, 242, 0.3)',
+              borderRadius: '12px',
+              padding: '1.75rem 2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1.25rem',
+              position: 'relative',
+              overflow: 'hidden',
+              boxShadow: colors.boxShadow,
+              transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+            className="social-cta-card facebook-cta"
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+              <div
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '12px',
+                  backgroundColor: '#1877F2',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#FFFFFF',
+                  flexShrink: 0,
+                  boxShadow: '0 6px 18px rgba(24, 119, 242, 0.3)',
+                }}
+              >
+                <FacebookIcon size={24} color="#FFFFFF" />
+              </div>
+
+              <div>
+                <div
+                  style={{
+                    fontSize: '1.15rem',
+                    fontWeight: 600,
+                    color: colors.textPrimary,
+                    marginBottom: '0.2rem',
+                    letterSpacing: '0.01em',
+                  }}
+                >
+                  Follow Us on Facebook
+                </div>
+                <div
+                  style={{
+                    fontSize: '0.86rem',
+                    color: colors.accentGold,
+                    fontWeight: 500,
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  @arunvala
                 </div>
               </div>
             </div>
@@ -759,9 +856,9 @@ export default function WhyChooseUs() {
         }
         .instagram-cta:hover {
           border-color: rgba(225, 48, 108, 0.6) !important;
-          background: ${isDark 
-            ? 'linear-gradient(135deg, rgba(131, 58, 180, 0.15) 0%, rgba(253, 29, 29, 0.12) 50%, rgba(20, 19, 18, 0.98) 100%)' 
-            : 'linear-gradient(135deg, #FFF0F5 0%, #FFFFFF 100%)'} !important;
+          background: ${isDark
+          ? 'linear-gradient(135deg, rgba(131, 58, 180, 0.15) 0%, rgba(253, 29, 29, 0.12) 50%, rgba(20, 19, 18, 0.98) 100%)'
+          : 'linear-gradient(135deg, #FFF0F5 0%, #FFFFFF 100%)'} !important;
         }
         .instagram-cta:hover .social-arrow-btn {
           background-color: #E1306C !important;
@@ -771,13 +868,25 @@ export default function WhyChooseUs() {
         }
         .youtube-cta:hover {
           border-color: rgba(255, 0, 0, 0.6) !important;
-          background: ${isDark 
-            ? 'linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(20, 19, 18, 0.98) 100%)' 
-            : 'linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%)'} !important;
+          background: ${isDark
+          ? 'linear-gradient(135deg, rgba(255, 0, 0, 0.15) 0%, rgba(20, 19, 18, 0.98) 100%)'
+          : 'linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%)'} !important;
         }
         .youtube-cta:hover .social-arrow-btn {
           background-color: #FF0000 !important;
           border-color: #FF0000 !important;
+          color: #FFFFFF !important;
+          transform: translate(2px, -2px);
+        }
+        .facebook-cta:hover {
+          border-color: rgba(24, 119, 242, 0.6) !important;
+          background: ${isDark
+          ? 'linear-gradient(135deg, rgba(24, 119, 242, 0.15) 0%, rgba(20, 19, 18, 0.98) 100%)'
+          : 'linear-gradient(135deg, #F0F5FF 0%, #FFFFFF 100%)'} !important;
+        }
+        .facebook-cta:hover .social-arrow-btn {
+          background-color: #1877F2 !important;
+          border-color: #1877F2 !important;
           color: #FFFFFF !important;
           transform: translate(2px, -2px);
         }
@@ -797,6 +906,12 @@ export default function WhyChooseUs() {
         @media (max-width: 1024px) {
           .why-achievements-grid {
             grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .why-social-grid {
+            grid-template-columns: 1fr !important;
+            max-width: 520px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
           }
           .why-features-grid {
             grid-template-columns: repeat(3, 1fr) !important;

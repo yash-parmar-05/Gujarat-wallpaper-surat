@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowUp } from 'lucide-react';
-import { SHOWROOM_INFO, CATEGORIES } from '../data/categories';
+import { ArrowUp, MapPin } from 'lucide-react';
+import { BRANCHES, CATEGORIES } from '../data/categories';
 import { useTheme } from '../context/ThemeContext';
 
 export default function Footer() {
@@ -49,7 +49,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div
             style={{
-              gridColumn: 'span 4',
+              gridColumn: 'span 3',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -139,6 +139,7 @@ export default function Footer() {
                 { label: 'Home', path: '/home' },
                 { label: 'Catalogs', path: '/catalogs' },
                 { label: 'Visual Gallery', path: '/gallery' },
+                { label: 'Our Work', path: '/our-work' },
                 { label: 'Why Choose Us', path: '/why-choose-us' },
                 { label: 'Contact & Visit', path: '/contact' },
               ].map((link) => (
@@ -164,7 +165,7 @@ export default function Footer() {
           {/* Approved Categories Column */}
           <div
             style={{
-              gridColumn: 'span 3',
+              gridColumn: 'span 2',
             }}
             className="footer-cat-col"
           >
@@ -205,12 +206,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Showroom & Contact Info Column */}
+          {/* Showroom Branch Addresses Column */}
           <div
             style={{
-              gridColumn: 'span 3',
+              gridColumn: 'span 5',
             }}
-            className="footer-contact-col"
+            className="footer-branches-col"
           >
             <div
               style={{
@@ -222,39 +223,53 @@ export default function Footer() {
                 marginBottom: '1.5rem',
               }}
             >
-              Showroom Inquiries
+              Our Branches
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem', fontSize: '0.88rem', color: textSecondary }}>
-              <div>
-                <span style={{ color: textMuted, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block' }}>
-                  Address:
-                </span>
-                <span>{SHOWROOM_INFO.contactPlaceholder.address}</span>
-              </div>
-
-              <div>
-                <span style={{ color: textMuted, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block' }}>
-                  Phone:
-                </span>
-                <span>+91 9265785158 / 8320802633</span>
-              </div>
-
-              <div>
-                <span style={{ color: textMuted, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block' }}>
-                  Consultation:
-                </span>
-                <Link to="/contact" style={{ color: gold, textDecoration: 'none' }}>
-                  Book Private Viewing &rarr;
-                </Link>
-              </div>
-
-              <div>
-                <span style={{ color: textMuted, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block' }}>
-                  Instagram:
-                </span>
-                <span>@gujrat_wallpaper_decor</span>
-              </div>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '1.5rem 1.25rem',
+              }}
+              className="footer-branches-grid"
+            >
+              {BRANCHES.map((branch) => (
+                <div
+                  key={branch.id}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.35rem',
+                    fontSize: '0.85rem',
+                  }}
+                  className="footer-branch-item"
+                >
+                  <div
+                    style={{
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: gold,
+                      fontWeight: 600,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {branch.name}
+                  </div>
+                  <div
+                    style={{
+                      color: textSecondary,
+                      lineHeight: 1.5,
+                      fontWeight: 300,
+                    }}
+                  >
+                    {branch.addressLines.map((line, lIdx) => (
+                      <div key={lIdx}>{line}</div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -284,27 +299,34 @@ export default function Footer() {
       </div>
 
       <style>{`
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
           .footer-brand-col {
             grid-column: span 12 !important;
           }
           .footer-nav-col {
-            grid-column: span 6 !important;
+            grid-column: span 3 !important;
           }
           .footer-cat-col {
-            grid-column: span 6 !important;
+            grid-column: span 3 !important;
           }
-          .footer-contact-col {
-            grid-column: span 12 !important;
+          .footer-branches-col {
+            grid-column: span 6 !important;
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .footer-nav-col {
-            grid-column: span 12 !important;
+            grid-column: span 6 !important;
           }
           .footer-cat-col {
+            grid-column: span 6 !important;
+          }
+          .footer-branches-col {
             grid-column: span 12 !important;
+          }
+          .footer-branches-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.35rem !important;
           }
         }
 
@@ -312,6 +334,12 @@ export default function Footer() {
           footer {
             padding-top: 4rem !important;
             padding-bottom: 2rem !important;
+          }
+          .footer-nav-col {
+            grid-column: span 12 !important;
+          }
+          .footer-cat-col {
+            grid-column: span 12 !important;
           }
         }
       `}</style>

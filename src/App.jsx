@@ -11,6 +11,7 @@ import CatalogsPage from './pages/CatalogsPage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import GalleryPage from './pages/GalleryPage';
+import OurWorkPage from './pages/OurWorkPage';
 import WhyChooseUsPage from './pages/WhyChooseUsPage';
 import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -77,6 +78,7 @@ export default function App() {
             <Route path="/products" element={<Navigate to="/catalogs" replace />} />
             <Route path="/products/:id" element={<Navigate to="/catalogs" replace />} />
             <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/our-work" element={<OurWorkPage />} />
             <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
 
             <Route path="/contact" element={<ContactPage />} />

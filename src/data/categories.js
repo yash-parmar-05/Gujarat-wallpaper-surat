@@ -74,16 +74,54 @@ export const CATEGORIES = [
   }
 ];
 
+export const BRANCHES = [
+  {
+    id: "branch-01",
+    name: "BRANCH 1 — POLARIS",
+    addressLines: [
+      "Shop No. 154, Polaris Mall,",
+      "Puna Canal Road, Surat"
+    ]
+  },
+  {
+    id: "branch-02",
+    name: "BRANCH 2 — BHATAR",
+    addressLines: [
+      "22, 23, 2nd Floor,",
+      "Mangaldas Shopping Center,",
+      "Navjivan Circle, Udhana, Magdalla Road,",
+      "Surat - 395017"
+    ]
+  },
+  {
+    id: "branch-03",
+    name: "BRANCH 3 — KATARGAM",
+    addressLines: [
+      "Sadguru Plaza Business Hub,",
+      "Ved Road, Tribhuvan Nagar,",
+      "Singanpor, Surat - 395010"
+    ]
+  },
+  {
+    id: "branch-04",
+    name: "BRANCH 4 — RAJKOT",
+    addressLines: [
+      "Umiya Chowk,",
+      "Jasraj Nagar, Mavdi,",
+      "Rajkot - 360004"
+    ]
+  }
+];
+
 export const SHOWROOM_INFO = {
   name: "Gujarat Wallpaper & Decor",
   city: "Surat, Gujarat, India",
   tagline: "Transform Your Walls. Transform Your Space.",
   description: "Surat's premier luxury interior decor showroom, delivering designer wallpapers, architectural PVC wall panels, hand-crafted carpets, artificial turf, and bespoke wall decor for prestigious residential and commercial spaces.",
   contactPlaceholder: {
-    phone: "+91 (Contact Showroom)",
-    whatsapp: "", // Configurable placeholder as required
-    address: "Ring Road / Ghod Dod Road, Surat, Gujarat 395007",
-    hours: "Monday – Saturday: 10:00 AM – 8:30 PM | Sunday by Appointment",
-    instagram: "@gujaratwallpaperdecor"
+    phone: "+91 9265785158 / 8320802633",
+    whatsapp: "+919265785158",
+    branches: BRANCHES,
+    instagram: "@gujarat_wallpaper_decor"
   }
 };

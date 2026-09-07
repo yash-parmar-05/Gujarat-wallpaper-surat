@@ -586,7 +586,7 @@ export default function Contact({ prefilledProduct }) {
                     +91 9265785158 / 8320802633
                   </div>
                   <div style={{ fontSize: '0.8rem', color: colors.accentGold, marginTop: '0.25rem' }}>
-                    Instagram: @gujrat_wallpaper_decor
+                    Instagram: @arunvala
                   </div>
                 </div>
               </div>
