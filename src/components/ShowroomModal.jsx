@@ -89,14 +89,13 @@ export default function ShowroomModal({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.28 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundColor: 'rgba(12, 11, 10, 0.88)',
-              backdropFilter: 'blur(14px)',
-              WebkitBackdropFilter: 'blur(14px)',
+              backgroundColor: 'rgba(12, 11, 10, 0.82)',
+              willChange: 'opacity',
             }}
           />
 
@@ -104,10 +103,10 @@ export default function ShowroomModal({ isOpen, onClose }) {
           <motion.div
             key="showroom-window"
             data-lenis-prevent="true"
-            initial={{ opacity: 0, scale: 0.95, y: 18 }}
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 18 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, scale: 0.98, y: 10 }}
+            transition={{ duration: 0.22, ease: [0.25, 1, 0.5, 1] }}
             style={{
               position: 'relative',
               width: '100%',
@@ -116,11 +115,12 @@ export default function ShowroomModal({ isOpen, onClose }) {
               backgroundColor: isDark ? '#161514' : '#FAF8F5',
               borderRadius: '16px',
               border: isDark ? '1px solid rgba(197, 168, 128, 0.25)' : '1px solid rgba(166, 131, 83, 0.25)',
-              boxShadow: '0 30px 70px -15px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.04)',
+              boxShadow: '0 25px 60px -10px rgba(0, 0, 0, 0.75)',
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',
               zIndex: 10,
+              willChange: 'transform, opacity',
             }}
           >
             {/* Modal Header */}
