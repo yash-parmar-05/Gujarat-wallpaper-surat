@@ -122,6 +122,6 @@ export const SHOWROOM_INFO = {
     phone: "+91 9265785158 / 8320802633",
     whatsapp: "+919265785158",
     branches: BRANCHES,
-    instagram: "@gujarat_wallpaper_decor"
+    instagram: "@gujrat_wallpaper_decor"
   }
 };

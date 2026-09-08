@@ -1082,7 +1082,7 @@ export default function Home() {
           >
             {/* INSTAGRAM */}
             <a
-              href="https://www.instagram.com/arunvala/"
+              href="https://www.instagram.com/gujrat_wallpaper_decor/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1121,7 +1121,7 @@ export default function Home() {
                     Follow Us on Instagram
                   </div>
                   <div style={{ fontSize: '0.82rem', color: colors.accentGold }}>
-                    @arunvala
+                    @gujrat_wallpaper_decor
                   </div>
                 </div>
               </div>
@@ -1212,7 +1212,7 @@ export default function Home() {
 
             {/* FACEBOOK */}
             <a
-              href="https://www.facebook.com/gujrat_wallpaper_decor/"
+              href="https://www.facebook.com/share/19FULrAcv3/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1251,7 +1251,7 @@ export default function Home() {
                     Follow Us on Facebook
                   </div>
                   <div style={{ fontSize: '0.82rem', color: colors.accentGold }}>
-                    @gujrat_wallpaper_decor
+                    Arun Vala
                   </div>
                 </div>
               </div>

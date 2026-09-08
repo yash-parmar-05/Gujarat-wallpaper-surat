@@ -552,7 +552,7 @@ export default function WhyChooseUs() {
                     letterSpacing: '0.02em',
                   }}
                 >
-                  @arunvala
+                  @gujrat_wallpaper_decor
                 </div>
               </div>
             </div>
@@ -668,7 +668,7 @@ export default function WhyChooseUs() {
 
           {/* BUTTON 3 — FACEBOOK */}
           <motion.a
-            href="https://www.facebook.com/arunvala/"
+            href="https://www.facebook.com/share/19FULrAcv3/"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
@@ -730,7 +730,7 @@ export default function WhyChooseUs() {
                     letterSpacing: '0.02em',
                   }}
                 >
-                  @arunvala
+                  Arun Vala
                 </div>
               </div>
             </div>
