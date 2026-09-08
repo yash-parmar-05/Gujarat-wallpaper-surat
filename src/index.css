@@ -148,14 +148,11 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
-  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-overflow-scrolling: touch;
 }
 
-header, footer, section, .theme-transition {
-  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.theme-transition {
+  transition: background-color 0.25s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 h1, h2, h3, h4, .font-serif {
@@ -372,5 +369,24 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile Smooth Performance & Hardware Acceleration */
+@media (max-width: 1024px) {
+  html, body {
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+  }
+
+  /* Optimize blur filters and compositing on mobile GPUs */
+  .hero-slide-img {
+    transform: translateZ(0) !important;
+    transition: opacity 0.8s ease !important;
+    will-change: opacity;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }

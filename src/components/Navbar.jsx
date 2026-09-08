@@ -437,6 +437,10 @@ export default function Navbar() {
           .mobile-toggle {
             display: flex !important;
           }
+          .navbar-inner {
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+          }
         }
       `}</style>
     </>

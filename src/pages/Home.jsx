@@ -1554,10 +1554,17 @@ export default function Home() {
           }
         }
 
-        /* Tablet Portrait */
+        /* Tablet Portrait & Mobile Smoothness */
         @media (max-width: 768px) {
           .hero-slide-img {
             object-position: center 50% !important;
+            transform: none !important;
+            transition: none !important;
+          }
+          .hero-eyebrow {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background-color: rgba(26, 22, 18, 0.85) !important;
           }
           .hero-main-container {
             padding: 5.75rem 1.5rem 1.75rem !important;
@@ -1577,6 +1584,10 @@ export default function Home() {
             gap: 0.85rem !important;
             margin-bottom: 1.75rem !important;
           }
+          .hero-cta-buttons button {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
           .hero-badges-row {
             grid-template-columns: repeat(3, 1fr) !important;
             gap: 0.75rem !important;
@@ -1584,8 +1595,8 @@ export default function Home() {
             margin-bottom: 1.25rem !important;
           }
           .hero-badge-card {
-            background: rgba(255, 255, 255, 0.03) !important;
-            border: 1px solid rgba(245, 242, 236, 0.07) !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(245, 242, 236, 0.08) !important;
             padding: 0.75rem 0.85rem !important;
             border-radius: 10px !important;
           }
@@ -1594,6 +1605,9 @@ export default function Home() {
             margin-top: 1.75rem !important;
             padding: 1rem 1.25rem !important;
             border-radius: 14px !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background-color: rgba(20, 17, 14, 0.92) !important;
           }
           .hero-stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -1612,7 +1626,7 @@ export default function Home() {
           #showroom-location,
           #social-cta,
           #why-preview {
-            padding: 5rem 0 !important;
+            padding: 4.5rem 0 !important;
           }
         }
 
