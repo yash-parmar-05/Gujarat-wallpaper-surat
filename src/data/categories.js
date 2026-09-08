@@ -119,8 +119,8 @@ export const SHOWROOM_INFO = {
   tagline: "Transform Your Walls. Transform Your Space.",
   description: "Surat's premier luxury interior decor showroom, delivering designer wallpapers, architectural PVC wall panels, hand-crafted carpets, artificial turf, and bespoke wall decor for prestigious residential and commercial spaces.",
   contactPlaceholder: {
-    phone: "+91 9265785158 / 8320802633",
-    whatsapp: "+919265785158",
+    phone: "+91 99044 89826 / 92657 85158",
+    whatsapp: "+918320802633",
     branches: BRANCHES,
     instagram: "@gujrat_wallpaper_decor"
   }

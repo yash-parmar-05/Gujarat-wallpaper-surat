@@ -24,32 +24,38 @@ import CatalogsSection from '../components/CatalogsSection';
 // showroom-06 is placed first as requested, followed by 01, 02, 03, 04, 05
 const HERO_SLIDES = [
   {
-    image: '/showroom/showroom-06.jpg',
+    image: '/showroom/showroom-06.webp',
+    fallback: '/showroom/showroom-06.jpg',
     label: 'Showroom Interiors – Main Gallery & Grand Hallway',
     position: 'center 62%',
   },
   {
-    image: '/showroom/showroom-01.jpg',
+    image: '/showroom/showroom-01.webp',
+    fallback: '/showroom/showroom-01.jpg',
     label: 'Showroom Interiors – Wallpaper Showcase & Consult Area',
     position: 'center 56%',
   },
   {
-    image: '/showroom/showroom-02.jpg',
+    image: '/showroom/showroom-02.webp',
+    fallback: '/showroom/showroom-02.jpg',
     label: 'Showroom Interiors – Grand Wall Display & Signage',
     position: 'center 52%',
   },
   {
-    image: '/showroom/showroom-03.jpg',
+    image: '/showroom/showroom-03.webp',
+    fallback: '/showroom/showroom-03.jpg',
     label: 'Showroom Interiors – Feature Wall & Selection Area',
     position: 'center 52%',
   },
   {
-    image: '/showroom/showroom-04.jpg',
+    image: '/showroom/showroom-04.webp',
+    fallback: '/showroom/showroom-04.jpg',
     label: 'Showroom Interiors – Wallpaper Rolls Gallery',
     position: 'center 62%',
   },
   {
-    image: '/showroom/showroom-05.jpg',
+    image: '/showroom/showroom-05.webp',
+    fallback: '/showroom/showroom-05.jpg',
     label: 'Showroom Interiors – PVC Louvers & Architectural Panels',
     position: 'center 58%',
   },
@@ -103,11 +109,11 @@ export default function Home() {
     });
   }, []);
 
-  // Smooth automatic slideshow rotation
+  // Smooth automatic slideshow rotation (Every 4 seconds)
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 5000);
+    }, 4000);
 
     return () => window.clearInterval(timer);
   }, []);
@@ -193,38 +199,41 @@ export default function Home() {
           }}
           aria-hidden="true"
         >
-          {HERO_SLIDES.map((slide, slideIndex) => (
-            <motion.div
-              key={`hero-bg-${slide.image}`}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: slideIndex === activeHeroSlide ? 1 : 0,
-              }}
-              transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1.0] }}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                willChange: 'opacity',
-              }}
-            >
-              <img
-                src={slide.image}
-                alt={slide.label}
-                className="hero-slide-img"
+          {HERO_SLIDES.map((slide, slideIndex) => {
+            const isActive = slideIndex === activeHeroSlide;
+            return (
+              <div
+                key={`hero-bg-${slide.image}`}
                 style={{
+                  position: 'absolute',
+                  inset: 0,
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: slide.position,
-                  display: 'block',
+                  opacity: isActive ? 1 : 0,
+                  visibility: isActive ? 'visible' : 'hidden',
+                  transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  willChange: 'opacity',
                 }}
-                loading="eager"
-                decoding="async"
-              />
-            </motion.div>
-          ))}
+              >
+                <img
+                  src={slide.image}
+                  alt={slide.label}
+                  className="hero-slide-img"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: slide.position,
+                    display: 'block',
+                    transform: isActive ? 'scale(1)' : 'scale(1.04)',
+                    transition: 'transform 4.5s ease-out',
+                  }}
+                  loading={slideIndex === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+            );
+          })}
 
           {/* ── Seamless Multi-Directional Luxury Gradient Overlay (Subtle & Natural) ── */}
           <div
@@ -607,7 +616,7 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
-                    10K+
+                    20K+
                   </div>
                   <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
                     Customers
@@ -773,7 +782,7 @@ export default function Home() {
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <CheckCircle2 size={18} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
                   <span style={{ fontSize: '0.88rem', color: colors.textSecondary, lineHeight: 1.5 }}>
-                    <strong style={{ color: colors.textPrimary }}>Prime Surat Location:</strong> Mangaldas Shopping Centre, Near Navjivan Circle, Udhana-Magdalla Rd, Surat.
+                    <strong style={{ color: colors.textPrimary }}>Main Polaris Branch:</strong> Shop No. 154, Polaris Mall, Puna Canal Road, Surat.
                   </span>
                 </div>
               </div>
@@ -781,7 +790,7 @@ export default function Home() {
               {/* Action Buttons */}
               <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <a
-                  href="https://maps.google.com/?q=Mangaldas+Shopping+Centre+Surat"
+                  href="https://www.google.com/maps/search/?api=1&query=Shop+No.+154+Polaris+Mall+Puna+Canal+Road+Surat"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -807,7 +816,7 @@ export default function Home() {
                 </a>
 
                 <a
-                  href="https://wa.me/919265785158?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20visit%20your%20Surat%20showroom."
+                  href="https://wa.me/918320802633?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20visit%20your%20Surat%20showroom."
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -1293,7 +1302,7 @@ export default function Home() {
             }}
           >
             <a
-              href="https://wa.me/919265785158?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20enquire%20about%20your%20decor%20solutions."
+              href="https://wa.me/918320802633?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20enquire%20about%20your%20decor%20solutions."
               target="_blank"
               rel="noopener noreferrer"
               style={{

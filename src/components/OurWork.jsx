@@ -218,30 +218,39 @@ export default function OurWork({ id = 'our-work' }) {
           }}
           className="our-work-grid"
         >
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.45, delay: idx * 0.05 }}
-                onClick={() => setSelectedItem(item)}
-                style={{
-                  backgroundColor: colors.bgCard,
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  border: `1px solid ${colors.borderCard}`,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  position: 'relative',
-                  boxShadow: isDark ? '0 10px 30px rgba(0, 0, 0, 0.35)' : '0 6px 20px rgba(0, 0, 0, 0.05)',
-                  transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease',
-                }}
-                className="our-work-card"
-              >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              style={{
+                gridColumn: '1 / -1',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '1.5rem',
+              }}
+              className="our-work-inner-grid"
+            >
+              {filteredItems.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setSelectedItem(item)}
+                  style={{
+                    backgroundColor: colors.bgCard,
+                    borderRadius: '10px',
+                    overflow: 'hidden',
+                    border: `1px solid ${colors.borderCard}`,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'relative',
+                    boxShadow: isDark ? '0 10px 30px rgba(0, 0, 0, 0.35)' : '0 6px 20px rgba(0, 0, 0, 0.05)',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+                  }}
+                  className="our-work-card"
+                >
                 {/* Image Container with Fixed Aspect Ratio */}
                 <div
                   style={{
@@ -370,10 +379,11 @@ export default function OurWork({ id = 'our-work' }) {
                     {item.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </AnimatePresence>
-        </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
       </div>
 
       {/* Lightbox / Full View Modal */}
@@ -532,6 +542,10 @@ export default function OurWork({ id = 'our-work' }) {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 1.5rem !important;
           }
+          .our-work-inner-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 1.5rem !important;
+          }
         }
 
         @media (max-width: 768px) {
@@ -539,6 +553,10 @@ export default function OurWork({ id = 'our-work' }) {
             padding: 4.5rem 0 !important;
           }
           .our-work-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.25rem !important;
+          }
+          .our-work-inner-grid {
             grid-template-columns: 1fr !important;
             gap: 1.25rem !important;
           }

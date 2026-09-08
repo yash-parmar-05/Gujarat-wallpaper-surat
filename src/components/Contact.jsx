@@ -123,60 +123,38 @@ export default function Contact({ prefilledProduct }) {
 
             <div className="contact-banner-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem' }}>
               <button
-                onClick={handleWhatsAppEnquiry}
-                style={{
-                  backgroundColor: '#25D366',
-                  color: '#FFFFFF',
-                  padding: '0.95rem 2.25rem',
-                  borderRadius: '6px',
-                  fontWeight: 600,
-                  fontSize: '0.84rem',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  border: 'none',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.65rem',
-                  boxShadow: '0 6px 20px rgba(37, 211, 102, 0.35)',
-                  transition: 'all 0.3s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#1EBE5D';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#25D366';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <MessageCircle size={18} />
-                <span>Get in Touch on WhatsApp</span>
-              </button>
-
-              <button
                 onClick={() => {
                   const el = document.getElementById('showroom-location');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
                 style={{
-                  borderColor: isDark ? 'rgba(247, 244, 238, 0.3)' : 'rgba(28, 25, 23, 0.2)',
-                  color: isDark ? '#F7F4EE' : '#1C1917',
-                  backgroundColor: 'transparent',
-                  border: `1px solid ${isDark ? 'rgba(247, 244, 238, 0.3)' : 'rgba(28, 25, 23, 0.2)'}`,
-                  padding: '0.95rem 2.25rem',
+                  backgroundColor: colors.accentGold,
+                  color: isDark ? '#141312' : '#FFFFFF',
+                  border: `1px solid ${colors.accentGold}`,
+                  padding: '0.95rem 2.5rem',
                   borderRadius: '6px',
-                  fontWeight: 500,
+                  fontWeight: 600,
                   fontSize: '0.84rem',
-                  letterSpacing: '0.08em',
+                  letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.55rem',
+                  boxShadow: isDark ? '0 6px 20px rgba(197, 168, 128, 0.25)' : '0 4px 16px rgba(166, 131, 83, 0.25)',
                   transition: 'all 0.3s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = colors.accentGold)}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = isDark ? 'rgba(247, 244, 238, 0.3)' : 'rgba(28, 25, 23, 0.2)')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = colors.accentGoldHover;
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = colors.accentGold;
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
               >
                 <span>Visit Showroom</span>
+                <ArrowUpRight size={16} />
               </button>
             </div>
           </div>
@@ -449,7 +427,7 @@ export default function Contact({ prefilledProduct }) {
                     Visiting Hours
                   </div>
                   <div style={{ fontSize: '0.92rem', color: colors.textPrimary, fontWeight: 500 }}>
-                    Monday – Sunday: 10:00 AM – 8:30 PM
+                    Monday – Sunday: 10:00 AM – 7:00 PM
                   </div>
                 </div>
               </div>
