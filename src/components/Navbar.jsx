@@ -10,11 +10,15 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 40) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isScrolled = window.scrollY > 30;
+          setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -78,11 +82,13 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 100,
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          padding: scrolled ? '0.75rem 1.25rem' : '1.25rem 0',
+          padding: scrolled ? '0.65rem 1.25rem' : '1.15rem 0',
           display: 'flex',
           justifyContent: 'center',
           pointerEvents: 'none',
+          transition: 'padding 0.3s ease',
+          transform: 'translateZ(0)',
+          willChange: 'padding',
         }}
       >
         <div
@@ -93,10 +99,10 @@ export default function Navbar() {
             justifyContent: 'space-between',
             width: '100%',
             maxWidth: scrolled ? '1280px' : '1440px',
-            padding: scrolled ? '0.65rem 1.75rem' : '0 2rem',
+            padding: scrolled ? '0.6rem 1.5rem' : '0 2rem',
             backgroundColor: headerBg,
-            backdropFilter: isHomeAtTop ? 'none' : 'blur(20px) saturate(160%)',
-            WebkitBackdropFilter: isHomeAtTop ? 'none' : 'blur(20px) saturate(160%)',
+            backdropFilter: isHomeAtTop ? 'none' : 'blur(16px)',
+            WebkitBackdropFilter: isHomeAtTop ? 'none' : 'blur(16px)',
             border: isHomeAtTop
               ? '1px solid transparent'
               : scrolled
@@ -104,10 +110,11 @@ export default function Navbar() {
               : '1px solid rgba(122, 90, 58, 0.1)',
             borderRadius: scrolled ? '9999px' : '0px',
             boxShadow: scrolled
-              ? '0 12px 36px rgba(122, 90, 58, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.6)'
+              ? '0 10px 30px rgba(122, 90, 58, 0.1)'
               : 'none',
-            transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'background-color 0.25s ease, border-radius 0.3s ease, border-color 0.25s ease, box-shadow 0.25s ease, max-width 0.3s ease, padding 0.3s ease',
             pointerEvents: 'auto',
+            transform: 'translateZ(0)',
           }}
         >
           {/* Brand Logo */}

@@ -42,12 +42,21 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // Initialize Lenis smooth scroll
+    // Check if device is mobile or touch device
+    const isTouchOrMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024;
+    
+    // If mobile/touch, use ultra-responsive native browser momentum scrolling (zero lag)
+    if (isTouchOrMobile) {
+      return;
+    }
+
+    // Initialize Lenis smooth scroll for Desktop/Laptop only
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.0,
     });
 
     function raf(time) {
