@@ -316,21 +316,21 @@ export default function Showroom3DScene() {
     };
   }, []);
 
-  // Dynamically update materials and lighting when theme toggles
+  // Dynamically update materials and lighting to Ivory + Warm Beige + Walnut Luxury
   useEffect(() => {
     if (sceneElementsRef.current) {
       const { backWallMat, plinthMat, ambientLight, warmSpot } = sceneElementsRef.current;
-      if (backWallMat) backWallMat.color.setHex(isDark ? 0x181715 : 0xece6dc);
-      if (plinthMat) plinthMat.color.setHex(isDark ? 0x191816 : 0xf2ece4);
+      if (backWallMat) backWallMat.color.setHex(0xe7d7be);
+      if (plinthMat) plinthMat.color.setHex(0xf8f5f1);
       if (ambientLight) {
-        ambientLight.color.setHex(isDark ? 0xf5efe6 : 0xfffaf2);
-        ambientLight.intensity = isDark ? 0.9 : 1.25;
+        ambientLight.color.setHex(0xfffaf5);
+        ambientLight.intensity = 1.35;
       }
       if (warmSpot) {
-        warmSpot.intensity = isDark ? 4.2 : 3.6;
+        warmSpot.intensity = 3.8;
       }
     }
-  }, [isDark]);
+  }, []);
 
   return (
     <div
@@ -365,9 +365,7 @@ export default function Showroom3DScene() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: isDark
-            ? 'radial-gradient(circle at 65% 50%, transparent 45%, rgba(20, 19, 18, 0.6) 80%, rgba(20, 19, 18, 0.95) 100%)'
-            : 'radial-gradient(circle at 65% 50%, transparent 45%, rgba(240, 234, 225, 0.4) 80%, rgba(251, 249, 245, 0.85) 100%)',
+          background: 'radial-gradient(circle at 65% 50%, transparent 45%, rgba(231, 215, 190, 0.4) 80%, rgba(248, 245, 241, 0.85) 100%)',
           pointerEvents: 'none',
         }}
       />
@@ -381,15 +379,17 @@ export default function Showroom3DScene() {
           display: 'flex',
           alignItems: 'center',
           gap: '0.45rem',
-          padding: '0.35rem 0.75rem',
-          backgroundColor: isDark ? 'rgba(20, 19, 18, 0.75)' : 'rgba(255, 255, 255, 0.88)',
+          padding: '0.4rem 0.85rem',
+          backgroundColor: 'rgba(255, 255, 255, 0.92)',
           backdropFilter: 'blur(10px)',
-          border: isDark ? '1px solid rgba(197, 168, 128, 0.25)' : '1px solid rgba(166, 131, 83, 0.3)',
+          border: '1px solid rgba(122, 90, 58, 0.25)',
           borderRadius: '9999px',
-          fontSize: '0.68rem',
+          fontSize: '0.72rem',
           letterSpacing: '0.12em',
           textTransform: 'uppercase',
-          color: isDark ? '#C5A880' : '#A68353',
+          color: '#7A5A3A',
+          fontWeight: 700,
+          boxShadow: '0 4px 14px rgba(122, 90, 58, 0.1)',
           pointerEvents: 'none',
         }}
       >
@@ -398,8 +398,8 @@ export default function Showroom3DScene() {
             width: '6px',
             height: '6px',
             borderRadius: '50%',
-            backgroundColor: isDark ? '#C5A880' : '#A68353',
-            boxShadow: isDark ? '0 0 8px #C5A880' : '0 0 6px #A68353',
+            backgroundColor: '#7A5A3A',
+            boxShadow: '0 0 6px #7A5A3A',
           }}
         />
         Interactive 3D Showroom

@@ -122,19 +122,20 @@ export default function Home() {
     setActiveHeroSlide((prev) => (prev + direction + HERO_SLIDES.length) % HERO_SLIDES.length);
   };
 
-  // Signature Luxury Dark Theme Colors
+  // Signature Luxury Ivory + Warm Beige + Walnut Theme Colors
   const colors = {
-    bgMain: '#121110',
-    bgSectionAlt: '#161513',
-    bgCard: '#181715',
-    bgCardHover: '#201E1B',
-    textPrimary: '#F7F4EE',
-    textSecondary: '#C8C2B7',
-    textMuted: '#948E85',
-    accentGold: '#C5A880',
-    accentGoldHover: '#DFCAAD',
-    borderSubtle: 'rgba(245, 242, 236, 0.08)',
-    borderCard: 'rgba(197, 168, 128, 0.22)',
+    bgMain: '#F8F5F1',
+    bgSectionAlt: '#E7D7BE',
+    bgCard: '#FFFFFF',
+    bgCardHover: '#FCFAF7',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    textMuted: '#87827C',
+    accentWalnut: '#7A5A3A',
+    accentGold: '#7A5A3A',
+    accentGoldHover: '#63472C',
+    borderSubtle: 'rgba(122, 90, 58, 0.12)',
+    borderCard: 'rgba(122, 90, 58, 0.18)',
   };
 
   // 3 Why Choose Us Highlights
@@ -169,7 +170,7 @@ export default function Home() {
     >
 
       {/* =========================================
-          HERO SECTION — Unified Luxury Showroom Slideshow
+          HERO SECTION — High-End Luxury Showroom Experience
           ========================================= */}
       <section
         id="hero"
@@ -180,13 +181,13 @@ export default function Home() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          backgroundColor: colors.bgMain,
+          backgroundColor: '#161412',
           overflow: 'hidden',
           transition: 'background-color 0.35s ease',
         }}
         aria-label="Gujarat Wallpaper Showroom Hero Section"
       >
-        {/* ── 1. Full-Width Background Slideshow Stack ── */}
+        {/* ── 1. Full-Width Background Slideshow Stack with Ken Burns motion ── */}
         <div
           style={{
             position: 'absolute',
@@ -211,8 +212,8 @@ export default function Home() {
                   height: '100%',
                   opacity: isActive ? 1 : 0,
                   visibility: isActive ? 'visible' : 'hidden',
-                  transition: 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                  willChange: 'opacity',
+                  transition: 'opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  willChange: 'opacity, transform',
                 }}
               >
                 <img
@@ -225,8 +226,8 @@ export default function Home() {
                     objectFit: 'cover',
                     objectPosition: slide.position,
                     display: 'block',
-                    transform: isActive ? 'scale(1)' : 'scale(1.04)',
-                    transition: 'transform 4.5s ease-out',
+                    transform: isActive ? 'scale(1.05)' : 'scale(1)',
+                    transition: 'transform 6s ease-out',
                   }}
                   loading={slideIndex === 0 ? 'eager' : 'lazy'}
                   decoding="async"
@@ -235,18 +236,43 @@ export default function Home() {
             );
           })}
 
-          {/* ── Seamless Multi-Directional Luxury Gradient Overlay (Subtle & Natural) ── */}
+          {/* ── Multi-Layered Luxury Gradient Overlay for Maximum Readability ── */}
           <div
             style={{
               position: 'absolute',
               inset: 0,
-              background: `linear-gradient(90deg, rgba(18, 17, 16, 0.78) 0%, rgba(18, 17, 16, 0.52) 36%, rgba(18, 17, 16, 0.18) 68%, rgba(18, 17, 16, 0.04) 100%), linear-gradient(180deg, rgba(18, 17, 16, 0.45) 0%, transparent 16%, transparent 78%, rgba(18, 17, 16, 0.75) 100%)`,
+              background: `linear-gradient(105deg, rgba(16, 14, 12, 0.88) 0%, rgba(20, 17, 14, 0.72) 42%, rgba(25, 20, 16, 0.42) 75%, rgba(20, 17, 14, 0.65) 100%)`,
+              zIndex: 1,
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: `linear-gradient(180deg, rgba(16, 14, 12, 0.65) 0%, transparent 22%, transparent 68%, rgba(16, 14, 12, 0.92) 100%)`,
+              zIndex: 1,
+            }}
+          />
+          {/* Subtle warm luxury ambient glow */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '15%',
+              left: '5%',
+              width: '45vw',
+              height: '45vw',
+              maxWidth: '550px',
+              maxHeight: '550px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(200, 169, 106, 0.12) 0%, transparent 70%)',
+              filter: 'blur(60px)',
+              pointerEvents: 'none',
               zIndex: 1,
             }}
           />
         </div>
 
-        {/* ── 2. Unified Hero Content Canvas ── */}
+        {/* ── 2. Main Hero Content Canvas ── */}
         <div
           className="hero-main-container"
           style={{
@@ -255,26 +281,26 @@ export default function Home() {
             width: '100%',
             maxWidth: '1440px',
             margin: '0 auto',
-            padding: '6.5rem 2rem 2rem',
+            padding: '7rem 2rem 2.5rem',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             flex: 1,
           }}
         >
-          {/* Upper Row: Left Brand Narrative & Right Minimal Luxury Slider Controls */}
+          {/* Upper Row: Brand Content */}
           <div
             className="hero-upper-grid"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(0, 1.25fr) minmax(0, 0.75fr)',
-              gap: '2.5rem',
-              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              maxWidth: '820px',
               marginBottom: '2.5rem',
             }}
           >
-            {/* Left Column: Brand Content */}
-            <div style={{ maxWidth: '640px' }} className="hero-text-block">
+            {/* Brand Content & Action */}
+            <div style={{ width: '100%' }} className="hero-text-block">
               {/* Eyebrow badge */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -284,22 +310,24 @@ export default function Home() {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.4rem 0.95rem',
-                  backgroundColor: 'rgba(197, 168, 128, 0.12)',
-                  backdropFilter: 'blur(8px)',
-                  border: `1px solid ${colors.borderCard}`,
+                  gap: '0.55rem',
+                  padding: '0.45rem 1.1rem',
+                  backgroundColor: 'rgba(200, 169, 106, 0.14)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(200, 169, 106, 0.35)',
                   borderRadius: '9999px',
-                  fontSize: '0.72rem',
+                  fontSize: '0.74rem',
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
-                  color: colors.accentGold,
+                  color: '#C8A96A',
                   fontWeight: 600,
                   marginBottom: '1.4rem',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)',
                   width: 'fit-content',
                 }}
               >
-                <Sparkles size={13} />
+                <Sparkles size={14} color="#C8A96A" />
                 SURAT SHOWROOM • GUJARAT WALLPAPER &amp; DECOR
               </motion.div>
 
@@ -311,18 +339,27 @@ export default function Home() {
                 className="hero-heading"
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: 'clamp(2.6rem, 4.4vw, 4.4rem)',
-                  lineHeight: 1.1,
-                  color: colors.textPrimary,
+                  fontSize: 'clamp(2.7rem, 4.8vw, 4.6rem)',
+                  lineHeight: 1.08,
+                  color: '#FFFFFF',
                   fontWeight: 500,
-                  letterSpacing: '0.01em',
+                  letterSpacing: '-0.01em',
                   marginBottom: '1.4rem',
-                  textShadow: '0 2px 16px rgba(0, 0, 0, 0.7)',
+                  textShadow: '0 4px 24px rgba(0, 0, 0, 0.6)',
                 }}
               >
                 Transform Your Walls.
                 <br />
-                <span style={{ color: colors.accentGold, fontStyle: 'italic' }}>Transform Your Space.</span>
+                <span
+                  style={{
+                    color: '#C8A96A',
+                    fontStyle: 'italic',
+                    fontWeight: 500,
+                    textShadow: '0 2px 20px rgba(200, 169, 106, 0.3)',
+                  }}
+                >
+                  Transform Your Space.
+                </span>
               </motion.h1>
 
               {/* Supporting Text */}
@@ -332,16 +369,16 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="hero-description"
                 style={{
-                  fontSize: '1.08rem',
-                  color: colors.textSecondary,
-                  lineHeight: 1.7,
-                  maxWidth: '520px',
+                  fontSize: '1.12rem',
+                  color: 'rgba(255, 255, 255, 0.88)',
+                  lineHeight: 1.75,
+                  maxWidth: '560px',
                   fontWeight: 300,
                   marginBottom: '2.2rem',
-                  textShadow: '0 1px 10px rgba(0, 0, 0, 0.6)',
+                  textShadow: '0 2px 12px rgba(0, 0, 0, 0.5)',
                 }}
               >
-                Premium wallpapers, wall panels, carpets and decor solutions for homes, offices and commercial spaces.
+                Surat’s destination for imported wallpapers, custom murals, 3D PVC louvers, luxury carpets, and end-to-end decor styling.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -354,74 +391,77 @@ export default function Home() {
                   alignItems: 'center',
                   flexWrap: 'wrap',
                   gap: '1.15rem',
-                  marginBottom: '2.2rem',
+                  marginBottom: '2.4rem',
                 }}
                 className="hero-cta-buttons"
               >
                 <button
-                  onClick={() => {
-                    const el = document.getElementById('catalogs');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={() => navigate('/catalogs')}
+                  className="btn-primary"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.65rem',
-                    padding: '0.95rem 2.2rem',
-                    backgroundColor: colors.accentGold,
-                    color: '#121110',
-                    fontSize: '0.82rem',
+                    padding: '1rem 2.2rem',
+                    backgroundColor: '#7A5A3A',
+                    color: '#FFFFFF',
+                    fontSize: '0.84rem',
                     fontWeight: 600,
-                    letterSpacing: '0.12em',
+                    letterSpacing: '0.1em',
                     textTransform: 'uppercase',
-                    borderRadius: '4px',
-                    border: 'none',
+                    borderRadius: '24px',
+                    border: '1px solid #967049',
                     cursor: 'pointer',
-                    boxShadow: '0 4px 16px rgba(197, 168, 128, 0.25)',
-                    transition: 'all 0.3s ease',
+                    boxShadow: '0 10px 28px rgba(122, 90, 58, 0.45)',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.accentGoldHover;
+                    e.currentTarget.style.backgroundColor = '#967049';
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(197,168,128,0.35)';
+                    e.currentTarget.style.boxShadow = '0 14px 32px rgba(122, 90, 58, 0.6)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = colors.accentGold;
+                    e.currentTarget.style.backgroundColor = '#7A5A3A';
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.boxShadow = '0 10px 28px rgba(122, 90, 58, 0.45)';
                   }}
                 >
                   <span>EXPLORE CATALOGS</span>
-                  <ArrowUpRight size={16} />
+                  <ArrowUpRight size={17} />
                 </button>
 
                 <button
                   onClick={() => setIsShowroomModalOpen(true)}
+                  className="btn-secondary"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.65rem',
-                    padding: '0.95rem 2rem',
-                    backgroundColor: 'rgba(18, 17, 16, 0.6)',
-                    backdropFilter: 'blur(8px)',
-                    color: colors.textPrimary,
-                    fontSize: '0.82rem',
-                    fontWeight: 500,
-                    letterSpacing: '0.12em',
+                    padding: '1rem 2.2rem',
+                    backgroundColor: 'rgba(248, 245, 241, 0.15)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    color: '#FFFFFF',
+                    fontSize: '0.84rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.1em',
                     textTransform: 'uppercase',
-                    borderRadius: '4px',
-                    border: `1px solid ${colors.borderCard}`,
+                    borderRadius: '24px',
+                    border: '1px solid rgba(255, 255, 255, 0.35)',
                     cursor: 'pointer',
-                    transition: 'all 0.3s ease',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25)',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = colors.accentGold;
-                    e.currentTarget.style.backgroundColor = 'rgba(197, 168, 128, 0.15)';
+                    e.currentTarget.style.borderColor = '#C8A96A';
+                    e.currentTarget.style.backgroundColor = 'rgba(200, 169, 106, 0.25)';
+                    e.currentTarget.style.color = '#FFFFFF';
                     e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = colors.borderCard;
-                    e.currentTarget.style.backgroundColor = 'rgba(18, 17, 16, 0.6)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.35)';
+                    e.currentTarget.style.backgroundColor = 'rgba(248, 245, 241, 0.15)';
+                    e.currentTarget.style.color = '#FFFFFF';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
@@ -436,70 +476,110 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
                   gap: '1.25rem',
-                  maxWidth: '560px',
-                  paddingTop: '1.25rem',
-                  borderTop: `1px solid ${colors.borderSubtle}`,
-                  marginBottom: '1.25rem',
+                  maxWidth: '580px',
+                  paddingTop: '1.4rem',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.18)',
                 }}
                 className="hero-badges-row"
               >
-                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                  <Award size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                  <div
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(200, 169, 106, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      border: '1px solid rgba(200, 169, 106, 0.3)',
+                    }}
+                  >
+                    <Award size={18} color="#C8A96A" />
+                  </div>
                   <div>
-                    <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FFFFFF' }}>
                       Premium Quality
                     </div>
-                    <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.4, marginTop: '2px' }}>
                       Carefully curated materials
                     </div>
                   </div>
                 </div>
 
-                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                  <Users size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                  <div
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(200, 169, 106, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      border: '1px solid rgba(200, 169, 106, 0.3)',
+                    }}
+                  >
+                    <Users size={18} color="#C8A96A" />
+                  </div>
                   <div>
-                    <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FFFFFF' }}>
                       Expert Guidance
                     </div>
-                    <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.4, marginTop: '2px' }}>
                       Personalized support
                     </div>
                   </div>
                 </div>
 
-                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                  <Layers size={19} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div className="hero-badge-card" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                  <div
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(200, 169, 106, 0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      border: '1px solid rgba(200, 169, 106, 0.3)',
+                    }}
+                  >
+                    <Layers size={18} color="#C8A96A" />
+                  </div>
                   <div>
-                    <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: colors.textPrimary }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#FFFFFF' }}>
                       Complete Solutions
                     </div>
-                    <div style={{ fontSize: '0.74rem', color: colors.textSecondary, lineHeight: 1.4, marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.4, marginTop: '2px' }}>
                       Everything under one roof
                     </div>
                   </div>
                 </div>
               </motion.div>
-
-
             </div>
           </div>
 
-          {/* ── 3. Bottom Integrated Bar: Statistics ── */}
+          {/* ── 3. Bottom Integrated Bar: Statistics (Glassmorphism & Transparent) ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
             className="hero-bottom-bar"
             style={{
-              marginTop: '2.5rem',
-              padding: '1.2rem 1.8rem',
-              borderRadius: '16px',
-              backgroundColor: 'rgba(22, 20, 19, 0.85)',
+              marginTop: '1.5rem',
+              padding: '1.25rem 2rem',
+              borderRadius: '24px',
+              backgroundColor: 'rgba(24, 21, 18, 0.65)',
               backdropFilter: 'blur(20px)',
-              border: `1px solid rgba(197, 168, 128, 0.22)`,
-              boxShadow: '0 20px 48px rgba(0, 0, 0, 0.55)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              boxShadow: '0 20px 48px rgba(0, 0, 0, 0.45)',
             }}
           >
             {/* Integrated Stats Grid */}
@@ -520,133 +600,133 @@ export default function Home() {
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    border: '1px solid rgba(197, 168, 128, 0.3)',
+                    border: '1px solid rgba(200, 169, 106, 0.35)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
+                    backgroundColor: 'rgba(200, 169, 106, 0.15)',
                   }}
                 >
-                  <InstagramIcon size={19} color={colors.accentGold} />
+                  <InstagramIcon size={19} color="#C8A96A" />
                 </div>
                 <div>
-                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.65rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.1 }}>
                     100K+
                   </div>
-                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                  <div className="hero-stat-label" style={{ fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C8A96A', marginTop: '2px' }}>
                     Instagram
                   </div>
                 </div>
               </div>
 
               {/* Stat 2: YouTube */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    border: '1px solid rgba(197, 168, 128, 0.3)',
+                    border: '1px solid rgba(200, 169, 106, 0.35)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
+                    backgroundColor: 'rgba(200, 169, 106, 0.15)',
                   }}
                 >
-                  <YouTubeIcon size={19} color={colors.accentGold} />
+                  <YouTubeIcon size={19} color="#C8A96A" />
                 </div>
                 <div>
-                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.65rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.1 }}>
                     160K+
                   </div>
-                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                  <div className="hero-stat-label" style={{ fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C8A96A', marginTop: '2px' }}>
                     YouTube
                   </div>
                 </div>
               </div>
 
               {/* Stat 3: Facebook */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    border: '1px solid rgba(197, 168, 128, 0.3)',
+                    border: '1px solid rgba(200, 169, 106, 0.35)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
+                    backgroundColor: 'rgba(200, 169, 106, 0.15)',
                   }}
                 >
-                  <FacebookIcon size={19} color={colors.accentGold} />
+                  <FacebookIcon size={19} color="#C8A96A" />
                 </div>
                 <div>
-                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.65rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.1 }}>
                     300K+
                   </div>
-                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                  <div className="hero-stat-label" style={{ fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C8A96A', marginTop: '2px' }}>
                     Facebook
                   </div>
                 </div>
               </div>
 
               {/* Stat 4: Customers */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    border: '1px solid rgba(197, 168, 128, 0.3)',
+                    border: '1px solid rgba(200, 169, 106, 0.35)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
+                    backgroundColor: 'rgba(200, 169, 106, 0.15)',
                   }}
                 >
-                  <Users size={19} color={colors.accentGold} />
+                  <Users size={19} color="#C8A96A" />
                 </div>
                 <div>
-                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.65rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.1 }}>
                     20K+
                   </div>
-                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                  <div className="hero-stat-label" style={{ fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C8A96A', marginTop: '2px' }}>
                     Customers
                   </div>
                 </div>
               </div>
 
               {/* Stat 5: Excellence */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: `1px solid ${colors.borderSubtle}`, paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
                     width: '42px',
                     height: '42px',
                     borderRadius: '12px',
-                    border: '1px solid rgba(197, 168, 128, 0.3)',
+                    border: '1px solid rgba(200, 169, 106, 0.35)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    backgroundColor: 'rgba(197, 168, 128, 0.08)',
+                    backgroundColor: 'rgba(200, 169, 106, 0.15)',
                   }}
                 >
-                  <Award size={19} color={colors.accentGold} />
+                  <Award size={19} color="#C8A96A" />
                 </div>
                 <div>
-                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.55rem', fontWeight: 700, color: colors.textPrimary, lineHeight: 1.1 }}>
+                  <div className="hero-stat-number" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.65rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.1 }}>
                     5+ Yrs
                   </div>
-                  <div className="hero-stat-label" style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.accentGold, marginTop: '2px' }}>
+                  <div className="hero-stat-label" style={{ fontSize: '0.66rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C8A96A', marginTop: '2px' }}>
                     Excellence
                   </div>
                 </div>

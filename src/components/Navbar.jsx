@@ -54,6 +54,21 @@ export default function Navbar() {
     return location.pathname === path;
   };
 
+  const isHome = location.pathname === '/home' || location.pathname === '/';
+  const isHomeAtTop = isHome && !scrolled;
+
+  // On Home at top over dark hero image: White text with gold accents
+  // When scrolled or on light pages (Catalogs, Gallery, etc.): Charcoal text with walnut accents
+  const textColor = isHomeAtTop ? '#FFFFFF' : '#2F2F2F';
+  const subtitleColor = isHomeAtTop ? '#C8A96A' : '#7A5A3A';
+  const linkColorDefault = isHomeAtTop ? 'rgba(255, 255, 255, 0.88)' : '#4A4642';
+  const linkColorActive = isHomeAtTop ? '#C8A96A' : '#7A5A3A';
+  const headerBg = isHomeAtTop
+    ? 'transparent'
+    : scrolled
+    ? 'rgba(255, 255, 255, 0.82)'
+    : 'rgba(248, 245, 241, 0.96)';
+
   return (
     <>
       <header
@@ -63,16 +78,38 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 100,
-          transition: 'background-color 0.35s ease, border-color 0.35s ease, padding 0.3s ease',
-          backgroundColor: 'rgba(18, 17, 16, 0.92)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: '1px solid rgba(245, 242, 236, 0.08)',
-          boxShadow: scrolled ? '0 4px 24px rgba(0, 0, 0, 0.5)' : 'none',
-          padding: scrolled ? '0.75rem 0' : '1.1rem 0',
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          padding: scrolled ? '0.75rem 1.25rem' : '1.25rem 0',
+          display: 'flex',
+          justifyContent: 'center',
+          pointerEvents: 'none',
         }}
       >
-        <div className="container-luxury" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div
+          className="container-luxury navbar-inner"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+            maxWidth: scrolled ? '1280px' : '1440px',
+            padding: scrolled ? '0.65rem 1.75rem' : '0 2rem',
+            backgroundColor: headerBg,
+            backdropFilter: isHomeAtTop ? 'none' : 'blur(20px) saturate(160%)',
+            WebkitBackdropFilter: isHomeAtTop ? 'none' : 'blur(20px) saturate(160%)',
+            border: isHomeAtTop
+              ? '1px solid transparent'
+              : scrolled
+              ? '1px solid rgba(122, 90, 58, 0.18)'
+              : '1px solid rgba(122, 90, 58, 0.1)',
+            borderRadius: scrolled ? '9999px' : '0px',
+            boxShadow: scrolled
+              ? '0 12px 36px rgba(122, 90, 58, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.6)'
+              : 'none',
+            transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+            pointerEvents: 'auto',
+          }}
+        >
           {/* Brand Logo */}
           <Link
             to="/home"
@@ -85,24 +122,26 @@ export default function Navbar() {
             <span
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(1.2rem, 3.5vw, 1.45rem)',
+                fontSize: scrolled ? '1.35rem' : 'clamp(1.25rem, 3.5vw, 1.55rem)',
                 fontWeight: 600,
-                letterSpacing: '0.04em',
-                color: '#F7F4EE',
+                letterSpacing: '0.03em',
+                color: textColor,
                 lineHeight: 1.1,
-                transition: 'color 0.3s ease',
+                textShadow: isHomeAtTop ? '0 2px 12px rgba(0, 0, 0, 0.7)' : 'none',
+                transition: 'all 0.3s ease',
               }}
             >
               Gujarat Wallpaper &amp; Decor
             </span>
             <span
               style={{
-                fontSize: '0.65rem',
+                fontSize: '0.64rem',
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: '#C5A880',
-                fontWeight: 500,
+                color: subtitleColor,
+                fontWeight: 600,
                 marginTop: '2px',
+                textShadow: isHomeAtTop ? '0 1px 6px rgba(0, 0, 0, 0.6)' : 'none',
                 transition: 'color 0.3s ease',
               }}
             >
@@ -121,8 +160,8 @@ export default function Navbar() {
           >
             {navLinks.map((link) => {
               const active = isLinkActive(link.path);
-              const linkColor = active ? '#C5A880' : '#E5E1D8';
-              const hoverColor = '#C5A880';
+              const linkColor = active ? linkColorActive : linkColorDefault;
+              const hoverColor = isHomeAtTop ? '#C8A96A' : '#7A5A3A';
 
               return (
                 <Link
@@ -130,7 +169,7 @@ export default function Navbar() {
                   to={link.path}
                   style={{
                     fontSize: '0.82rem',
-                    fontWeight: 500,
+                    fontWeight: active ? 600 : 500,
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     color: linkColor,
@@ -138,6 +177,7 @@ export default function Navbar() {
                     position: 'relative',
                     padding: '0.25rem 0',
                     textDecoration: 'none',
+                    textShadow: isHomeAtTop ? '0 2px 8px rgba(0,0,0,0.6)' : 'none',
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = hoverColor)}
                   onMouseLeave={(e) => (e.currentTarget.style.color = linkColor)}
@@ -152,8 +192,8 @@ export default function Navbar() {
                         left: 0,
                         right: 0,
                         height: '2px',
-                        backgroundColor: '#C5A880',
-                        borderRadius: '1px',
+                        backgroundColor: isHomeAtTop ? '#C8A96A' : '#7A5A3A',
+                        borderRadius: '2px',
                       }}
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
@@ -168,28 +208,32 @@ export default function Navbar() {
             {/* Desktop CTA Button */}
             <Link
               to="/catalogs"
-              className="desktop-cta"
+              className="desktop-cta btn-primary"
               style={{
                 display: 'none',
                 alignItems: 'center',
                 gap: '0.55rem',
-                backgroundColor: '#C5A880',
-                color: '#121110',
+                backgroundColor: '#7A5A3A',
+                color: '#FFFFFF',
                 fontSize: '0.8rem',
                 fontWeight: 600,
-                letterSpacing: '0.12em',
+                letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                padding: '0.75rem 1.6rem',
-                borderRadius: '4px',
+                padding: '0.7rem 1.5rem',
+                borderRadius: '9999px',
                 textDecoration: 'none',
                 transition: 'all 0.3s ease',
+                border: '1px solid #7A5A3A',
+                boxShadow: isHomeAtTop
+                  ? '0 4px 18px rgba(0, 0, 0, 0.35)'
+                  : '0 4px 14px rgba(122, 90, 58, 0.2)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#DFCAAD';
+                e.currentTarget.style.backgroundColor = '#63472C';
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#C5A880';
+                e.currentTarget.style.backgroundColor = '#7A5A3A';
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
@@ -206,12 +250,14 @@ export default function Navbar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#F7F4EE',
+                color: isHomeAtTop ? '#FFFFFF' : '#2F2F2F',
                 width: '42px',
                 height: '42px',
-                borderRadius: '4px',
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '50%',
+                backgroundColor: isHomeAtTop ? 'rgba(255, 255, 255, 0.15)' : 'rgba(122, 90, 58, 0.08)',
+                border: isHomeAtTop ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid rgba(122, 90, 58, 0.18)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
               }}
@@ -222,37 +268,91 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Animated Drawer */}
+      {/* Mobile Animated Drawer (Full Screen & Clean Integration) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             key="mobile-drawer"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed',
-              top: '64px',
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(18, 17, 16, 0.98)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              zIndex: 99,
+              inset: 0,
+              backgroundColor: 'rgba(248, 245, 241, 0.98)',
+              backdropFilter: 'blur(28px)',
+              WebkitBackdropFilter: 'blur(28px)',
+              zIndex: 9999,
               display: 'flex',
               flexDirection: 'column',
-              padding: '2rem 1.5rem',
+              padding: '1.25rem 1.75rem 2rem',
               overflowY: 'auto',
             }}
           >
+            {/* Top Drawer Header with Brand & Close Button */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingBottom: '1.25rem',
+                borderBottom: '1px solid rgba(122, 90, 58, 0.15)',
+                marginBottom: '2rem',
+              }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span
+                  style={{
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    fontSize: '1.4rem',
+                    fontWeight: 600,
+                    color: '#2F2F2F',
+                    lineHeight: 1.1,
+                  }}
+                >
+                  Gujarat Wallpaper &amp; Decor
+                </span>
+                <span
+                  style={{
+                    fontSize: '0.62rem',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    color: '#7A5A3A',
+                    fontWeight: 600,
+                    marginTop: '2px',
+                  }}
+                >
+                  Surat Showroom
+                </span>
+              </div>
+
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close Menu"
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                  border: '1px solid rgba(122, 90, 58, 0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#2F2F2F',
+                  cursor: 'pointer',
+                }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
             {/* Mobile Navigation Links */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem', marginBottom: '2.5rem' }}>
               {navLinks.map((link, idx) => {
                 const active = isLinkActive(link.path);
-                const activeColor = '#C5A880';
-                const defaultColor = '#F7F4EE';
+                const activeColor = '#7A5A3A';
+                const defaultColor = '#2F2F2F';
 
                 return (
                   <motion.div
@@ -269,7 +369,7 @@ export default function Navbar() {
                         fontSize: '1.85rem',
                         color: active ? activeColor : defaultColor,
                         textDecoration: 'none',
-                        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                        borderBottom: '1px solid rgba(122, 90, 58, 0.1)',
                         paddingBottom: '0.65rem',
                         display: 'flex',
                         alignItems: 'center',
@@ -277,7 +377,7 @@ export default function Navbar() {
                       }}
                     >
                       <span>{link.label}</span>
-                      <ArrowUpRight size={18} color={activeColor} />
+                      <ArrowUpRight size={18} color={active ? activeColor : '#87827C'} />
                     </Link>
                   </motion.div>
                 );
@@ -285,11 +385,11 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Drawer Showroom Footer */}
-            <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
-              <p style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#C5A880', marginBottom: '0.35rem' }}>
+            <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid rgba(122, 90, 58, 0.15)' }}>
+              <p style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#7A5A3A', fontWeight: 600, marginBottom: '0.35rem' }}>
                 Visit Our Showroom
               </p>
-              <p style={{ fontSize: '0.88rem', color: '#A8A29E', marginBottom: '1.25rem' }}>
+              <p style={{ fontSize: '0.88rem', color: '#5A5652', marginBottom: '1.25rem' }}>
                 Mangaldas Complex, Near Navjivan Circle, Surat
               </p>
               <button
@@ -300,10 +400,11 @@ export default function Navbar() {
                 className="btn-primary"
                 style={{ 
                   width: '100%', 
-                  backgroundColor: '#C5A880', 
-                  color: '#141312', 
-                  borderColor: '#C5A880',
-                  padding: '0.85rem'
+                  backgroundColor: '#7A5A3A', 
+                  color: '#FFFFFF', 
+                  borderColor: '#7A5A3A',
+                  padding: '0.9rem',
+                  borderRadius: '24px'
                 }}
               >
                 Schedule Consultation

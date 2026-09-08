@@ -26,29 +26,30 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
   };
 
   const colors = {
-    cardBg: isDark ? '#171614' : '#FFFFFF',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#78716C',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    borderSubtle: isDark ? 'rgba(245, 242, 236, 0.08)' : 'rgba(28, 25, 23, 0.08)',
-    btnDetailsBg: isDark ? '#22201D' : '#F4EFEA',
-    btnDetailsHover: isDark ? '#2C2A26' : '#EAE3D9',
-    btnEnquireBg: isDark ? '#C5A880' : '#1C1917',
-    btnEnquireText: isDark ? '#141312' : '#FFFFFF',
-    boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.4)' : '0 4px 20px rgba(0, 0, 0, 0.03)',
+    cardBg: '#FFFFFF',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    accentWalnut: '#7A5A3A',
+    accentGold: '#C8A96A',
+    borderSubtle: 'rgba(122, 90, 58, 0.14)',
+    btnDetailsBg: '#F8F5F1',
+    btnDetailsHover: '#E7D7BE',
+    btnEnquireBg: '#7A5A3A',
+    btnEnquireText: '#FFFFFF',
+    boxShadow: '0 10px 28px rgba(122, 90, 58, 0.08)',
   };
 
   return (
     <div
       style={{
         backgroundColor: colors.cardBg,
-        borderRadius: '8px',
+        borderRadius: '24px',
         overflow: 'hidden',
         border: `1px solid ${colors.borderSubtle}`,
         boxShadow: colors.boxShadow,
         display: 'flex',
         flexDirection: 'column',
-        transition: 'box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease',
+        transition: 'box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease',
       }}
       className="product-card"
     >
@@ -58,7 +59,7 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
           position: 'relative',
           aspectRatio: '1/1',
           overflow: 'hidden',
-          backgroundColor: '#EAE3D9',
+          backgroundColor: '#E7D7BE',
           cursor: 'pointer',
         }}
         onClick={handleCardClick}
@@ -82,16 +83,16 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
             position: 'absolute',
             top: '0.85rem',
             left: '0.85rem',
-            backgroundColor: 'rgba(20, 19, 18, 0.75)',
+            backgroundColor: 'rgba(248, 245, 241, 0.92)',
             backdropFilter: 'blur(6px)',
-            color: '#F7F4EE',
-            fontSize: '0.68rem',
-            fontWeight: 500,
+            color: '#7A5A3A',
+            fontSize: '0.7rem',
+            fontWeight: 700,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            padding: '0.3rem 0.65rem',
-            borderRadius: '4px',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
+            padding: '0.35rem 0.75rem',
+            borderRadius: '20px',
+            border: '1px solid rgba(122, 90, 58, 0.2)',
           }}
         >
           {product.category}
@@ -103,8 +104,8 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundColor: 'rgba(20, 19, 18, 0.35)',
-            backdropFilter: 'blur(2px)',
+            backgroundColor: 'rgba(47, 47, 47, 0.35)',
+            backdropFilter: 'blur(3px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -114,18 +115,18 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
         >
           <span
             style={{
-              backgroundColor: '#F7F4EE',
-              color: '#141312',
-              padding: '0.55rem 1.1rem',
+              backgroundColor: '#F8F5F1',
+              color: '#2F2F2F',
+              padding: '0.6rem 1.25rem',
               borderRadius: '9999px',
-              fontSize: '0.75rem',
+              fontSize: '0.78rem',
               fontWeight: 600,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+              boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
             }}
           >
             <Eye size={14} /> View Details
@@ -136,7 +137,7 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
       {/* Product Content Details */}
       <div
         style={{
-          padding: '1.5rem',
+          padding: '1.6rem',
           display: 'flex',
           flexDirection: 'column',
           flexGrow: 1,
@@ -144,12 +145,12 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
       >
         <div
           style={{
-            fontSize: '0.72rem',
-            letterSpacing: '0.15em',
+            fontSize: '0.74rem',
+            letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            color: colors.accentGold,
-            fontWeight: 600,
-            marginBottom: '0.35rem',
+            color: colors.accentWalnut,
+            fontWeight: 700,
+            marginBottom: '0.4rem',
           }}
         >
           {product.subcategory}
@@ -158,7 +159,7 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
         <h3
           style={{
             fontFamily: "'Cormorant Garamond', Georgia, serif",
-            fontSize: '1.35rem',
+            fontSize: '1.4rem',
             color: colors.textPrimary,
             marginBottom: '0.5rem',
             fontWeight: 600,
@@ -172,10 +173,10 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
 
         <p
           style={{
-            fontSize: '0.86rem',
+            fontSize: '0.88rem',
             color: colors.textSecondary,
-            lineHeight: 1.5,
-            marginBottom: '1.25rem',
+            lineHeight: 1.55,
+            marginBottom: '1.4rem',
             fontWeight: 400,
             display: '-webkit-box',
             WebkitLineClamp: 2,
@@ -194,47 +195,47 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
             alignItems: 'center',
             gap: '0.75rem',
             borderTop: `1px solid ${colors.borderSubtle}`,
-            paddingTop: '1rem',
+            paddingTop: '1.1rem',
           }}
         >
           <button
             onClick={handleCardClick}
             style={{
               flex: 1,
-              padding: '0.6rem 0.8rem',
-              fontSize: '0.78rem',
+              padding: '0.7rem 0.9rem',
+              fontSize: '0.8rem',
               fontWeight: 600,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
               color: colors.textPrimary,
               backgroundColor: colors.btnDetailsBg,
-              borderRadius: '4px',
+              borderRadius: '20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '0.35rem',
               transition: 'all 0.25s ease',
-              border: 'none',
+              border: `1px solid ${colors.borderSubtle}`,
               cursor: 'pointer',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.btnDetailsHover)}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.btnDetailsBg)}
           >
             <span>View Details</span>
-            <ArrowUpRight size={13} />
+            <ArrowUpRight size={14} />
           </button>
 
           <button
             onClick={handleEnquireClick}
             style={{
-              padding: '0.6rem 0.9rem',
-              fontSize: '0.78rem',
+              padding: '0.7rem 1.1rem',
+              fontSize: '0.8rem',
               fontWeight: 600,
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
               color: colors.btnEnquireText,
               backgroundColor: colors.btnEnquireBg,
-              borderRadius: '4px',
+              borderRadius: '20px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -242,16 +243,17 @@ export default function ProductCard({ product, onViewDetails, onEnquire }) {
               transition: 'all 0.25s ease',
               border: 'none',
               cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(122, 90, 58, 0.25)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = isDark ? '#DFCAAD' : '#8D6B3C';
+              e.currentTarget.style.backgroundColor = '#5E4329';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = colors.btnEnquireBg;
             }}
             title="Enquire via Showroom Concierge"
           >
-            <MessageCircle size={13} />
+            <MessageCircle size={14} />
             <span>Enquire</span>
           </button>
         </div>

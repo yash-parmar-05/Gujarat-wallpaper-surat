@@ -5,13 +5,27 @@ export default function Preloader({ isLoading }) {
   const [fontsReady, setFontsReady] = useState(false);
 
   useEffect(() => {
+    let active = true;
+    const fontTimeout = setTimeout(() => {
+      if (active) setFontsReady(true);
+    }, 400);
+
     if (document.fonts) {
-      document.fonts.ready.then(() => {
-        setFontsReady(true);
-      });
+      document.fonts.ready
+        .then(() => {
+          if (active) setFontsReady(true);
+        })
+        .catch(() => {
+          if (active) setFontsReady(true);
+        });
     } else {
       setFontsReady(true);
     }
+
+    return () => {
+      active = false;
+      clearTimeout(fontTimeout);
+    };
   }, []);
 
   useEffect(() => {

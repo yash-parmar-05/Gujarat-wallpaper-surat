@@ -6,10 +6,11 @@ import { useTheme } from '../context/ThemeContext';
 export default function NotFoundPage() {
   const { isDark } = useTheme();
 
-  const bg = isDark ? '#121110' : '#FBF9F5';
-  const textPrimary = isDark ? '#F7F4EE' : '#1C1917';
-  const textSecondary = isDark ? '#C8C2B7' : '#57534E';
-  const gold = isDark ? '#C5A880' : '#A68353';
+  const bg = '#F8F5F1';
+  const textPrimary = '#2F2F2F';
+  const textSecondary = '#5A5652';
+  const walnut = '#7A5A3A';
+  const gold = '#C8A96A';
 
   return (
     <div
@@ -30,9 +31,9 @@ export default function NotFoundPage() {
           style={{
             fontFamily: "'Cormorant Garamond', Georgia, serif",
             fontSize: 'clamp(5rem, 12vw, 9rem)',
-            fontWeight: 300,
+            fontWeight: 400,
             lineHeight: 1,
-            color: gold,
+            color: walnut,
             marginBottom: '1rem',
           }}
         >
@@ -41,11 +42,12 @@ export default function NotFoundPage() {
 
         <div
           style={{
-            fontSize: '0.8rem',
+            fontSize: '0.82rem',
             letterSpacing: '0.22em',
             textTransform: 'uppercase',
-            color: gold,
+            color: walnut,
             marginBottom: '1.25rem',
+            fontWeight: 700,
           }}
         >
           Page Not Found
@@ -58,6 +60,7 @@ export default function NotFoundPage() {
             color: textPrimary,
             marginBottom: '1.5rem',
             lineHeight: 1.15,
+            fontWeight: 600,
           }}
         >
           The Surface You Are Looking For Does Not Exist
@@ -69,7 +72,7 @@ export default function NotFoundPage() {
             color: textSecondary,
             lineHeight: 1.65,
             marginBottom: '3rem',
-            fontWeight: 300,
+            fontWeight: 400,
           }}
         >
           The link you followed may be expired or the address may have been mistyped. Allow us to direct you back to our curated showroom collections.
@@ -80,10 +83,12 @@ export default function NotFoundPage() {
             to="/home"
             className="btn-primary"
             style={{
-              backgroundColor: gold,
-              color: isDark ? '#141312' : '#FFFFFF',
-              borderColor: gold,
-              padding: '0.9rem 2.25rem',
+              backgroundColor: walnut,
+              color: '#FFFFFF',
+              borderColor: walnut,
+              padding: '0.95rem 2.5rem',
+              borderRadius: '24px',
+              boxShadow: '0 8px 24px rgba(122, 90, 58, 0.25)',
             }}
           >
             <span>Return to Home</span>
@@ -94,9 +99,11 @@ export default function NotFoundPage() {
             to="/products"
             className="btn-secondary"
             style={{
-              borderColor: isDark ? 'rgba(247, 244, 238, 0.3)' : 'rgba(28, 25, 23, 0.2)',
+              borderColor: 'rgba(122, 90, 58, 0.25)',
               color: textPrimary,
-              padding: '0.9rem 2.25rem',
+              padding: '0.95rem 2.5rem',
+              borderRadius: '24px',
+              backgroundColor: '#FFFFFF',
             }}
           >
             <span>Browse Products</span>

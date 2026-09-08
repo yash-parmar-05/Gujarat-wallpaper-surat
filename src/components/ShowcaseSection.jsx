@@ -125,13 +125,14 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
   const current = showcaseChapters.find((c) => c.id === activeTab) || showcaseChapters[0];
 
   const colors = {
-    bgSection: isDark ? '#141312' : '#F4EFEA',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#57534E',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    borderSubtle: isDark ? 'rgba(247, 244, 238, 0.1)' : 'rgba(28, 25, 23, 0.1)',
-    tagBg: isDark ? 'rgba(255, 255, 255, 0.06)' : '#FFFFFF',
-    tagText: isDark ? '#D4CDC3' : '#44403C',
+    bgSection: '#E7D7BE',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    accentWalnut: '#7A5A3A',
+    accentGold: '#C8A96A',
+    borderSubtle: 'rgba(122, 90, 58, 0.16)',
+    tagBg: '#FFFFFF',
+    tagText: '#2F2F2F',
   };
 
   return (
@@ -148,7 +149,7 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
       <div className="container-luxury">
         {/* Showcase Header */}
         <div style={{ maxWidth: '780px', marginBottom: '3.5rem' }}>
-          <div className="sub-tag" style={{ color: colors.accentGold, marginBottom: '0.75rem' }}>
+          <div className="sub-tag" style={{ color: colors.accentWalnut, marginBottom: '0.75rem', fontWeight: 700 }}>
             Material &amp; Craft Showcase
           </div>
           <h2
@@ -157,11 +158,14 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
               fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
               color: colors.textPrimary,
               marginBottom: '1rem',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.1,
             }}
           >
             Showroom Disciplines
           </h2>
-          <p style={{ fontSize: '1.05rem', color: colors.textSecondary, lineHeight: 1.6 }}>
+          <p style={{ fontSize: '1.05rem', color: colors.textSecondary, lineHeight: 1.7, fontWeight: 400 }}>
             Explore each specialized product vertical in detail, from bespoke wallcoverings and acoustic louvers to lush balcony landscapes.
           </p>
         </div>
@@ -171,7 +175,7 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem',
+            gap: '0.85rem',
             overflowX: 'auto',
             WebkitOverflowScrolling: 'touch',
             paddingBottom: '1rem',
@@ -189,9 +193,9 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                 key={chapter.id}
                 onClick={() => setActiveTab(chapter.id)}
                 style={{
-                  padding: '0.75rem 1.5rem',
-                  borderRadius: '6px',
-                  fontSize: '0.82rem',
+                  padding: '0.85rem 1.75rem',
+                  borderRadius: '24px',
+                  fontSize: '0.84rem',
                   fontWeight: 600,
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
@@ -199,11 +203,11 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                   flexShrink: 0,
                   minWidth: 'max-content',
                   cursor: 'pointer',
-                  transition: 'background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease',
-                  backgroundColor: isActive ? colors.accentGold : (isDark ? 'rgba(255, 255, 255, 0.05)' : '#FFFFFF'),
-                  color: isActive ? (isDark ? '#141312' : '#FFFFFF') : (isDark ? '#D4CDC3' : '#57534E'),
-                  border: isActive ? `1px solid ${colors.accentGold}` : `1px solid ${colors.borderSubtle}`,
-                  boxShadow: isActive ? '0 4px 12px rgba(0, 0, 0, 0.12)' : 'none',
+                  transition: 'background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease',
+                  backgroundColor: isActive ? colors.accentWalnut : '#FFFFFF',
+                  color: isActive ? '#FFFFFF' : '#5A5652',
+                  border: isActive ? `1px solid ${colors.accentWalnut}` : `1px solid ${colors.borderSubtle}`,
+                  boxShadow: isActive ? '0 6px 18px rgba(122, 90, 58, 0.25)' : '0 2px 8px rgba(0,0,0,0.03)',
                 }}
               >
                 {chapter.title}
@@ -239,13 +243,13 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
               {/* Main 16:9 Showcase Image */}
               <div
                 style={{
-                  borderRadius: '8px',
+                  borderRadius: '24px',
                   overflow: 'hidden',
                   aspectRatio: '16/9',
-                  backgroundColor: '#1C1A18',
-                  border: '1px solid rgba(247, 244, 238, 0.1)',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid rgba(122, 90, 58, 0.16)',
                   position: 'relative',
-                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
+                  boxShadow: '0 20px 48px rgba(122, 90, 58, 0.12)',
                 }}
               >
                 <img
@@ -262,15 +266,16 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                     position: 'absolute',
                     top: '1.25rem',
                     left: '1.25rem',
-                    backgroundColor: 'rgba(20, 19, 18, 0.75)',
+                    backgroundColor: 'rgba(248, 245, 241, 0.9)',
                     backdropFilter: 'blur(8px)',
-                    padding: '0.35rem 0.9rem',
+                    padding: '0.4rem 1rem',
                     borderRadius: '9999px',
-                    fontSize: '0.7rem',
+                    fontSize: '0.72rem',
                     letterSpacing: '0.15em',
                     textTransform: 'uppercase',
-                    color: '#C5A880',
-                    border: '1px solid rgba(197, 168, 128, 0.3)',
+                    color: colors.accentWalnut,
+                    fontWeight: 700,
+                    border: '1px solid rgba(122, 90, 58, 0.25)',
                   }}
                 >
                   {current.badge}
@@ -285,11 +290,11 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                   right: '-1.5rem',
                   width: '200px',
                   height: '200px',
-                  borderRadius: '6px',
+                  borderRadius: '20px',
                   overflow: 'hidden',
-                  border: '3px solid #141312',
-                  boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
-                  backgroundColor: '#1C1A18',
+                  border: '4px solid #F8F5F1',
+                  boxShadow: '0 15px 35px rgba(122, 90, 58, 0.2)',
+                  backgroundColor: '#E7D7BE',
                   display: 'none',
                 }}
                 className="showcase-inset-thumb"
@@ -305,14 +310,15 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                     bottom: '0.5rem',
                     left: '0.5rem',
                     right: '0.5rem',
-                    backgroundColor: 'rgba(20, 19, 18, 0.8)',
-                    padding: '0.2rem 0.4rem',
-                    borderRadius: '3px',
-                    fontSize: '0.62rem',
+                    backgroundColor: 'rgba(47, 47, 47, 0.85)',
+                    padding: '0.3rem 0.5rem',
+                    borderRadius: '8px',
+                    fontSize: '0.65rem',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     textAlign: 'center',
-                    color: '#F7F4EE',
+                    color: '#F8F5F1',
+                    fontWeight: 600,
                   }}
                 >
                   Texture Relief
@@ -335,8 +341,8 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                   fontSize: '0.75rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  color: colors.accentGold,
-                  fontWeight: 600,
+                  color: colors.accentWalnut,
+                  fontWeight: 700,
                   marginBottom: '0.5rem',
                 }}
               >
@@ -350,6 +356,8 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                   color: colors.textPrimary,
                   marginBottom: '1.25rem',
                   lineHeight: 1.15,
+                  fontWeight: 600,
+                  letterSpacing: '-0.02em',
                 }}
               >
                 {current.headline}
@@ -361,7 +369,7 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                   color: colors.textSecondary,
                   lineHeight: 1.65,
                   marginBottom: '1.75rem',
-                  fontWeight: 300,
+                  fontWeight: 400,
                 }}
               >
                 {current.description}
@@ -371,27 +379,28 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
               <div style={{ marginBottom: '1.75rem' }}>
                 <div
                   style={{
-                    fontSize: '0.72rem',
+                    fontSize: '0.74rem',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    color: colors.accentGold,
-                    fontWeight: 600,
+                    color: colors.accentWalnut,
+                    fontWeight: 700,
                     marginBottom: '0.65rem',
                   }}
                 >
                   Available Subcategories:
                 </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                   {current.subcategories.map((sub) => (
                     <span
                       key={sub}
                       style={{
-                        fontSize: '0.75rem',
+                        fontSize: '0.78rem',
                         color: colors.tagText,
                         backgroundColor: colors.tagBg,
-                        padding: '0.35rem 0.75rem',
-                        borderRadius: '4px',
+                        padding: '0.4rem 0.85rem',
+                        borderRadius: '20px',
                         border: `1px solid ${colors.borderSubtle}`,
+                        fontWeight: 500,
                       }}
                     >
                       {sub}
@@ -409,11 +418,11 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.65rem',
-                      fontSize: '0.85rem',
+                      fontSize: '0.88rem',
                       color: colors.textPrimary,
                     }}
                   >
-                    <Check size={14} color={colors.accentGold} style={{ flexShrink: 0 }} />
+                    <Check size={16} color={colors.accentWalnut} style={{ flexShrink: 0 }} />
                     <span>{feat}</span>
                   </div>
                 ))}
@@ -424,26 +433,33 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
                 <button
                   onClick={() => onExploreCategory(current.category)}
                   style={{
-                    backgroundColor: colors.accentGold,
-                    color: isDark ? '#141312' : '#FFFFFF',
-                    padding: '0.85rem 1.8rem',
-                    borderRadius: '4px',
+                    backgroundColor: colors.accentWalnut,
+                    color: '#FFFFFF',
+                    padding: '0.95rem 2rem',
+                    borderRadius: '24px',
                     border: 'none',
                     fontWeight: 600,
-                    fontSize: '0.82rem',
+                    fontSize: '0.86rem',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem',
+                    boxShadow: '0 8px 24px rgba(122, 90, 58, 0.25)',
                     transition: 'all 0.3s ease',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = isDark ? '#DFCAAD' : '#8D6B3C')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.accentGold)}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#5E4329';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = colors.accentWalnut;
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
                 >
                   <span>Explore All {current.title}</span>
-                  <ArrowUpRight size={15} />
+                  <ArrowUpRight size={16} />
                 </button>
               </div>
             </div>

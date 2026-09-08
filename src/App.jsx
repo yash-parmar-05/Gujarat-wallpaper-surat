@@ -23,10 +23,13 @@ export default function App() {
   // Initial site load timer — ensures fonts & assets are ready only once on first load
   useEffect(() => {
     let isMounted = true;
-    const minTimer = new Promise((resolve) => setTimeout(resolve, 1100));
-    const fontsPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+    const maxTimer = setTimeout(() => {
+      if (isMounted) setInitialLoading(false);
+    }, 800);
 
-    Promise.all([minTimer, fontsPromise]).then(() => {
+    const fontsPromise = document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve();
+
+    fontsPromise.then(() => {
       if (isMounted) {
         setInitialLoading(false);
       }
@@ -34,6 +37,7 @@ export default function App() {
 
     return () => {
       isMounted = false;
+      clearTimeout(maxTimer);
     };
   }, []);
 

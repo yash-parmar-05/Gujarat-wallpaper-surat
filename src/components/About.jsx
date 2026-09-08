@@ -6,12 +6,13 @@ import { useTheme } from '../context/ThemeContext';
 export default function About({ onVisitClick }) {
   const { isDark } = useTheme();
 
-  const bg = isDark ? '#121110' : '#FBF9F5';
-  const textPrimary = isDark ? '#F7F4EE' : '#1C1917';
-  const textSecondary = isDark ? '#C8C2B7' : '#44403C';
-  const textMuted = isDark ? '#948E85' : '#78716C';
-  const gold = isDark ? '#C5A880' : '#A68353';
-  const border = isDark ? '1px solid rgba(245, 242, 236, 0.08)' : '1px solid rgba(28, 25, 23, 0.08)';
+  const bg = '#F8F5F1';
+  const textPrimary = '#2F2F2F';
+  const textSecondary = '#5A5652';
+  const textMuted = '#7A7570';
+  const walnut = '#7A5A3A';
+  const gold = '#C8A96A';
+  const border = '1px solid rgba(122, 90, 58, 0.16)';
 
   return (
     <section
@@ -47,11 +48,12 @@ export default function About({ onVisitClick }) {
             {/* Primary Image */}
             <div
               style={{
-                borderRadius: '8px',
+                borderRadius: '24px',
                 overflow: 'hidden',
                 aspectRatio: '4/3',
-                backgroundColor: '#141312',
-                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)',
+                backgroundColor: '#E7D7BE',
+                boxShadow: '0 20px 48px rgba(122, 90, 58, 0.12)',
+                border: '1px solid rgba(122, 90, 58, 0.16)',
               }}
             >
               <img
@@ -68,11 +70,11 @@ export default function About({ onVisitClick }) {
                 bottom: '-2.5rem',
                 right: '-2rem',
                 width: '55%',
-                borderRadius: '6px',
+                borderRadius: '20px',
                 overflow: 'hidden',
                 aspectRatio: '1/1',
-                border: '6px solid #FBF9F5',
-                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.12)',
+                border: '6px solid #F8F5F1',
+                boxShadow: '0 20px 40px rgba(122, 90, 58, 0.16)',
                 display: 'none',
               }}
               className="about-secondary-img"
@@ -96,7 +98,7 @@ export default function About({ onVisitClick }) {
             }}
             className="about-text-col"
           >
-            <div className="sub-tag" style={{ marginBottom: '0.75rem' }}>
+            <div className="sub-tag" style={{ color: walnut, marginBottom: '0.75rem', fontWeight: 700 }}>
               The Showroom
             </div>
 
@@ -106,7 +108,9 @@ export default function About({ onVisitClick }) {
                 fontSize: 'clamp(2.25rem, 4.2vw, 3.5rem)',
                 color: textPrimary,
                 marginBottom: '1.5rem',
-                lineHeight: 1.15,
+                lineHeight: 1.12,
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
               }}
             >
               Gujarat Wallpaper &amp; Decor
@@ -130,7 +134,7 @@ export default function About({ onVisitClick }) {
                 color: textMuted,
                 lineHeight: 1.7,
                 marginBottom: '2rem',
-                fontWeight: 300,
+                fontWeight: 400,
               }}
             >
               We believe walls define the emotional soul and architectural character of every room. Our curated portfolio brings together rich tactile wallpapers, three-dimensional acoustic PVC louvers, artisanal silk-blend carpets, lush terrace turf, and bespoke wall accents, offering architects, interior designers, and discerning homeowners complete surface excellence under one roof.
@@ -149,25 +153,25 @@ export default function About({ onVisitClick }) {
               }}
             >
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: gold, marginBottom: '0.35rem' }}>
-                  <MapPin size={15} />
-                  <span style={{ fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: walnut, marginBottom: '0.35rem' }}>
+                  <MapPin size={16} />
+                  <span style={{ fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 700 }}>
                     Surat, Gujarat
                   </span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: textMuted }}>
+                <p style={{ fontSize: '0.86rem', color: textMuted, lineHeight: 1.55 }}>
                   Dedicated showroom showcasing full-scale architectural wall installations and material swatches.
                 </p>
               </div>
 
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: gold, marginBottom: '0.35rem' }}>
-                  <Compass size={15} />
-                  <span style={{ fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: walnut, marginBottom: '0.35rem' }}>
+                  <Compass size={16} />
+                  <span style={{ fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 700 }}>
                     Full Space Harmony
                   </span>
                 </div>
-                <p style={{ fontSize: '0.85rem', color: textMuted }}>
+                <p style={{ fontSize: '0.86rem', color: textMuted, lineHeight: 1.55 }}>
                   Cohesive material curation from vertical walls to flooring and outdoor living terraces.
                 </p>
               </div>
@@ -179,23 +183,30 @@ export default function About({ onVisitClick }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.65rem',
-                padding: '0.9rem 2rem',
-                backgroundColor: isDark ? '#C5A880' : '#1C1917',
-                color: isDark ? '#141312' : '#FFFFFF',
-                borderRadius: '4px',
-                fontSize: '0.82rem',
+                padding: '1rem 2.25rem',
+                backgroundColor: walnut,
+                color: '#FFFFFF',
+                borderRadius: '24px',
+                fontSize: '0.88rem',
                 fontWeight: 600,
-                letterSpacing: '0.1em',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
                 border: 'none',
                 cursor: 'pointer',
+                boxShadow: '0 8px 24px rgba(122, 90, 58, 0.25)',
                 transition: 'all 0.3s ease',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = isDark ? '#DFCAAD' : '#33302E')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = isDark ? '#C5A880' : '#1C1917')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#5E4329';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = walnut;
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             >
               <span>Visit Showroom</span>
-              <ArrowUpRight size={15} />
+              <ArrowUpRight size={16} />
             </button>
           </motion.div>
         </div>

@@ -89,13 +89,14 @@ export default function ShowroomModal({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             onClick={onClose}
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundColor: 'rgba(12, 11, 10, 0.82)',
-              willChange: 'opacity',
+              backgroundColor: 'rgba(12, 11, 10, 0.78)',
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)',
             }}
           />
 
@@ -103,31 +104,36 @@ export default function ShowroomModal({ isOpen, onClose }) {
           <motion.div
             key="showroom-window"
             data-lenis-prevent="true"
-            initial={{ opacity: 0, scale: 0.98, y: 10 }}
+            initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: 10 }}
-            transition={{ duration: 0.22, ease: [0.25, 1, 0.5, 1] }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
+            transition={{
+              type: 'spring',
+              damping: 28,
+              stiffness: 300,
+              mass: 0.8,
+            }}
             style={{
               position: 'relative',
               width: '100%',
               maxWidth: '960px',
-              maxHeight: '90vh',
-              backgroundColor: isDark ? '#161514' : '#FAF8F5',
-              borderRadius: '16px',
-              border: isDark ? '1px solid rgba(197, 168, 128, 0.25)' : '1px solid rgba(166, 131, 83, 0.25)',
-              boxShadow: '0 25px 60px -10px rgba(0, 0, 0, 0.75)',
+              maxHeight: '88vh',
+              backgroundColor: '#F8F5F1',
+              borderRadius: '24px',
+              border: '1px solid rgba(122, 90, 58, 0.2)',
+              boxShadow: '0 30px 70px -15px rgba(0, 0, 0, 0.45)',
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',
               zIndex: 10,
-              willChange: 'transform, opacity',
+              transformOrigin: 'center center',
             }}
           >
             {/* Modal Header */}
             <div
               style={{
                 padding: '1.75rem 2.25rem 1.25rem',
-                borderBottom: isDark ? '1px solid rgba(245, 242, 236, 0.08)' : '1px solid rgba(28, 25, 23, 0.08)',
+                borderBottom: '1px solid rgba(122, 90, 58, 0.12)',
                 position: 'relative',
                 display: 'flex',
                 alignItems: 'flex-start',
@@ -142,15 +148,15 @@ export default function ShowroomModal({ isOpen, onClose }) {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.45rem',
-                    fontSize: '0.68rem',
-                    fontWeight: 600,
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
                     letterSpacing: '0.18em',
                     textTransform: 'uppercase',
-                    color: '#C5A880',
+                    color: '#7A5A3A',
                     marginBottom: '0.4rem',
                   }}
                 >
-                  <MapPin size={13} color="#C5A880" />
+                  <MapPin size={14} color="#7A5A3A" />
                   <span>OUR SHOWROOM LOCATIONS</span>
                 </div>
                 <h2
@@ -158,8 +164,8 @@ export default function ShowroomModal({ isOpen, onClose }) {
                   style={{
                     fontFamily: "'Cormorant Garamond', Georgia, serif",
                     fontSize: 'clamp(1.65rem, 3.2vw, 2.35rem)',
-                    fontWeight: 500,
-                    color: isDark ? '#F7F4EE' : '#1C1917',
+                    fontWeight: 600,
+                    color: '#2F2F2F',
                     margin: '0 0 0.4rem 0',
                     lineHeight: 1.15,
                   }}
@@ -168,11 +174,11 @@ export default function ShowroomModal({ isOpen, onClose }) {
                 </h2>
                 <p
                   style={{
-                    fontSize: '0.88rem',
-                    color: isDark ? '#A69F94' : '#78716C',
+                    fontSize: '0.9rem',
+                    color: '#5A5652',
                     margin: 0,
                     lineHeight: 1.5,
-                    fontWeight: 300,
+                    fontWeight: 400,
                   }}
                 >
                   Select a branch below to get direct turn-by-turn directions in Google Maps.
@@ -184,12 +190,12 @@ export default function ShowroomModal({ isOpen, onClose }) {
                 onClick={onClose}
                 aria-label="Close Showroom Locations Modal"
                 style={{
-                  width: '38px',
-                  height: '38px',
+                  width: '40px',
+                  height: '40px',
                   borderRadius: '50%',
-                  backgroundColor: isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.05)',
-                  border: isDark ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid rgba(0, 0, 0, 0.12)',
-                  color: isDark ? '#F7F4EE' : '#1C1917',
+                  backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                  border: '1px solid rgba(122, 90, 58, 0.16)',
+                  color: '#2F2F2F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -198,15 +204,15 @@ export default function ShowroomModal({ isOpen, onClose }) {
                   transition: 'all 0.25s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#C5A880';
-                  e.currentTarget.style.borderColor = '#C5A880';
-                  e.currentTarget.style.color = '#121110';
+                  e.currentTarget.style.backgroundColor = '#7A5A3A';
+                  e.currentTarget.style.borderColor = '#7A5A3A';
+                  e.currentTarget.style.color = '#FFFFFF';
                   e.currentTarget.style.transform = 'scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.05)';
-                  e.currentTarget.style.borderColor = isDark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 0, 0, 0.12)';
-                  e.currentTarget.style.color = isDark ? '#F7F4EE' : '#1C1917';
+                  e.currentTarget.style.backgroundColor = 'rgba(122, 90, 58, 0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(122, 90, 58, 0.16)';
+                  e.currentTarget.style.color = '#2F2F2F';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
@@ -220,9 +226,11 @@ export default function ShowroomModal({ isOpen, onClose }) {
               style={{
                 padding: '1.75rem 2.25rem 2.25rem',
                 overflowY: 'auto',
+                overflowX: 'hidden',
                 WebkitOverflowScrolling: 'touch',
                 flex: '1 1 auto',
                 minHeight: 0,
+                scrollBehavior: 'smooth',
               }}
               className="showroom-modal-scroll"
             >
@@ -230,7 +238,7 @@ export default function ShowroomModal({ isOpen, onClose }) {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '1.25rem',
+                  gap: '1.5rem',
                 }}
                 className="showroom-branch-grid"
               >
@@ -239,16 +247,16 @@ export default function ShowroomModal({ isOpen, onClose }) {
                     <div
                       key={branch.id}
                       style={{
-                        backgroundColor: isDark ? 'rgba(26, 24, 22, 0.75)' : '#FFFFFF',
-                        border: isDark ? '1px solid rgba(245, 242, 236, 0.1)' : '1px solid rgba(28, 25, 23, 0.1)',
-                        borderRadius: '12px',
-                        padding: '1.45rem 1.5rem',
+                        backgroundColor: '#FFFFFF',
+                        border: '1px solid rgba(122, 90, 58, 0.16)',
+                        borderRadius: '20px',
+                        padding: '1.6rem 1.6rem',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         gap: '1.25rem',
-                        boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.04)',
-                        transition: 'all 0.3s ease',
+                        boxShadow: '0 8px 24px rgba(122, 90, 58, 0.06)',
+                        transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
                       }}
                       className="showroom-branch-card"
                     >
@@ -271,15 +279,15 @@ export default function ShowroomModal({ isOpen, onClose }) {
                           >
                             <div
                               style={{
-                                width: '36px',
-                                height: '36px',
-                                borderRadius: '10px',
-                                backgroundColor: isDark ? 'rgba(197, 168, 128, 0.12)' : 'rgba(166, 131, 83, 0.12)',
-                                border: '1px solid rgba(197, 168, 128, 0.3)',
+                                width: '38px',
+                                height: '38px',
+                                borderRadius: '12px',
+                                backgroundColor: 'rgba(122, 90, 58, 0.1)',
+                                border: '1px solid rgba(122, 90, 58, 0.25)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: '#C5A880',
+                                color: '#7A5A3A',
                                 flexShrink: 0,
                               }}
                             >
@@ -288,9 +296,9 @@ export default function ShowroomModal({ isOpen, onClose }) {
                             <h3
                               style={{
                                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                                fontSize: '1.4rem',
+                                fontSize: '1.45rem',
                                 fontWeight: 600,
-                                color: isDark ? '#F7F4EE' : '#1C1917',
+                                color: '#2F2F2F',
                                 margin: 0,
                                 letterSpacing: '0.01em',
                               }}
@@ -303,9 +311,9 @@ export default function ShowroomModal({ isOpen, onClose }) {
                         {/* Full Address */}
                         <p
                           style={{
-                            fontSize: '0.88rem',
+                            fontSize: '0.9rem',
                             lineHeight: 1.6,
-                            color: isDark ? '#C8C2B7' : '#57534E',
+                            color: '#5A5652',
                             margin: 0,
                             whiteSpace: 'pre-line',
                             fontWeight: 400,
@@ -319,7 +327,7 @@ export default function ShowroomModal({ isOpen, onClose }) {
                       <div
                         style={{
                           paddingTop: '0.75rem',
-                          borderTop: isDark ? '1px solid rgba(245, 242, 236, 0.06)' : '1px solid rgba(28, 25, 23, 0.06)',
+                          borderTop: '1px solid rgba(122, 90, 58, 0.1)',
                         }}
                       >
                         <button
@@ -329,12 +337,12 @@ export default function ShowroomModal({ isOpen, onClose }) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             gap: '0.65rem',
-                            padding: '0.85rem 1.35rem',
-                            backgroundColor: '#C5A880',
-                            color: '#121110',
+                            padding: '0.9rem 1.35rem',
+                            backgroundColor: '#7A5A3A',
+                            color: '#FFFFFF',
                             border: 'none',
-                            borderRadius: '6px',
-                            fontSize: '0.8rem',
+                            borderRadius: '20px',
+                            fontSize: '0.82rem',
                             fontWeight: 600,
                             letterSpacing: '0.1em',
                             textTransform: 'uppercase',
@@ -342,17 +350,18 @@ export default function ShowroomModal({ isOpen, onClose }) {
                             transition: 'all 0.25s ease',
                             width: '100%',
                             boxSizing: 'border-box',
+                            boxShadow: '0 4px 14px rgba(122, 90, 58, 0.25)',
                           }}
                           className="branch-btn-directions"
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = '#DFCAAD';
+                            e.currentTarget.style.backgroundColor = '#5E4329';
                             e.currentTarget.style.transform = 'translateY(-1px)';
-                            e.currentTarget.style.boxShadow = '0 6px 18px rgba(197, 168, 128, 0.3)';
+                            e.currentTarget.style.boxShadow = '0 6px 18px rgba(122, 90, 58, 0.35)';
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = '#C5A880';
+                            e.currentTarget.style.backgroundColor = '#7A5A3A';
                             e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = 'none';
+                            e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 90, 58, 0.25)';
                           }}
                         >
                           <Navigation size={16} />
@@ -373,20 +382,26 @@ export default function ShowroomModal({ isOpen, onClose }) {
               overscroll-behavior: contain !important;
               -webkit-overflow-scrolling: touch !important;
               touch-action: pan-y !important;
+              scrollbar-width: thin;
+              scrollbar-color: rgba(122, 90, 58, 0.3) transparent;
             }
             .showroom-modal-scroll::-webkit-scrollbar {
               width: 6px;
             }
             .showroom-modal-scroll::-webkit-scrollbar-track {
-              background: rgba(0, 0, 0, 0.1);
+              background: transparent;
             }
             .showroom-modal-scroll::-webkit-scrollbar-thumb {
-              background: rgba(197, 168, 128, 0.35);
-              border-radius: 3px;
+              background: rgba(122, 90, 58, 0.28);
+              border-radius: 6px;
+            }
+            .showroom-modal-scroll::-webkit-scrollbar-thumb:hover {
+              background: rgba(122, 90, 58, 0.45);
             }
             .showroom-branch-card:hover {
-              border-color: rgba(197, 168, 128, 0.4) !important;
-              transform: translateY(-3px);
+              border-color: rgba(122, 90, 58, 0.35) !important;
+              transform: translateY(-2px);
+              box-shadow: 0 12px 28px rgba(122, 90, 58, 0.12) !important;
             }
 
             @media (max-width: 768px) {

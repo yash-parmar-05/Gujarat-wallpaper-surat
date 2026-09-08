@@ -79,20 +79,21 @@ export default function OurWork({ id = 'our-work' }) {
   const { isDark } = useTheme();
 
   const colors = {
-    bgMain: isDark ? '#121110' : '#FBF9F5',
-    bgCard: isDark ? '#181715' : '#FFFFFF',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#57534E',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    borderSubtle: isDark ? 'rgba(245, 242, 236, 0.08)' : 'rgba(28, 25, 23, 0.08)',
-    borderCard: isDark ? 'rgba(197, 168, 128, 0.22)' : 'rgba(166, 131, 83, 0.22)',
+    bgMain: '#F8F5F1',
+    bgCard: '#FFFFFF',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    accentWalnut: '#7A5A3A',
+    accentGold: '#C8A96A',
+    borderSubtle: 'rgba(122, 90, 58, 0.12)',
+    borderCard: 'rgba(122, 90, 58, 0.16)',
   };
 
   return (
     <section
       id={id}
       style={{
-        padding: '6.5rem 0',
+        padding: '7.5rem 0',
         backgroundColor: colors.bgMain,
         borderTop: `1px solid ${colors.borderSubtle}`,
         position: 'relative',
@@ -104,7 +105,7 @@ export default function OurWork({ id = 'our-work' }) {
         <div
           style={{
             maxWidth: '680px',
-            marginBottom: '3rem',
+            marginBottom: '3.5rem',
           }}
         >
           <div
@@ -112,11 +113,11 @@ export default function OurWork({ id = 'our-work' }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              fontSize: '0.72rem',
-              letterSpacing: '0.22em',
+              fontSize: '0.75rem',
+              letterSpacing: '0.2em',
               textTransform: 'uppercase',
-              color: colors.accentGold,
-              fontWeight: 600,
+              color: colors.accentWalnut,
+              fontWeight: 700,
               marginBottom: '0.75rem',
             }}
           >
@@ -126,11 +127,11 @@ export default function OurWork({ id = 'our-work' }) {
           <h2
             style={{
               fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(2.3rem, 4vw, 3.2rem)',
+              fontSize: 'clamp(2.3rem, 4.5vw, 3.8rem)',
               color: colors.textPrimary,
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-              lineHeight: 1.15,
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
+              lineHeight: 1.1,
               marginBottom: '0.85rem',
             }}
           >
@@ -138,10 +139,10 @@ export default function OurWork({ id = 'our-work' }) {
           </h2>
           <p
             style={{
-              fontSize: '1rem',
+              fontSize: '1.05rem',
               color: colors.textSecondary,
-              lineHeight: 1.65,
-              fontWeight: 300,
+              lineHeight: 1.7,
+              fontWeight: 400,
             }}
           >
             Watch actual project videos and live wall transformations executed by Gujarat Wallpaper &amp; Decor across Surat.
@@ -152,7 +153,7 @@ export default function OurWork({ id = 'our-work' }) {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1.75rem',
+            gap: '2rem',
           }}
           className="our-work-grid"
         >
@@ -162,15 +163,15 @@ export default function OurWork({ id = 'our-work' }) {
               onClick={() => setSelectedItem(item)}
               style={{
                 backgroundColor: colors.bgCard,
-                borderRadius: '12px',
+                borderRadius: '24px',
                 overflow: 'hidden',
                 border: `1px solid ${colors.borderCard}`,
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
-                boxShadow: isDark ? '0 10px 30px rgba(0, 0, 0, 0.35)' : '0 6px 20px rgba(0, 0, 0, 0.05)',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+                boxShadow: '0 12px 32px rgba(122, 90, 58, 0.08)',
+                transition: 'transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease',
               }}
               className="our-work-card"
             >
@@ -181,7 +182,7 @@ export default function OurWork({ id = 'our-work' }) {
                   aspectRatio: '9 / 14',
                   maxHeight: '440px',
                   overflow: 'hidden',
-                  backgroundColor: '#0D0C0B',
+                  backgroundColor: '#E7D7BE',
                 }}
               >
                 <video
@@ -211,7 +212,7 @@ export default function OurWork({ id = 'our-work' }) {
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, rgba(14, 13, 12, 0.75) 0%, transparent 50%)',
+                    background: 'linear-gradient(to top, rgba(47, 47, 47, 0.75) 0%, transparent 50%)',
                     pointerEvents: 'none',
                   }}
                 />
@@ -228,27 +229,27 @@ export default function OurWork({ id = 'our-work' }) {
                 >
                   <div
                     style={{
-                      width: '54px',
-                      height: '54px',
+                      width: '56px',
+                      height: '56px',
                       borderRadius: '50%',
-                      backgroundColor: 'rgba(197, 168, 128, 0.95)',
-                      color: '#121110',
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                      color: colors.accentWalnut,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       paddingLeft: '3px',
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+                      boxShadow: '0 8px 24px rgba(122, 90, 58, 0.25)',
                       transition: 'transform 0.3s ease, background-color 0.3s ease',
                     }}
                     className="play-btn-circle"
                   >
-                    <Play size={22} fill="#121110" />
+                    <Play size={22} fill={colors.accentWalnut} />
                   </div>
                 </div>
               </div>
               <div
                 style={{
-                  padding: '1.4rem 1.5rem',
+                  padding: '1.6rem 1.6rem',
                   display: 'flex',
                   flexDirection: 'column',
                   flexGrow: 1,
@@ -258,9 +259,9 @@ export default function OurWork({ id = 'our-work' }) {
                 <div
                   style={{
                     fontSize: '0.72rem',
-                    color: colors.accentGold,
-                    fontWeight: 500,
-                    letterSpacing: '0.08em',
+                    color: colors.accentWalnut,
+                    fontWeight: 700,
+                    letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     marginBottom: '0.35rem',
                   }}
@@ -270,7 +271,7 @@ export default function OurWork({ id = 'our-work' }) {
                 <h3
                   style={{
                     fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: '1.3rem',
+                    fontSize: '1.4rem',
                     color: colors.textPrimary,
                     fontWeight: 600,
                     lineHeight: 1.25,
@@ -281,10 +282,10 @@ export default function OurWork({ id = 'our-work' }) {
                 </h3>
                 <p
                   style={{
-                    fontSize: '0.86rem',
+                    fontSize: '0.9rem',
                     color: colors.textSecondary,
-                    lineHeight: 1.55,
-                    fontWeight: 300,
+                    lineHeight: 1.6,
+                    fontWeight: 400,
                     margin: 0,
                   }}
                 >
@@ -298,24 +299,23 @@ export default function OurWork({ id = 'our-work' }) {
         {/* Instagram Follow Call-to-Action Banner */}
         <div
           style={{
-            marginTop: '4rem',
-            padding: '2.5rem 2rem',
-            borderRadius: '16px',
-            backgroundColor: isDark ? 'rgba(25, 24, 22, 0.85)' : 'rgba(255, 255, 255, 0.9)',
-            backdropFilter: 'blur(12px)',
+            marginTop: '4.5rem',
+            padding: '2.75rem 2.5rem',
+            borderRadius: '24px',
+            backgroundColor: '#E7D7BE',
             border: `1px solid ${colors.borderCard}`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '1.75rem',
-            boxShadow: isDark ? '0 20px 50px rgba(0, 0, 0, 0.4)' : '0 12px 36px rgba(0, 0, 0, 0.06)',
+            gap: '2rem',
+            boxShadow: '0 16px 40px rgba(122, 90, 58, 0.1)',
             position: 'relative',
             overflow: 'hidden',
           }}
           className="our-work-instagram-banner"
         >
-          {/* Subtle gold glow background */}
+          {/* Subtle Walnut glow background */}
           <div
             style={{
               position: 'absolute',
@@ -324,7 +324,7 @@ export default function OurWork({ id = 'our-work' }) {
               width: '320px',
               height: '320px',
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(197, 168, 128, 0.12) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(122, 90, 58, 0.15) 0%, transparent 70%)',
               pointerEvents: 'none',
             }}
           />
@@ -335,24 +335,24 @@ export default function OurWork({ id = 'our-work' }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                fontSize: '0.72rem',
+                fontSize: '0.74rem',
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
-                color: colors.accentGold,
-                fontWeight: 600,
+                color: colors.accentWalnut,
+                fontWeight: 700,
                 marginBottom: '0.5rem',
               }}
             >
-              <InstagramIcon size={16} color={colors.accentGold} />
+              <InstagramIcon size={16} color={colors.accentWalnut} />
               <span>OFFICIAL INSTAGRAM COMMUNITY • 100K+ FOLLOWERS</span>
             </div>
             <h3
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)',
                 color: colors.textPrimary,
                 fontWeight: 600,
-                lineHeight: 1.25,
+                lineHeight: 1.2,
                 marginBottom: '0.5rem',
               }}
             >
@@ -360,10 +360,10 @@ export default function OurWork({ id = 'our-work' }) {
             </h3>
             <p
               style={{
-                fontSize: '0.92rem',
+                fontSize: '0.95rem',
                 color: colors.textSecondary,
                 lineHeight: 1.6,
-                fontWeight: 300,
+                fontWeight: 400,
                 margin: 0,
               }}
             >
@@ -379,16 +379,16 @@ export default function OurWork({ id = 'our-work' }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.75rem',
-              padding: '0.95rem 1.85rem',
-              borderRadius: '8px',
-              background: 'linear-gradient(135deg, #E1306C 0%, #C13584 50%, #833AB4 100%)',
+              padding: '1rem 2rem',
+              borderRadius: '22px',
+              background: 'linear-gradient(135deg, #7A5A3A 0%, #5E4329 100%)',
               color: '#FFFFFF',
               textDecoration: 'none',
-              fontSize: '0.85rem',
+              fontSize: '0.88rem',
               fontWeight: 600,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              boxShadow: '0 8px 24px rgba(225, 48, 108, 0.35)',
+              boxShadow: '0 8px 24px rgba(122, 90, 58, 0.3)',
               transition: 'all 0.3s ease',
               position: 'relative',
               zIndex: 1,

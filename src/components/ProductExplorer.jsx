@@ -16,15 +16,16 @@ export default function ProductExplorer({
   const { isDark } = useTheme();
 
   const colors = {
-    bgSection: isDark ? '#121110' : '#FBF9F5',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#78716C',
-    textMuted: isDark ? '#8E887E' : '#A8A29E',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    cardBg: isDark ? '#171614' : '#FFFFFF',
-    inputBg: isDark ? '#1F1E1B' : '#FFFFFF',
-    borderSubtle: isDark ? 'rgba(245, 242, 236, 0.08)' : 'rgba(28, 25, 23, 0.08)',
-    borderInput: isDark ? 'rgba(197, 168, 128, 0.25)' : 'rgba(28, 25, 23, 0.15)',
+    bgSection: '#F8F5F1',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    textMuted: '#7A7570',
+    accentWalnut: '#7A5A3A',
+    accentGold: '#C8A96A',
+    cardBg: '#FFFFFF',
+    inputBg: '#FFFFFF',
+    borderSubtle: 'rgba(122, 90, 58, 0.14)',
+    borderInput: 'rgba(122, 90, 58, 0.22)',
   };
 
   const mainCategories = [
@@ -81,7 +82,7 @@ export default function ProductExplorer({
     <section
       id="explorer"
       style={{
-        padding: '7rem 0',
+        padding: '7.5rem 0',
         backgroundColor: colors.bgSection,
         position: 'relative',
         transition: 'background-color 0.35s ease',
@@ -100,7 +101,7 @@ export default function ProductExplorer({
           }}
         >
           <div style={{ maxWidth: '650px' }}>
-            <div className="sub-tag" style={{ color: colors.accentGold, marginBottom: '0.75rem' }}>
+            <div className="sub-tag" style={{ color: colors.accentWalnut, marginBottom: '0.75rem', fontWeight: 700 }}>
               Showroom Catalog
             </div>
             <h2
@@ -109,11 +110,14 @@ export default function ProductExplorer({
                 fontSize: 'clamp(2.25rem, 4.5vw, 3.75rem)',
                 color: colors.textPrimary,
                 marginBottom: '1rem',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
               }}
             >
               Product Explorer
             </h2>
-            <p style={{ fontSize: '1rem', color: colors.textSecondary, lineHeight: 1.6 }}>
+            <p style={{ fontSize: '1.05rem', color: colors.textSecondary, lineHeight: 1.7, fontWeight: 400 }}>
               Browse our complete library of wallpapers, 3D architectural panels, designer carpets, and landscape turf available for immediate specification in Surat.
             </p>
           </div>
@@ -123,7 +127,7 @@ export default function ProductExplorer({
             style={{
               position: 'relative',
               width: '100%',
-              maxWidth: '320px',
+              maxWidth: '340px',
             }}
           >
             <input
@@ -133,24 +137,31 @@ export default function ProductExplorer({
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: '100%',
-                padding: '0.8rem 1rem 0.8rem 2.75rem',
-                borderRadius: '4px',
+                padding: '0.85rem 1.25rem 0.85rem 2.85rem',
+                borderRadius: '24px',
                 border: `1px solid ${colors.borderInput}`,
                 backgroundColor: colors.inputBg,
-                fontSize: '0.85rem',
+                fontSize: '0.88rem',
                 color: colors.textPrimary,
                 outline: 'none',
-                transition: 'border-color 0.2s ease',
+                transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+                boxShadow: '0 4px 14px rgba(122, 90, 58, 0.05)',
               }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = colors.accentGold)}
-              onBlur={(e) => (e.currentTarget.style.borderColor = colors.borderInput)}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = colors.accentWalnut;
+                e.currentTarget.style.boxShadow = '0 6px 18px rgba(122, 90, 58, 0.12)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = colors.borderInput;
+                e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 90, 58, 0.05)';
+              }}
             />
             <Search
-              size={16}
-              color={colors.textMuted}
+              size={18}
+              color={colors.accentWalnut}
               style={{
                 position: 'absolute',
-                left: '1rem',
+                left: '1.1rem',
                 top: '50%',
                 transform: 'translateY(-50%)',
                 pointerEvents: 'none',
@@ -168,7 +179,7 @@ export default function ProductExplorer({
             overflowX: 'auto',
             WebkitOverflowScrolling: 'touch',
             paddingBottom: '0.85rem',
-            marginBottom: '1.5rem',
+            marginBottom: '2rem',
             scrollbarWidth: 'none',
             flexWrap: 'nowrap',
           }}
@@ -181,9 +192,9 @@ export default function ProductExplorer({
                 key={cat}
                 onClick={() => handleCategorySelect(cat)}
                 style={{
-                  padding: '0.75rem 1.6rem',
-                  borderRadius: '6px',
-                  fontSize: '0.82rem',
+                  padding: '0.8rem 1.75rem',
+                  borderRadius: '24px',
+                  fontSize: '0.84rem',
                   fontWeight: 600,
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
@@ -192,10 +203,10 @@ export default function ProductExplorer({
                   minWidth: 'max-content',
                   cursor: 'pointer',
                   transition: 'background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease',
-                  backgroundColor: isActive ? (isDark ? '#C5A880' : '#1C1917') : (isDark ? '#1A1917' : '#FFFFFF'),
-                  color: isActive ? (isDark ? '#141312' : '#FFFFFF') : (isDark ? '#C8C2B7' : '#57534E'),
-                  border: isActive ? `1px solid ${isDark ? '#C5A880' : '#1C1917'}` : `1px solid ${colors.borderSubtle}`,
-                  boxShadow: isActive ? '0 4px 14px rgba(0, 0, 0, 0.15)' : 'none',
+                  backgroundColor: isActive ? colors.accentWalnut : '#FFFFFF',
+                  color: isActive ? '#FFFFFF' : '#5A5652',
+                  border: isActive ? `1px solid ${colors.accentWalnut}` : `1px solid ${colors.borderSubtle}`,
+                  boxShadow: isActive ? '0 6px 18px rgba(122, 90, 58, 0.25)' : '0 2px 8px rgba(0, 0, 0, 0.03)',
                 }}
               >
                 {cat}
@@ -215,11 +226,12 @@ export default function ProductExplorer({
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 overflow: 'hidden',
-                backgroundColor: isDark ? '#181715' : '#F4EFEA',
-                padding: '1rem 1.25rem',
-                borderRadius: '6px',
+                backgroundColor: '#E7D7BE',
+                padding: '1.25rem 1.5rem',
+                borderRadius: '20px',
                 marginBottom: '2.5rem',
                 border: `1px solid ${colors.borderSubtle}`,
+                boxShadow: '0 8px 24px rgba(122, 90, 58, 0.06)',
               }}
             >
               <div
@@ -227,15 +239,15 @@ export default function ProductExplorer({
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.65rem',
-                  fontSize: '0.72rem',
-                  letterSpacing: '0.12em',
+                  fontSize: '0.74rem',
+                  letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  color: colors.accentGold,
-                  fontWeight: 600,
-                  marginBottom: '0.75rem',
+                  color: colors.accentWalnut,
+                  fontWeight: 700,
+                  marginBottom: '0.85rem',
                 }}
               >
-                <SlidersHorizontal size={13} color={colors.accentGold} />
+                <SlidersHorizontal size={14} color={colors.accentWalnut} />
                 <span>Wallpaper Styles &amp; Finishes</span>
               </div>
 
@@ -245,7 +257,7 @@ export default function ProductExplorer({
                   flexWrap: 'nowrap',
                   overflowX: 'auto',
                   WebkitOverflowScrolling: 'touch',
-                  gap: '0.5rem',
+                  gap: '0.6rem',
                   paddingBottom: '0.35rem',
                 }}
                 className="no-scrollbar"
@@ -257,16 +269,17 @@ export default function ProductExplorer({
                       key={sub}
                       onClick={() => setActiveSubcategory(sub)}
                       style={{
-                        padding: '0.45rem 1rem',
+                        padding: '0.5rem 1.15rem',
                         borderRadius: '9999px',
-                        fontSize: '0.75rem',
-                        fontWeight: 500,
+                        fontSize: '0.78rem',
+                        fontWeight: 600,
                         whiteSpace: 'nowrap',
                         flexShrink: 0,
                         minWidth: 'max-content',
-                        backgroundColor: isSubActive ? colors.accentGold : (isDark ? '#22201D' : '#FFFFFF'),
-                        color: isSubActive ? '#141312' : (isDark ? '#C8C2B7' : '#57534E'),
-                        border: isSubActive ? `1px solid ${colors.accentGold}` : `1px solid ${colors.borderSubtle}`,
+                        backgroundColor: isSubActive ? colors.accentWalnut : '#FFFFFF',
+                        color: isSubActive ? '#FFFFFF' : '#5A5652',
+                        border: isSubActive ? `1px solid ${colors.accentWalnut}` : `1px solid ${colors.borderSubtle}`,
+                        boxShadow: isSubActive ? '0 4px 12px rgba(122, 90, 58, 0.25)' : 'none',
                         transition: 'all 0.2s ease',
                         cursor: 'pointer',
                       }}

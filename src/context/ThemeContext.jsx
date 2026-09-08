@@ -8,20 +8,20 @@ const ThemeContext = createContext({
 
 export function ThemeProvider({ children }) {
   useEffect(() => {
-    // Apply permanent luxury dark theme
+    // Apply permanent luxury Ivory + Warm Beige + Walnut theme
     const root = document.documentElement;
-    root.setAttribute('data-theme', 'dark');
-    root.classList.add('dark');
-    root.classList.remove('light');
+    root.setAttribute('data-theme', 'light');
+    root.classList.add('light');
+    root.classList.remove('dark');
     try {
-      localStorage.setItem('gwd-theme', 'dark');
+      localStorage.setItem('gwd-theme', 'light');
     } catch (e) {
       // Ignore
     }
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme: 'dark', toggleTheme: () => {}, isDark: true }}>
+    <ThemeContext.Provider value={{ theme: 'light', toggleTheme: () => {}, isDark: false }}>
       {children}
     </ThemeContext.Provider>
   );

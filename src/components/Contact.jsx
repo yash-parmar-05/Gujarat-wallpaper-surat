@@ -34,23 +34,25 @@ export default function Contact({ prefilledProduct }) {
   };
 
   const colors = {
-    bgSection: isDark ? '#121110' : '#FAF8F5',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#78716C',
-    textMuted: isDark ? '#8E887E' : '#A8A29E',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    cardBg: isDark ? '#171614' : '#FFFFFF',
-    cardHoverBg: isDark ? '#1F1D1A' : '#F4EFEA',
-    borderSubtle: isDark ? 'rgba(245, 242, 236, 0.08)' : 'rgba(28, 25, 23, 0.08)',
-    borderCard: isDark ? 'rgba(197, 168, 128, 0.22)' : 'rgba(166, 131, 83, 0.22)',
-    boxShadow: isDark ? '0 10px 30px rgba(0, 0, 0, 0.35)' : '0 10px 30px rgba(0, 0, 0, 0.04)',
+    bgSection: '#F8F5F1',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    textMuted: '#7A7570',
+    accentGold: '#C8A96A',
+    accentWalnut: '#7A5A3A',
+    accentWalnutHover: '#5E4329',
+    cardBg: '#FFFFFF',
+    cardHoverBg: '#FAF7F2',
+    borderSubtle: 'rgba(122, 90, 58, 0.12)',
+    borderCard: 'rgba(122, 90, 58, 0.16)',
+    boxShadow: '0 12px 32px rgba(122, 90, 58, 0.08)',
   };
 
   return (
     <section
       id="contact"
       style={{
-        padding: '7rem 0',
+        padding: '7.5rem 0',
         backgroundColor: colors.bgSection,
         position: 'relative',
         transition: 'background-color 0.35s ease',
@@ -61,15 +63,15 @@ export default function Contact({ prefilledProduct }) {
         <div
           className="contact-top-banner"
           style={{
-            backgroundColor: isDark ? '#141312' : '#FFFFFF',
-            color: isDark ? '#F7F4EE' : '#1C1917',
-            borderRadius: '12px',
+            backgroundColor: '#E7D7BE',
+            color: '#2F2F2F',
+            borderRadius: '24px',
             padding: 'clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 5vw, 3.5rem)',
             position: 'relative',
             overflow: 'hidden',
             marginBottom: '4rem',
-            border: `1px solid ${colors.borderSubtle}`,
-            boxShadow: isDark ? '0 12px 36px rgba(0, 0, 0, 0.4)' : '0 10px 30px rgba(0, 0, 0, 0.04)',
+            border: `1px solid ${colors.borderCard}`,
+            boxShadow: '0 16px 40px rgba(122, 90, 58, 0.1)',
             transition: 'background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease',
           }}
         >
@@ -85,7 +87,7 @@ export default function Contact({ prefilledProduct }) {
               backgroundImage: 'url(/assets/products/wallpaper-card.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              opacity: isDark ? 0.45 : 0.65,
+              opacity: 0.35,
               pointerEvents: 'none',
               maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)',
               WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)',
@@ -93,7 +95,7 @@ export default function Contact({ prefilledProduct }) {
           />
 
           <div style={{ position: 'relative', zIndex: 2, maxWidth: '780px' }}>
-            <div className="sub-tag" style={{ color: colors.accentGold, marginBottom: '0.85rem' }}>
+            <div className="sub-tag" style={{ color: colors.accentWalnut, marginBottom: '0.85rem', fontWeight: 700 }}>
               Begin Your Transformation
             </div>
 
@@ -101,9 +103,11 @@ export default function Contact({ prefilledProduct }) {
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
                 fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
-                color: isDark ? '#F7F4EE' : '#1C1917',
+                color: '#2F2F2F',
                 lineHeight: 1.1,
                 marginBottom: '1rem',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
               }}
             >
               Give Your Space a New Identity.
@@ -112,10 +116,10 @@ export default function Contact({ prefilledProduct }) {
             <p
               style={{
                 fontSize: 'clamp(1rem, 1.35vw, 1.15rem)',
-                color: isDark ? '#D4CDC3' : '#57534E',
+                color: colors.textSecondary,
                 lineHeight: 1.65,
                 marginBottom: '2.25rem',
-                fontWeight: 300,
+                fontWeight: 400,
               }}
             >
               Connect directly with our design consultants on WhatsApp or call our Surat showroom lines for immediate assistance.
@@ -128,28 +132,28 @@ export default function Contact({ prefilledProduct }) {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
                 style={{
-                  backgroundColor: colors.accentGold,
-                  color: isDark ? '#141312' : '#FFFFFF',
-                  border: `1px solid ${colors.accentGold}`,
-                  padding: '0.95rem 2.5rem',
-                  borderRadius: '6px',
+                  backgroundColor: colors.accentWalnut,
+                  color: '#FFFFFF',
+                  border: `1px solid ${colors.accentWalnut}`,
+                  padding: '1rem 2.5rem',
+                  borderRadius: '24px',
                   fontWeight: 600,
-                  fontSize: '0.84rem',
-                  letterSpacing: '0.1em',
+                  fontSize: '0.88rem',
+                  letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.55rem',
-                  boxShadow: isDark ? '0 6px 20px rgba(197, 168, 128, 0.25)' : '0 4px 16px rgba(166, 131, 83, 0.25)',
+                  boxShadow: '0 8px 24px rgba(122, 90, 58, 0.25)',
                   transition: 'all 0.3s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.accentGoldHover;
+                  e.currentTarget.style.backgroundColor = colors.accentWalnutHover;
                   e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.accentGold;
+                  e.currentTarget.style.backgroundColor = colors.accentWalnut;
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
@@ -175,17 +179,16 @@ export default function Contact({ prefilledProduct }) {
           <div
             style={{
               gridColumn: 'span 7',
-              backgroundColor: isDark ? 'rgba(24, 22, 20, 0.85)' : '#FFFFFF',
-              backdropFilter: 'blur(16px)',
+              backgroundColor: '#FFFFFF',
               padding: 'clamp(2rem, 4vw, 3.25rem)',
-              borderRadius: '12px',
+              borderRadius: '24px',
               border: `1px solid ${colors.borderCard}`,
               boxShadow: colors.boxShadow,
               transition: 'all 0.35s ease',
             }}
             className="contact-form-card"
           >
-            <div className="sub-tag" style={{ color: colors.accentGold, marginBottom: '0.5rem' }}>
+            <div className="sub-tag" style={{ color: colors.accentWalnut, marginBottom: '0.5rem', fontWeight: 700 }}>
               Direct Showroom Connect
             </div>
             <h3
@@ -207,45 +210,45 @@ export default function Contact({ prefilledProduct }) {
             {/* Premium WhatsApp Action Card */}
             <div
               style={{
-                backgroundColor: isDark ? 'rgba(37, 211, 102, 0.08)' : 'rgba(37, 211, 102, 0.06)',
+                backgroundColor: 'rgba(37, 211, 102, 0.06)',
                 border: '1px solid rgba(37, 211, 102, 0.3)',
-                borderRadius: '10px',
-                padding: '1.75rem',
-                marginBottom: '1.75rem',
+                borderRadius: '20px',
+                padding: '1.85rem',
+                marginBottom: '2rem',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1rem',
+                gap: '1.25rem',
               }}
               className="whatsapp-enquiry-box"
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <div
                   style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '10px',
+                    width: '50px',
+                    height: '50px',
+                    borderRadius: '14px',
                     backgroundColor: '#25D366',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#FFFFFF',
                     flexShrink: 0,
-                    boxShadow: '0 4px 14px rgba(37, 211, 102, 0.35)',
+                    boxShadow: '0 6px 16px rgba(37, 211, 102, 0.35)',
                   }}
                 >
-                  <MessageCircle size={24} />
+                  <MessageCircle size={26} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 600 }}>
+                  <div style={{ fontSize: '0.74rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 700 }}>
                     Official WhatsApp Enquiry
                   </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: colors.textPrimary }}>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: colors.textPrimary }}>
                     +91 {WHATSAPP_ENQUIRY_NUMBER}
                   </div>
                 </div>
               </div>
 
-              <p style={{ fontSize: '0.86rem', color: colors.textSecondary, margin: 0, lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.88rem', color: colors.textSecondary, margin: 0, lineHeight: 1.5 }}>
                 Click below to start an instant WhatsApp chat with our Surat showroom team:
               </p>
 
@@ -253,12 +256,12 @@ export default function Contact({ prefilledProduct }) {
                 onClick={handleWhatsAppEnquiry}
                 style={{
                   width: '100%',
-                  padding: '1rem 1.5rem',
+                  padding: '1.05rem 1.5rem',
                   backgroundColor: '#25D366',
                   color: '#FFFFFF',
-                  borderRadius: '6px',
+                  borderRadius: '20px',
                   border: 'none',
-                  fontSize: '0.88rem',
+                  fontSize: '0.9rem',
                   fontWeight: 600,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
@@ -267,7 +270,7 @@ export default function Contact({ prefilledProduct }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '0.65rem',
-                  boxShadow: '0 4px 16px rgba(37, 211, 102, 0.3)',
+                  boxShadow: '0 6px 20px rgba(37, 211, 102, 0.3)',
                   transition: 'all 0.25s ease',
                 }}
                 onMouseEnter={(e) => {
@@ -287,7 +290,7 @@ export default function Contact({ prefilledProduct }) {
 
             {/* Direct Calling Numbers */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ fontSize: '0.78rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: colors.accentGold, fontWeight: 600 }}>
+              <div style={{ fontSize: '0.78rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: colors.accentWalnut, fontWeight: 700 }}>
                 Direct Calling Numbers
               </div>
 
@@ -299,48 +302,48 @@ export default function Contact({ prefilledProduct }) {
                     style={{
                       textDecoration: 'none',
                       backgroundColor: colors.cardBg,
-                      border: `1px solid ${colors.borderSubtle}`,
-                      borderRadius: '8px',
-                      padding: '1.25rem',
+                      border: `1px solid ${colors.borderCard}`,
+                      borderRadius: '20px',
+                      padding: '1.35rem',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.9rem',
+                      gap: '1rem',
                       transition: 'all 0.3s ease',
                       boxShadow: colors.boxShadow,
                     }}
                     className="contact-call-card"
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = colors.accentGold;
+                      e.currentTarget.style.borderColor = colors.accentWalnut;
                       e.currentTarget.style.backgroundColor = colors.cardHoverBg;
                       e.currentTarget.style.transform = 'translateY(-2px)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = colors.borderSubtle;
+                      e.currentTarget.style.borderColor = colors.borderCard;
                       e.currentTarget.style.backgroundColor = colors.cardBg;
                       e.currentTarget.style.transform = 'translateY(0)';
                     }}
                   >
                     <div
                       style={{
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '8px',
-                        backgroundColor: isDark ? 'rgba(197, 168, 128, 0.12)' : 'rgba(166, 131, 83, 0.12)',
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '12px',
+                        backgroundColor: 'rgba(122, 90, 58, 0.1)',
                         border: `1px solid ${colors.borderCard}`,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: colors.accentGold,
+                        color: colors.accentWalnut,
                         flexShrink: 0,
                       }}
                     >
                       <PhoneCall size={18} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: colors.textMuted, fontWeight: 600 }}>
+                      <div style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: colors.textMuted, fontWeight: 600 }}>
                         {item.label}
                       </div>
-                      <div style={{ fontSize: '1rem', fontWeight: 600, color: colors.textPrimary, marginTop: '0.15rem' }}>
+                      <div style={{ fontSize: '1rem', fontWeight: 700, color: colors.textPrimary, marginTop: '0.15rem' }}>
                         {item.display}
                       </div>
                     </div>
@@ -362,7 +365,7 @@ export default function Contact({ prefilledProduct }) {
             className="contact-info-col"
           >
             <div>
-              <div className="sub-tag" style={{ color: colors.accentGold, marginBottom: '0.5rem' }}>
+              <div className="sub-tag" style={{ color: colors.accentWalnut, marginBottom: '0.5rem', fontWeight: 700 }}>
                 Showroom Visit
               </div>
               <h3
@@ -376,34 +379,34 @@ export default function Contact({ prefilledProduct }) {
               >
                 Surat Experience Center
               </h3>
-              <p style={{ fontSize: '0.94rem', color: colors.textSecondary, lineHeight: 1.6, fontWeight: 300 }}>
+              <p style={{ fontSize: '0.94rem', color: colors.textSecondary, lineHeight: 1.6, fontWeight: 400 }}>
                 Experience full-scale installed wall panels, tactile wallpaper sample books, and luxury carpet textures in person across our branches.
               </p>
             </div>
 
             {/* Info Cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '1rem',
-                  padding: '1.25rem',
+                  padding: '1.35rem',
                   backgroundColor: colors.cardBg,
-                  borderRadius: '8px',
-                  border: `1px solid ${colors.borderSubtle}`,
+                  borderRadius: '20px',
+                  border: `1px solid ${colors.borderCard}`,
                   boxShadow: colors.boxShadow,
                 }}
               >
-                <MapPin size={20} color={colors.accentGold} style={{ marginTop: '2px', flexShrink: 0 }} />
+                <MapPin size={22} color={colors.accentWalnut} style={{ marginTop: '2px', flexShrink: 0 }} />
                 <div>
-                  <div style={{ fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 600, marginBottom: '0.2rem' }}>
+                  <div style={{ fontSize: '0.74rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 700, marginBottom: '0.2rem' }}>
                     Main Branch (Polaris)
                   </div>
-                  <div style={{ fontSize: '0.92rem', color: colors.textPrimary, fontWeight: 500, lineHeight: 1.45 }}>
+                  <div style={{ fontSize: '0.94rem', color: colors.textPrimary, fontWeight: 600, lineHeight: 1.45 }}>
                     Shop No. 154, Polaris Mall, Puna Canal Road, Surat
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: colors.accentGold, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '0.82rem', color: colors.accentWalnut, marginTop: '0.25rem', fontWeight: 500 }}>
                     Surat, Gujarat, India
                   </div>
                 </div>
@@ -414,19 +417,19 @@ export default function Contact({ prefilledProduct }) {
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '1rem',
-                  padding: '1.25rem',
+                  padding: '1.35rem',
                   backgroundColor: colors.cardBg,
-                  borderRadius: '8px',
-                  border: `1px solid ${colors.borderSubtle}`,
+                  borderRadius: '20px',
+                  border: `1px solid ${colors.borderCard}`,
                   boxShadow: colors.boxShadow,
                 }}
               >
-                <Clock size={20} color={colors.accentGold} style={{ marginTop: '2px', flexShrink: 0 }} />
+                <Clock size={22} color={colors.accentWalnut} style={{ marginTop: '2px', flexShrink: 0 }} />
                 <div>
-                  <div style={{ fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 600, marginBottom: '0.2rem' }}>
+                  <div style={{ fontSize: '0.74rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 700, marginBottom: '0.2rem' }}>
                     Visiting Hours
                   </div>
-                  <div style={{ fontSize: '0.92rem', color: colors.textPrimary, fontWeight: 500 }}>
+                  <div style={{ fontSize: '0.94rem', color: colors.textPrimary, fontWeight: 600 }}>
                     Monday – Sunday: 10:00 AM – 7:00 PM
                   </div>
                 </div>
@@ -437,22 +440,22 @@ export default function Contact({ prefilledProduct }) {
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '1rem',
-                  padding: '1.25rem',
+                  padding: '1.35rem',
                   backgroundColor: colors.cardBg,
-                  borderRadius: '8px',
-                  border: `1px solid ${colors.borderSubtle}`,
+                  borderRadius: '20px',
+                  border: `1px solid ${colors.borderCard}`,
                   boxShadow: colors.boxShadow,
                 }}
               >
-                <InstagramIcon size={20} color={colors.accentGold} style={{ marginTop: '2px', flexShrink: 0 }} />
+                <InstagramIcon size={22} color={colors.accentWalnut} style={{ marginTop: '2px', flexShrink: 0 }} />
                 <div>
-                  <div style={{ fontSize: '0.72rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 600, marginBottom: '0.2rem' }}>
+                  <div style={{ fontSize: '0.74rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 700, marginBottom: '0.2rem' }}>
                     Instagram Community
                   </div>
-                  <div style={{ fontSize: '0.92rem', color: colors.textPrimary, fontWeight: 500 }}>
+                  <div style={{ fontSize: '0.94rem', color: colors.textPrimary, fontWeight: 600 }}>
                     @gujarat_wallpaper_decor
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: colors.accentGold, marginTop: '0.25rem' }}>
+                  <div style={{ fontSize: '0.82rem', color: colors.accentWalnut, marginTop: '0.25rem', fontWeight: 500 }}>
                     All India Delivery &amp; Fitting Support
                   </div>
                 </div>

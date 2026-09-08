@@ -25,10 +25,11 @@ export default function Gallery() {
 
   const activeItem = lightboxIndex !== null ? GALLERY_ITEMS[lightboxIndex] : null;
 
-  const bg = isDark ? '#121110' : '#FBF9F5';
-  const textPrimary = isDark ? '#F7F4EE' : '#1C1917';
-  const textSecondary = isDark ? '#C8C2B7' : '#57534E';
-  const gold = isDark ? '#C5A880' : '#A68353';
+  const bg = '#F8F5F1';
+  const textPrimary = '#2F2F2F';
+  const textSecondary = '#5A5652';
+  const walnut = '#7A5A3A';
+  const gold = '#C8A96A';
 
   return (
     <section
@@ -54,7 +55,7 @@ export default function Gallery() {
           }}
         >
           <div style={{ maxWidth: '680px' }}>
-            <div className="sub-tag" style={{ color: gold, marginBottom: '0.75rem' }}>
+            <div className="sub-tag" style={{ color: walnut, marginBottom: '0.75rem', fontWeight: 600 }}>
               Architectural Installations
             </div>
             <h2
@@ -63,11 +64,13 @@ export default function Gallery() {
                 fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
                 color: textPrimary,
                 marginBottom: '1rem',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.08,
               }}
             >
               The Visual Gallery
             </h2>
-            <p style={{ fontSize: '1.05rem', color: textSecondary, lineHeight: 1.6 }}>
+            <p style={{ fontSize: '1.05rem', color: textSecondary, lineHeight: 1.7, fontWeight: 400 }}>
               A curated visual anthology of luxury Italian textures, embossed damasks, marble wallcoverings, and designer living room walls from our signature catalogs.
             </p>
           </div>
@@ -75,9 +78,10 @@ export default function Gallery() {
           <div
             style={{
               fontSize: '0.8rem',
-              letterSpacing: '0.12em',
+              letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: gold,
+              color: walnut,
+              fontWeight: 600,
             }}
           >
             Click Any Image for Full-Screen View
@@ -89,33 +93,33 @@ export default function Gallery() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '1.5rem',
+            gap: '1.75rem',
           }}
           className="gallery-masonry-grid"
         >
           {GALLERY_ITEMS.map((item, index) => {
             // Asymmetric layout spans
             let colSpan = 'span 4';
-            let height = '360px';
+            let height = '380px';
 
             if (index === 0) {
               colSpan = 'span 8';
-              height = '440px';
+              height = '460px';
             } else if (index === 1) {
               colSpan = 'span 4';
-              height = '440px';
+              height = '460px';
             } else if (index === 2) {
               colSpan = 'span 5';
-              height = '400px';
+              height = '420px';
             } else if (index === 3) {
               colSpan = 'span 7';
-              height = '400px';
+              height = '420px';
             } else if (index === 4) {
               colSpan = 'span 7';
-              height = '420px';
+              height = '440px';
             } else if (index === 5) {
               colSpan = 'span 5';
-              height = '420px';
+              height = '440px';
             }
 
             return (
@@ -129,11 +133,13 @@ export default function Gallery() {
                 style={{
                   gridColumn: colSpan,
                   position: 'relative',
-                  borderRadius: '6px',
+                  borderRadius: '24px',
                   overflow: 'hidden',
                   cursor: 'pointer',
                   height: height,
-                  backgroundColor: '#1C1A18',
+                  backgroundColor: '#E7D7BE',
+                  boxShadow: '0 12px 32px rgba(122, 90, 58, 0.08)',
+                  border: '1px solid rgba(122, 90, 58, 0.12)',
                 }}
                 className="gallery-item-card"
               >
@@ -156,7 +162,7 @@ export default function Gallery() {
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, rgba(20, 19, 18, 0.92) 0%, rgba(20, 19, 18, 0.2) 60%, rgba(20, 19, 18, 0) 100%)',
+                    background: 'linear-gradient(to top, rgba(47, 47, 47, 0.92) 0%, rgba(47, 47, 47, 0.35) 60%, rgba(47, 47, 47, 0) 100%)',
                     opacity: 0,
                     transition: 'opacity 0.35s ease',
                     display: 'flex',
@@ -167,29 +173,31 @@ export default function Gallery() {
                 >
                   <span
                     style={{
-                      fontSize: '0.7rem',
+                      fontSize: '0.72rem',
                       letterSpacing: '0.15em',
                       textTransform: 'uppercase',
-                      color: '#C5A880',
+                      color: '#C8A96A',
                       marginBottom: '0.35rem',
+                      fontWeight: 600,
                     }}
                   >
                     {item.category}
                   </span>
                   <h4
                     style={{
-                      fontSize: '1.35rem',
-                      color: '#F7F4EE',
-                      marginBottom: '0.5rem',
+                      fontFamily: "'Cormorant Garamond', Georgia, serif",
+                      fontSize: '1.45rem',
+                      color: '#F8F5F1',
+                      marginBottom: '0.4rem',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
                     }}
                   >
                     <span>{item.title}</span>
-                    <Maximize2 size={16} color="#C5A880" />
+                    <Maximize2 size={18} color="#C8A96A" />
                   </h4>
-                  <p style={{ fontSize: '0.82rem', color: '#D4CDC3', lineHeight: 1.4, fontWeight: 300 }}>
+                  <p style={{ fontSize: '0.85rem', color: '#E7D7BE', lineHeight: 1.5, fontWeight: 300 }}>
                     {item.caption}
                   </p>
                 </div>

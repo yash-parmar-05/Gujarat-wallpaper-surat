@@ -21,15 +21,16 @@ export default function ProductDetailPage() {
   const product = PRODUCTS.find((p) => p.id === id);
 
   const colors = {
-    bgPage: isDark ? '#121110' : '#FAF8F5',
-    cardBg: isDark ? '#171614' : '#FFFFFF',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#57534E',
-    textMuted: isDark ? '#8E887E' : '#78716C',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    borderSubtle: isDark ? 'rgba(245, 242, 236, 0.08)' : 'rgba(28, 25, 23, 0.08)',
-    matrixBg: isDark ? '#1F1E1B' : '#FAF8F5',
-    boxShadow: isDark ? '0 12px 36px rgba(0, 0, 0, 0.45)' : '0 10px 30px rgba(0, 0, 0, 0.03)',
+    bgPage: '#F8F5F1',
+    cardBg: '#FFFFFF',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    textMuted: '#7A7570',
+    accentWalnut: '#7A5A3A',
+    accentGold: '#C8A96A',
+    borderSubtle: 'rgba(122, 90, 58, 0.14)',
+    matrixBg: '#E7D7BE',
+    boxShadow: '0 16px 40px rgba(122, 90, 58, 0.08)',
   };
 
   if (!product) {
@@ -46,7 +47,7 @@ export default function ProductDetailPage() {
           backgroundColor: colors.bgPage,
         }}
       >
-        <span style={{ fontSize: '0.85rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: colors.accentGold, marginBottom: '1rem' }}>
+        <span style={{ fontSize: '0.85rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: colors.accentWalnut, marginBottom: '1rem', fontWeight: 700 }}>
           Product Not Found
         </span>
         <h1
@@ -55,6 +56,7 @@ export default function ProductDetailPage() {
             fontSize: 'clamp(2.5rem, 5vw, 4rem)',
             color: colors.textPrimary,
             marginBottom: '1rem',
+            fontWeight: 600,
           }}
         >
           Product ID "{id}" Unavailable
@@ -62,7 +64,7 @@ export default function ProductDetailPage() {
         <p style={{ fontSize: '1rem', color: colors.textSecondary, maxWidth: '500px', marginBottom: '2.5rem', lineHeight: 1.6 }}>
           The requested product piece could not be located in our current catalog. Please browse our collections to find similar luxury surface solutions.
         </p>
-        <Link to="/products" className="btn-primary" style={{ backgroundColor: colors.accentGold, color: isDark ? '#141312' : '#FFFFFF', border: 'none' }}>
+        <Link to="/products" className="btn-primary" style={{ backgroundColor: colors.accentWalnut, color: '#FFFFFF', border: 'none', borderRadius: '24px', padding: '1rem 2rem' }}>
           <span>Return to Products</span>
           <ArrowUpRight size={16} />
         </Link>
@@ -93,16 +95,16 @@ export default function ProductDetailPage() {
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '1.5rem 0',
-            marginBottom: '1.5rem',
+            marginBottom: '2rem',
             borderBottom: `1px solid ${colors.borderSubtle}`,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem' }}>
-            <Link to="/home" style={{ color: colors.textSecondary, textDecoration: 'none' }}>Home</Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.84rem' }}>
+            <Link to="/home" style={{ color: colors.textSecondary, textDecoration: 'none', fontWeight: 500 }}>Home</Link>
             <ChevronRight size={14} color={colors.textMuted} />
-            <Link to="/products" style={{ color: colors.textSecondary, textDecoration: 'none' }}>Products</Link>
+            <Link to="/products" style={{ color: colors.textSecondary, textDecoration: 'none', fontWeight: 500 }}>Products</Link>
             <ChevronRight size={14} color={colors.textMuted} />
-            <span style={{ color: colors.accentGold, fontWeight: 600 }}>{product.name}</span>
+            <span style={{ color: colors.accentWalnut, fontWeight: 700 }}>{product.name}</span>
           </div>
 
           <button
@@ -111,14 +113,14 @@ export default function ProductDetailPage() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.4rem',
-              fontSize: '0.78rem',
+              fontSize: '0.8rem',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: colors.textPrimary,
+              color: colors.accentWalnut,
               backgroundColor: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              fontWeight: 500,
+              fontWeight: 700,
             }}
           >
             <ArrowLeft size={16} />
@@ -133,7 +135,7 @@ export default function ProductDetailPage() {
             gridTemplateColumns: 'repeat(12, 1fr)',
             gap: '3.5rem',
             backgroundColor: colors.cardBg,
-            borderRadius: '10px',
+            borderRadius: '24px',
             border: `1px solid ${colors.borderSubtle}`,
             overflow: 'hidden',
             boxShadow: colors.boxShadow,
@@ -147,7 +149,7 @@ export default function ProductDetailPage() {
             style={{
               gridColumn: 'span 6',
               position: 'relative',
-              backgroundColor: isDark ? '#0D0C0B' : '#EAE3D9',
+              backgroundColor: '#E7D7BE',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -178,25 +180,26 @@ export default function ProductDetailPage() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  backgroundColor: 'rgba(20, 19, 18, 0.82)',
+                  backgroundColor: 'rgba(248, 245, 241, 0.92)',
                   backdropFilter: 'blur(8px)',
                   padding: '0.4rem',
                   borderRadius: '9999px',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  border: '1px solid rgba(122, 90, 58, 0.25)',
                   zIndex: 2,
+                  boxShadow: '0 4px 14px rgba(122, 90, 58, 0.15)',
                 }}
               >
                 <button
                   onClick={() => setActiveImageView('card')}
                   style={{
-                    padding: '0.4rem 1rem',
+                    padding: '0.45rem 1.1rem',
                     borderRadius: '9999px',
-                    fontSize: '0.72rem',
+                    fontSize: '0.74rem',
                     fontWeight: 600,
                     textTransform: 'uppercase',
                     letterSpacing: '0.08em',
-                    color: activeImageView === 'card' ? '#141312' : '#D4CDC3',
-                    backgroundColor: activeImageView === 'card' ? '#C5A880' : 'transparent',
+                    color: activeImageView === 'card' ? '#FFFFFF' : '#5A5652',
+                    backgroundColor: activeImageView === 'card' ? colors.accentWalnut : 'transparent',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
@@ -207,14 +210,14 @@ export default function ProductDetailPage() {
                 <button
                   onClick={() => setActiveImageView('showcase')}
                   style={{
-                    padding: '0.4rem 1rem',
+                    padding: '0.45rem 1.1rem',
                     borderRadius: '9999px',
-                    fontSize: '0.72rem',
+                    fontSize: '0.74rem',
                     fontWeight: 600,
                     textTransform: 'uppercase',
                     letterSpacing: '0.08em',
-                    color: activeImageView === 'showcase' ? '#141312' : '#D4CDC3',
-                    backgroundColor: activeImageView === 'showcase' ? '#C5A880' : 'transparent',
+                    color: activeImageView === 'showcase' ? '#FFFFFF' : '#5A5652',
+                    backgroundColor: activeImageView === 'showcase' ? colors.accentWalnut : 'transparent',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
@@ -246,8 +249,8 @@ export default function ProductDetailPage() {
                 fontSize: '0.75rem',
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                color: colors.accentGold,
-                fontWeight: 600,
+                color: colors.accentWalnut,
+                fontWeight: 700,
                 marginBottom: '0.75rem',
               }}
             >
@@ -265,6 +268,7 @@ export default function ProductDetailPage() {
                 marginBottom: '1.25rem',
                 lineHeight: 1.12,
                 fontWeight: 600,
+                letterSpacing: '-0.02em',
               }}
             >
               {product.name}
@@ -288,8 +292,8 @@ export default function ProductDetailPage() {
               <div
                 style={{
                   backgroundColor: colors.matrixBg,
-                  borderRadius: '8px',
-                  padding: '1.5rem',
+                  borderRadius: '20px',
+                  padding: '1.6rem',
                   marginBottom: '2rem',
                   border: `1px solid ${colors.borderSubtle}`,
                 }}
@@ -307,16 +311,16 @@ export default function ProductDetailPage() {
                     gap: '0.5rem',
                   }}
                 >
-                  <Layers size={15} color={colors.accentGold} /> Specifications &amp; Architectural Application
+                  <Layers size={16} color={colors.accentWalnut} /> Specifications &amp; Architectural Application
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', fontSize: '0.85rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.1rem', fontSize: '0.85rem' }}>
                   {Object.entries(product.specifications).map(([key, val]) => (
                     <div key={key} style={{ gridColumn: key === 'recommendedSpaces' ? 'span 2' : 'span 1' }}>
-                      <div style={{ textTransform: 'capitalize', color: colors.textMuted, fontSize: '0.72rem', letterSpacing: '0.05em' }}>
+                      <div style={{ textTransform: 'capitalize', color: colors.textMuted, fontSize: '0.72rem', letterSpacing: '0.05em', fontWeight: 600 }}>
                         {key.replace(/([A-Z])/g, ' $1')}
                       </div>
-                      <div style={{ color: colors.textPrimary, fontWeight: 500, marginTop: '2px' }}>{val}</div>
+                      <div style={{ color: colors.textPrimary, fontWeight: 600, marginTop: '2px' }}>{val}</div>
                     </div>
                   ))}
                 </div>
@@ -329,12 +333,13 @@ export default function ProductDetailPage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.75rem',
-                fontSize: '0.85rem',
+                fontSize: '0.88rem',
                 color: colors.textSecondary,
                 marginBottom: '2.5rem',
+                fontWeight: 400,
               }}
             >
-              <ShieldCheck size={18} color={colors.accentGold} />
+              <ShieldCheck size={18} color={colors.accentWalnut} />
               <span>Available for private viewings &amp; material swatches at our Surat showroom.</span>
             </div>
 
@@ -353,46 +358,59 @@ export default function ProductDetailPage() {
                 onClick={handleEnquire}
                 style={{
                   flex: 1,
-                  backgroundColor: colors.accentGold,
-                  color: isDark ? '#141312' : '#FFFFFF',
-                  padding: '1rem 1.8rem',
-                  borderRadius: '4px',
+                  backgroundColor: colors.accentWalnut,
+                  color: '#FFFFFF',
+                  padding: '1.05rem 2rem',
+                  borderRadius: '24px',
                   border: 'none',
                   fontWeight: 600,
-                  fontSize: '0.82rem',
-                  letterSpacing: '0.1em',
+                  fontSize: '0.88rem',
+                  letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '0.5rem',
+                  boxShadow: '0 8px 24px rgba(122, 90, 58, 0.25)',
                   transition: 'all 0.3s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = isDark ? '#DFCAAD' : '#8D6B3C')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.accentGold)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#5E4329';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = colors.accentWalnut;
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
               >
-                <MessageCircle size={17} />
+                <MessageCircle size={18} />
                 <span>Enquire for Project</span>
               </button>
 
               <button
                 onClick={() => navigate('/products')}
                 style={{ 
-                  padding: '1rem 1.8rem',
+                  padding: '1.05rem 2rem',
                   backgroundColor: 'transparent',
                   color: colors.textPrimary,
                   border: `1px solid ${colors.borderSubtle}`,
-                  borderRadius: '4px',
-                  fontSize: '0.82rem',
-                  fontWeight: 500,
+                  borderRadius: '24px',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = colors.accentGold)}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = colors.borderSubtle)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = colors.accentWalnut;
+                  e.currentTarget.style.color = colors.accentWalnut;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = colors.borderSubtle;
+                  e.currentTarget.style.color = colors.textPrimary;
+                }}
               >
                 All Products
               </button>

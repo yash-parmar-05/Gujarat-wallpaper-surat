@@ -37,7 +37,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div style={{ paddingTop: '80px', backgroundColor: isDark ? '#121110' : '#FBF9F5', minHeight: '100vh', transition: 'background-color 0.35s ease' }}>
+    <div style={{ paddingTop: '80px', backgroundColor: '#F8F5F1', minHeight: '100vh', transition: 'background-color 0.35s ease' }}>
       {/* Functional Product Explorer */}
       <ProductExplorer
         selectedCategory={selectedCategory}

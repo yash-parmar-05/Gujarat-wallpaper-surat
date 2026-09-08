@@ -65,11 +65,11 @@ export default function ProductModal({ product, onClose, onEnquire }) {
             width: '100%',
             maxWidth: '1080px',
             maxHeight: '90vh',
-            backgroundColor: isDark ? '#171614' : '#FAF8F5',
-            borderRadius: '10px',
-            border: isDark ? '1px solid rgba(245, 242, 236, 0.1)' : '1px solid rgba(28, 25, 23, 0.08)',
+            backgroundColor: '#F8F5F1',
+            borderRadius: '24px',
+            border: '1px solid rgba(122, 90, 58, 0.2)',
             overflow: 'hidden',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+            boxShadow: '0 25px 60px -12px rgba(47, 47, 47, 0.5)',
             display: 'flex',
             flexDirection: 'column',
             zIndex: 10,
@@ -88,22 +88,22 @@ export default function ProductModal({ product, onClose, onEnquire }) {
               width: '40px',
               height: '40px',
               borderRadius: '50%',
-              backgroundColor: 'rgba(20, 19, 18, 0.65)',
+              backgroundColor: 'rgba(255, 255, 255, 0.85)',
               backdropFilter: 'blur(6px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              color: '#F7F4EE',
+              border: '1px solid rgba(122, 90, 58, 0.2)',
+              color: '#2F2F2F',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               transition: 'background-color 0.2s ease, transform 0.2s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = isDark ? '#C5A880' : '#A68353';
-              e.currentTarget.style.color = '#141312';
+              e.currentTarget.style.backgroundColor = '#7A5A3A';
+              e.currentTarget.style.color = '#FFFFFF';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(20, 19, 18, 0.65)';
-              e.currentTarget.style.color = '#F7F4EE';
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+              e.currentTarget.style.color = '#2F2F2F';
             }}
           >
             <X size={18} />
@@ -124,7 +124,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
               style={{
                 gridColumn: 'span 6',
                 position: 'relative',
-                backgroundColor: isDark ? '#0D0C0B' : '#EAE3D9',
+                backgroundColor: '#E7D7BE',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -155,25 +155,26 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.4rem',
-                    backgroundColor: 'rgba(20, 19, 18, 0.8)',
+                    backgroundColor: 'rgba(248, 245, 241, 0.92)',
                     backdropFilter: 'blur(8px)',
                     padding: '0.35rem',
                     borderRadius: '9999px',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    border: '1px solid rgba(122, 90, 58, 0.25)',
                     zIndex: 2,
+                    boxShadow: '0 4px 14px rgba(122, 90, 58, 0.15)',
                   }}
                 >
                   <button
                     onClick={() => setActiveImageView('card')}
                     style={{
-                      padding: '0.35rem 0.9rem',
+                      padding: '0.4rem 1rem',
                       borderRadius: '9999px',
-                      fontSize: '0.7rem',
+                      fontSize: '0.72rem',
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.08em',
-                      color: activeImageView === 'card' ? '#141312' : '#D4CDC3',
-                      backgroundColor: activeImageView === 'card' ? (isDark ? '#C5A880' : '#A68353') : 'transparent',
+                      color: activeImageView === 'card' ? '#FFFFFF' : '#5A5652',
+                      backgroundColor: activeImageView === 'card' ? '#7A5A3A' : 'transparent',
                       border: 'none',
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
@@ -184,14 +185,14 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                   <button
                     onClick={() => setActiveImageView('showcase')}
                     style={{
-                      padding: '0.35rem 0.9rem',
+                      padding: '0.4rem 1rem',
                       borderRadius: '9999px',
-                      fontSize: '0.7rem',
+                      fontSize: '0.72rem',
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.08em',
-                      color: activeImageView === 'showcase' ? '#141312' : '#D4CDC3',
-                      backgroundColor: activeImageView === 'showcase' ? (isDark ? '#C5A880' : '#A68353') : 'transparent',
+                      color: activeImageView === 'showcase' ? '#FFFFFF' : '#5A5652',
+                      backgroundColor: activeImageView === 'showcase' ? '#7A5A3A' : 'transparent',
                       border: 'none',
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
@@ -210,7 +211,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                 padding: '3rem 2.5rem',
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: isDark ? '#171614' : '#FAF8F5',
+                backgroundColor: '#F8F5F1',
               }}
               className="modal-info-col"
             >
@@ -223,8 +224,8 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                   fontSize: '0.75rem',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
-                  color: isDark ? '#C5A880' : '#A68353',
-                  fontWeight: 600,
+                  color: '#7A5A3A',
+                  fontWeight: 700,
                   marginBottom: '0.75rem',
                 }}
               >
@@ -238,10 +239,11 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
                   fontSize: 'clamp(1.85rem, 2.5vw, 2.4rem)',
-                  color: isDark ? '#F7F4EE' : '#1C1917',
+                  color: '#2F2F2F',
                   marginBottom: '1rem',
                   lineHeight: 1.15,
                   fontWeight: 600,
+                  letterSpacing: '-0.02em',
                 }}
               >
                 {product.name}
@@ -251,7 +253,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
               <p
                 style={{
                   fontSize: '0.95rem',
-                  color: isDark ? '#C8C2B7' : '#57534E',
+                  color: '#5A5652',
                   lineHeight: 1.65,
                   marginBottom: '2rem',
                   fontWeight: 400,
@@ -264,11 +266,11 @@ export default function ProductModal({ product, onClose, onEnquire }) {
               {product.specifications && (
                 <div
                   style={{
-                    backgroundColor: isDark ? '#1F1E1B' : '#F3EFE9',
-                    borderRadius: '8px',
+                    backgroundColor: '#E7D7BE',
+                    borderRadius: '16px',
                     padding: '1.25rem',
                     marginBottom: '2rem',
-                    border: isDark ? '1px solid rgba(197, 168, 128, 0.2)' : '1px solid rgba(28, 25, 23, 0.06)',
+                    border: '1px solid rgba(122, 90, 58, 0.16)',
                   }}
                 >
                   <div
@@ -276,7 +278,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                       fontSize: '0.72rem',
                       letterSpacing: '0.15em',
                       textTransform: 'uppercase',
-                      color: isDark ? '#F7F4EE' : '#1C1917',
+                      color: '#2F2F2F',
                       fontWeight: 700,
                       marginBottom: '0.75rem',
                       display: 'flex',
@@ -284,16 +286,16 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                       gap: '0.4rem',
                     }}
                   >
-                    <Layers size={13} color={isDark ? '#C5A880' : '#A68353'} /> Specifications &amp; Architectural Application
+                    <Layers size={14} color="#7A5A3A" /> Specifications &amp; Architectural Application
                   </div>
 
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', fontSize: '0.82rem' }}>
                     {Object.entries(product.specifications).map(([key, val]) => (
                       <div key={key} style={{ gridColumn: key === 'recommendedSpaces' ? 'span 2' : 'span 1' }}>
-                        <div style={{ textTransform: 'capitalize', color: isDark ? '#A8A29E' : '#78716C', fontSize: '0.7rem' }}>
+                        <div style={{ textTransform: 'capitalize', color: '#7A7570', fontSize: '0.7rem', fontWeight: 600 }}>
                           {key.replace(/([A-Z])/g, ' $1')}
                         </div>
-                        <div style={{ color: isDark ? '#F7F4EE' : '#1C1917', fontWeight: 500 }}>{val}</div>
+                        <div style={{ color: '#2F2F2F', fontWeight: 600 }}>{val}</div>
                       </div>
                     ))}
                   </div>
@@ -306,12 +308,13 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
-                  fontSize: '0.8rem',
-                  color: isDark ? '#A8A29E' : '#78716C',
+                  fontSize: '0.82rem',
+                  color: '#5A5652',
                   marginBottom: '2rem',
+                  fontWeight: 400,
                 }}
               >
-                <ShieldCheck size={16} color={isDark ? '#C5A880' : '#A68353'} />
+                <ShieldCheck size={16} color="#7A5A3A" />
                 <span>Available for private viewings &amp; sample consultations at Surat showroom.</span>
               </div>
 
@@ -331,13 +334,13 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                   }}
                   style={{
                     flex: 1,
-                    backgroundColor: isDark ? '#C5A880' : '#1C1917',
-                    color: isDark ? '#141312' : '#FFFFFF',
-                    padding: '0.9rem 1.5rem',
-                    borderRadius: '4px',
+                    backgroundColor: '#7A5A3A',
+                    color: '#FFFFFF',
+                    padding: '0.95rem 1.6rem',
+                    borderRadius: '24px',
                     border: 'none',
                     fontWeight: 600,
-                    fontSize: '0.82rem',
+                    fontSize: '0.84rem',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     cursor: 'pointer',
@@ -345,10 +348,17 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '0.5rem',
+                    boxShadow: '0 6px 18px rgba(122, 90, 58, 0.25)',
                     transition: 'all 0.3s ease',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = isDark ? '#DFCAAD' : '#33302E')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = isDark ? '#C5A880' : '#1C1917')}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#5E4329';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#7A5A3A';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
                 >
                   <MessageCircle size={16} />
                   <span>Enquire for Project</span>
@@ -357,16 +367,25 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                 <button
                   onClick={onClose}
                   style={{ 
-                    padding: '0.9rem 1.5rem',
+                    padding: '0.95rem 1.6rem',
                     backgroundColor: 'transparent',
-                    color: isDark ? '#F7F4EE' : '#1C1917',
-                    border: isDark ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(28, 25, 23, 0.2)',
-                    borderRadius: '4px',
-                    fontSize: '0.82rem',
-                    fontWeight: 500,
+                    color: '#2F2F2F',
+                    border: '1px solid rgba(122, 90, 58, 0.25)',
+                    borderRadius: '24px',
+                    fontSize: '0.84rem',
+                    fontWeight: 600,
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#7A5A3A';
+                    e.currentTarget.style.color = '#7A5A3A';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(122, 90, 58, 0.25)';
+                    e.currentTarget.style.color = '#2F2F2F';
                   }}
                 >
                   Close

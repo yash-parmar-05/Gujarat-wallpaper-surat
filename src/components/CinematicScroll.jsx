@@ -62,12 +62,12 @@ export default function CinematicScroll({ image, quote, author, subtext }) {
           {subtext && (
             <div
               style={{
-                fontSize: '0.75rem',
+                fontSize: '0.76rem',
                 letterSpacing: '0.25em',
                 textTransform: 'uppercase',
-                color: '#C5A880',
+                color: '#C8A96A',
                 marginBottom: '1.25rem',
-                fontWeight: 600,
+                fontWeight: 700,
               }}
             >
               {subtext}
@@ -79,7 +79,7 @@ export default function CinematicScroll({ image, quote, author, subtext }) {
               fontFamily: "'Cormorant Garamond', Georgia, serif",
               fontSize: 'clamp(2.5rem, 5.5vw, 4.75rem)',
               fontWeight: 400,
-              color: '#F7F4EE',
+              color: '#F8F5F1',
               lineHeight: 1.12,
               fontStyle: 'italic',
               marginBottom: '1.5rem',
@@ -91,10 +91,11 @@ export default function CinematicScroll({ image, quote, author, subtext }) {
           {author && (
             <div
               style={{
-                fontSize: '0.82rem',
+                fontSize: '0.84rem',
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                color: '#A8A29E',
+                color: '#E7D7BE',
+                fontWeight: 500,
               }}
             >
               — {author}

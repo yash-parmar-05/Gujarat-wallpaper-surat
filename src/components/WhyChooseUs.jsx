@@ -42,21 +42,22 @@ function FacebookIcon({ size = 24, color = 'currentColor' }) {
 export default function WhyChooseUs() {
   const { isDark } = useTheme();
 
-  // Dynamic Theme Palette
+  // Dynamic Theme Palette - Ivory + Warm Beige + Walnut Luxury
   const colors = {
-    bgSection: isDark ? '#121110' : '#FBF9F5',
-    textPrimary: isDark ? '#F7F4EE' : '#1C1917',
-    textSecondary: isDark ? '#C8C2B7' : '#57534E',
-    textMuted: isDark ? '#948E85' : '#78716C',
-    accentGold: isDark ? '#C5A880' : '#A68353',
-    accentGoldHover: isDark ? '#DFCAAD' : '#8D6B3C',
-    cardBg: isDark ? 'rgba(25, 24, 22, 0.75)' : '#FFFFFF',
-    cardHoverBg: isDark ? 'rgba(32, 30, 27, 0.95)' : '#FAF7F2',
-    borderSubtle: isDark ? 'rgba(245, 242, 236, 0.08)' : 'rgba(28, 25, 23, 0.08)',
-    borderCard: isDark ? 'rgba(197, 168, 128, 0.22)' : 'rgba(166, 131, 83, 0.25)',
-    silverBg: isDark ? '#171614' : '#FFFFFF',
-    socialBg: isDark ? '#171614' : '#FFFFFF',
-    boxShadow: isDark ? '0 10px 30px rgba(0, 0, 0, 0.45)' : '0 8px 24px rgba(0, 0, 0, 0.06)',
+    bgSection: '#F8F5F1',
+    textPrimary: '#2F2F2F',
+    textSecondary: '#5A5652',
+    textMuted: '#7A7570',
+    accentGold: '#C8A96A',
+    accentWalnut: '#7A5A3A',
+    accentWalnutHover: '#5E4329',
+    cardBg: '#FFFFFF',
+    cardHoverBg: '#FAF7F2',
+    borderSubtle: 'rgba(122, 90, 58, 0.12)',
+    borderCard: 'rgba(122, 90, 58, 0.16)',
+    silverBg: '#FFFFFF',
+    socialBg: '#FFFFFF',
+    boxShadow: '0 12px 32px rgba(122, 90, 58, 0.08)',
   };
 
   // 5 Achievement Cards (Instagram, YouTube, Facebook, Trust, Customers)
@@ -235,10 +236,9 @@ export default function WhyChooseUs() {
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   backgroundColor: colors.cardBg,
-                  backdropFilter: 'blur(10px)',
                   border: `1px solid ${colors.borderCard}`,
-                  borderRadius: '10px',
-                  padding: '2.25rem 1.6rem',
+                  borderRadius: '24px',
+                  padding: '2.4rem 1.6rem',
                   display: 'flex',
                   flexDirection: 'column',
                   position: 'relative',
@@ -250,30 +250,30 @@ export default function WhyChooseUs() {
                 {/* Top: Icon */}
                 <div
                   style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '8px',
-                    backgroundColor: isDark ? 'rgba(197, 168, 128, 0.12)' : 'rgba(166, 131, 83, 0.12)',
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '12px',
+                    backgroundColor: 'rgba(122, 90, 58, 0.1)',
                     border: `1px solid ${colors.borderCard}`,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: colors.accentGold,
+                    color: colors.accentWalnut,
                     marginBottom: '1.25rem',
                   }}
                 >
-                  <IconComp size={18} />
+                  <IconComp size={20} />
                 </div>
 
-                {/* Large Gold Number */}
+                {/* Large Walnut Number */}
                 <div
                   style={{
                     fontFamily: "'Cormorant Garamond', Georgia, serif",
                     fontSize: 'clamp(2.1rem, 2.8vw, 2.85rem)',
                     fontWeight: 700,
-                    color: colors.accentGold,
+                    color: colors.accentWalnut,
                     lineHeight: 1.1,
-                    letterSpacing: '0.02em',
+                    letterSpacing: '-0.02em',
                     marginBottom: '0.4rem',
                   }}
                 >
@@ -283,8 +283,8 @@ export default function WhyChooseUs() {
                 {/* Uppercase Small Label */}
                 <div
                   style={{
-                    fontSize: '0.72rem',
-                    fontWeight: 600,
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
                     letterSpacing: '0.14em',
                     textTransform: 'uppercase',
                     color: colors.textPrimary,
@@ -297,10 +297,10 @@ export default function WhyChooseUs() {
                 {/* Short Supporting Text */}
                 <p
                   style={{
-                    fontSize: '0.84rem',
-                    color: colors.textMuted,
+                    fontSize: '0.86rem',
+                    color: colors.textSecondary,
                     lineHeight: 1.55,
-                    fontWeight: 300,
+                    fontWeight: 400,
                     margin: 0,
                   }}
                 >
@@ -322,9 +322,9 @@ export default function WhyChooseUs() {
           style={{
             backgroundColor: colors.silverBg,
             border: `1px solid ${colors.borderCard}`,
-            borderRadius: '16px',
+            borderRadius: '24px',
             overflow: 'hidden',
-            marginBottom: '3rem',
+            marginBottom: '3.5rem',
             boxShadow: colors.boxShadow,
           }}
           className="silver-play-block"
@@ -506,9 +506,9 @@ export default function WhyChooseUs() {
             style={{
               textDecoration: 'none',
               backgroundColor: colors.socialBg,
-              border: '1px solid rgba(225, 48, 108, 0.3)',
-              borderRadius: '12px',
-              padding: '1.75rem 2rem',
+              border: '1px solid rgba(122, 90, 58, 0.16)',
+              borderRadius: '24px',
+              padding: '1.85rem 2rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -525,7 +525,7 @@ export default function WhyChooseUs() {
                 style={{
                   width: '52px',
                   height: '52px',
-                  borderRadius: '12px',
+                  borderRadius: '16px',
                   background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
                   display: 'flex',
                   alignItems: 'center',
@@ -553,8 +553,8 @@ export default function WhyChooseUs() {
                 <div
                   style={{
                     fontSize: '0.86rem',
-                    color: colors.accentGold,
-                    fontWeight: 500,
+                    color: colors.accentWalnut,
+                    fontWeight: 600,
                     letterSpacing: '0.02em',
                   }}
                 >
@@ -568,12 +568,12 @@ export default function WhyChooseUs() {
                 width: '44px',
                 height: '44px',
                 borderRadius: '50%',
-                backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
+                backgroundColor: 'rgba(122, 90, 58, 0.1)',
                 border: `1px solid ${colors.borderCard}`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: colors.textPrimary,
+                color: colors.accentWalnut,
                 flexShrink: 0,
                 transition: 'all 0.35s ease',
               }}
@@ -595,9 +595,9 @@ export default function WhyChooseUs() {
             style={{
               textDecoration: 'none',
               backgroundColor: colors.socialBg,
-              border: '1px solid rgba(255, 0, 0, 0.3)',
-              borderRadius: '12px',
-              padding: '1.75rem 2rem',
+              border: '1px solid rgba(122, 90, 58, 0.16)',
+              borderRadius: '24px',
+              padding: '1.85rem 2rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -614,7 +614,7 @@ export default function WhyChooseUs() {
                 style={{
                   width: '52px',
                   height: '52px',
-                  borderRadius: '12px',
+                  borderRadius: '16px',
                   backgroundColor: '#FF0000',
                   display: 'flex',
                   alignItems: 'center',
@@ -642,8 +642,8 @@ export default function WhyChooseUs() {
                 <div
                   style={{
                     fontSize: '0.86rem',
-                    color: colors.accentGold,
-                    fontWeight: 500,
+                    color: colors.accentWalnut,
+                    fontWeight: 600,
                     letterSpacing: '0.02em',
                   }}
                 >
@@ -657,12 +657,12 @@ export default function WhyChooseUs() {
                 width: '44px',
                 height: '44px',
                 borderRadius: '50%',
-                backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
+                backgroundColor: 'rgba(122, 90, 58, 0.1)',
                 border: `1px solid ${colors.borderCard}`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: colors.textPrimary,
+                color: colors.accentWalnut,
                 flexShrink: 0,
                 transition: 'all 0.35s ease',
               }}
@@ -684,9 +684,9 @@ export default function WhyChooseUs() {
             style={{
               textDecoration: 'none',
               backgroundColor: colors.socialBg,
-              border: '1px solid rgba(24, 119, 242, 0.3)',
-              borderRadius: '12px',
-              padding: '1.75rem 2rem',
+              border: '1px solid rgba(122, 90, 58, 0.16)',
+              borderRadius: '24px',
+              padding: '1.85rem 2rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -703,7 +703,7 @@ export default function WhyChooseUs() {
                 style={{
                   width: '52px',
                   height: '52px',
-                  borderRadius: '12px',
+                  borderRadius: '16px',
                   backgroundColor: '#1877F2',
                   display: 'flex',
                   alignItems: 'center',
@@ -731,8 +731,8 @@ export default function WhyChooseUs() {
                 <div
                   style={{
                     fontSize: '0.86rem',
-                    color: colors.accentGold,
-                    fontWeight: 500,
+                    color: colors.accentWalnut,
+                    fontWeight: 600,
                     letterSpacing: '0.02em',
                   }}
                 >
@@ -746,12 +746,12 @@ export default function WhyChooseUs() {
                 width: '44px',
                 height: '44px',
                 borderRadius: '50%',
-                backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
+                backgroundColor: 'rgba(122, 90, 58, 0.1)',
                 border: `1px solid ${colors.borderCard}`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: colors.textPrimary,
+                color: colors.accentWalnut,
                 flexShrink: 0,
                 transition: 'all 0.35s ease',
               }}
@@ -784,10 +784,9 @@ export default function WhyChooseUs() {
                 transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   backgroundColor: colors.cardBg,
-                  backdropFilter: 'blur(8px)',
-                  padding: '1.85rem 1.35rem',
-                  borderRadius: '10px',
-                  border: `1px solid ${colors.borderSubtle}`,
+                  padding: '2rem 1.4rem',
+                  borderRadius: '20px',
+                  border: `1px solid ${colors.borderCard}`,
                   display: 'flex',
                   flexDirection: 'column',
                   boxShadow: colors.boxShadow,
@@ -797,21 +796,21 @@ export default function WhyChooseUs() {
               >
                 <div
                   style={{
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '8px',
-                    backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '12px',
+                    backgroundColor: 'rgba(122, 90, 58, 0.1)',
                     border: `1px solid ${colors.borderCard}`,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: colors.accentGold,
+                    color: colors.accentWalnut,
                     marginBottom: '1.25rem',
                     transition: 'all 0.3s ease',
                   }}
                   className="feature-icon-box"
                 >
-                  <IconComponent size={18} />
+                  <IconComponent size={20} />
                 </div>
 
                 <h4
