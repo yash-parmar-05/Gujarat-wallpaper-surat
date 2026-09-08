@@ -127,10 +127,10 @@ export default function CatalogsSection({ id = 'catalogs' }) {
           {CATALOGS_DATA.map((catalog, idx) => (
             <motion.div
               key={catalog.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.12 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.45, delay: idx * 0.1, ease: 'easeOut' }}
               style={{
                 backgroundColor: colors.bgCard,
                 border: `1px solid ${colors.borderCard}`,
@@ -140,6 +140,7 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                 flexDirection: 'column',
                 boxShadow: isDark ? '0 12px 36px rgba(0, 0, 0, 0.45)' : '0 8px 24px rgba(0, 0, 0, 0.05)',
                 transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                willChange: 'transform, opacity',
               }}
               className="catalog-card"
             >
@@ -354,18 +355,24 @@ export default function CatalogsSection({ id = 'catalogs' }) {
       </div>
 
       <style>{`
-        .catalog-card:hover {
-          transform: translateY(-6px);
-          border-color: rgba(197, 168, 128, 0.5) !important;
-        }
-        .catalog-card:hover .catalog-cover-img {
-          transform: scale(1.05);
+        @media (hover: hover) {
+          .catalog-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(197, 168, 128, 0.5) !important;
+          }
+          .catalog-card:hover .catalog-cover-img {
+            transform: scale(1.05);
+          }
         }
 
         @media (max-width: 860px) {
           .catalogs-grid {
             grid-template-columns: 1fr !important;
             max-width: 580px !important;
+            gap: 1.5rem !important;
+          }
+          .catalog-card {
+            box-shadow: ${isDark ? '0 8px 24px rgba(0, 0, 0, 0.35)' : '0 4px 16px rgba(0, 0, 0, 0.04)'} !important;
           }
         }
 

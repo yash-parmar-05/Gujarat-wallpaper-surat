@@ -59,7 +59,7 @@ export default function WhyChooseUs() {
     boxShadow: isDark ? '0 10px 30px rgba(0, 0, 0, 0.45)' : '0 8px 24px rgba(0, 0, 0, 0.06)',
   };
 
-  // 4 Achievement Cards
+  // 5 Achievement Cards (Instagram, YouTube, Facebook, Trust, Customers)
   const achievements = [
     {
       metric: '100K+',
@@ -72,6 +72,12 @@ export default function WhyChooseUs() {
       label: 'YOUTUBE SUBSCRIBERS',
       description: 'Your trust and support are our greatest achievement.',
       icon: Play,
+    },
+    {
+      metric: '300K+',
+      label: 'FACEBOOK FOLLOWERS',
+      description: 'Connected with homeowners & designers across Gujarat & India.',
+      icon: FacebookIcon,
     },
     {
       metric: '5+ YEARS',
@@ -207,13 +213,13 @@ export default function WhyChooseUs() {
         </div>
 
         {/* ==================================================
-            2. ACHIEVEMENT CARDS (4 CARDS)
+            2. ACHIEVEMENT CARDS (5 CARDS)
             ================================================== */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '1.5rem',
+            gridTemplateColumns: 'repeat(5, 1fr)',
+            gap: '1.25rem',
             marginBottom: '4rem',
           }}
           className="why-achievements-grid"
@@ -903,6 +909,12 @@ export default function WhyChooseUs() {
         }
 
         /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+          .why-achievements-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+
         @media (max-width: 1024px) {
           .why-achievements-grid {
             grid-template-columns: repeat(2, 1fr) !important;
@@ -928,6 +940,7 @@ export default function WhyChooseUs() {
         @media (max-width: 768px) {
           .why-achievements-grid {
             grid-template-columns: 1fr !important;
+            gap: 1rem !important;
           }
           .why-social-grid {
             grid-template-columns: 1fr !important;

@@ -704,40 +704,6 @@ export default function Home() {
                   objectPosition: 'center 20%',
                 }}
               />
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(to top, rgba(20, 19, 18, 0.75) 0%, transparent 55%)',
-                }}
-              />
-              {/* Bottom Showroom Badge */}
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '1.25rem',
-                  left: '1.25rem',
-                  right: '1.25rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '0.75rem 1.25rem',
-                  backgroundColor: 'rgba(20, 19, 18, 0.85)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: '8px',
-                  border: '1px solid rgba(197, 168, 128, 0.25)',
-                }}
-              >
-                <div>
-                  <div style={{ fontSize: '0.86rem', fontWeight: 600, color: '#F7F4EE' }}>
-                    Gujarat Wallpaper &amp; Decor
-                  </div>
-                  <div style={{ fontSize: '0.72rem', color: '#C5A880', letterSpacing: '0.04em' }}>
-                    Surat Flagship Showroom
-                  </div>
-                </div>
-                <Navigation size={18} color="#C5A880" />
-              </div>
             </motion.div>
 
             {/* RIGHT: CONTENT & SHOWROOM DETAILS */}
