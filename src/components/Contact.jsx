@@ -450,7 +450,7 @@ export default function Contact({ prefilledProduct }) {
                     Instagram Community
                   </div>
                   <div style={{ fontSize: '0.92rem', color: colors.textPrimary, fontWeight: 500 }}>
-                    @gujrat_wallpaper_decor
+                    @gujarat_wallpaper_decor
                   </div>
                   <div style={{ fontSize: '0.8rem', color: colors.accentGold, marginTop: '0.25rem' }}>
                     All India Delivery &amp; Fitting Support

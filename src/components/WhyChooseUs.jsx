@@ -496,7 +496,7 @@ export default function WhyChooseUs() {
         >
           {/* BUTTON 1 — INSTAGRAM */}
           <motion.a
-            href="https://www.instagram.com/gujrat_wallpaper_decor/"
+            href="https://www.instagram.com/gujarat_wallpaper_decor/"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
@@ -558,7 +558,7 @@ export default function WhyChooseUs() {
                     letterSpacing: '0.02em',
                   }}
                 >
-                  @gujrat_wallpaper_decor
+                  @gujarat_wallpaper_decor
                 </div>
               </div>
             </div>

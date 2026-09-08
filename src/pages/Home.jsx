@@ -1057,7 +1057,7 @@ export default function Home() {
           >
             {/* INSTAGRAM */}
             <a
-              href="https://www.instagram.com/gujrat_wallpaper_decor/"
+              href="https://www.instagram.com/gujarat_wallpaper_decor/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1096,7 +1096,7 @@ export default function Home() {
                     Follow Us on Instagram
                   </div>
                   <div style={{ fontSize: '0.82rem', color: colors.accentGold }}>
-                    @gujrat_wallpaper_decor
+                    @gujarat_wallpaper_decor
                   </div>
                 </div>
               </div>
