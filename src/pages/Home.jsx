@@ -328,7 +328,7 @@ export default function Home() {
                 }}
               >
                 <Sparkles size={14} color="#C8A96A" />
-                SURAT SHOWROOM • GUJARAT WALLPAPER &amp; DECOR
+                SURAT • GUJARAT WALLPAPER &amp; DECOR
               </motion.div>
 
               {/* Main Heading */}

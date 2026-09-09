@@ -152,7 +152,7 @@ export default function Navbar() {
                 transition: 'color 0.3s ease',
               }}
             >
-              Surat Showroom
+              Surat
             </span>
           </Link>
 
@@ -330,7 +330,7 @@ export default function Navbar() {
                     marginTop: '2px',
                   }}
                 >
-                  Surat Showroom
+                  Surat
                 </span>
               </div>
 

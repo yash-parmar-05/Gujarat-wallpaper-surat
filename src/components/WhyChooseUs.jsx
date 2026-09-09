@@ -475,7 +475,7 @@ export default function WhyChooseUs() {
                     letterSpacing: '0.04em',
                   }}
                 >
-                  Official YouTube Creator Award • Surat Showroom
+                  Official YouTube Creator Award • Surat
                 </div>
               </div>
             </div>

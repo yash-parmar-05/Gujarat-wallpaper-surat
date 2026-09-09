@@ -518,7 +518,7 @@ export default function OurWork({ id = 'our-work' }) {
                     fontWeight: 600,
                   }}
                 >
-                  Gujarat Wallpaper &amp; Decor • Surat Showroom
+                  Gujarat Wallpaper &amp; Decor • Surat
                 </span>
                 <h3
                   style={{
