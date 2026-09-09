@@ -393,11 +393,8 @@ export default function Navbar() {
 
             {/* Mobile Drawer Showroom Footer */}
             <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid rgba(122, 90, 58, 0.15)' }}>
-              <p style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#7A5A3A', fontWeight: 600, marginBottom: '0.35rem' }}>
+              <p style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#7A5A3A', fontWeight: 600, marginBottom: '1rem' }}>
                 Visit Our Showroom
-              </p>
-              <p style={{ fontSize: '0.88rem', color: '#5A5652', marginBottom: '1.25rem' }}>
-                Mangaldas Complex, Near Navjivan Circle, Surat
               </p>
               <button
                 onClick={() => {
