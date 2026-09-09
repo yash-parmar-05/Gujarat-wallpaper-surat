@@ -174,32 +174,6 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                     background: 'linear-gradient(180deg, rgba(122, 90, 58, 0.04) 0%, rgba(30, 24, 18, 0.35) 100%)',
                   }}
                 />
-
-                {/* PDF Badge */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '1.25rem',
-                    left: '1.25rem',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.45rem',
-                    padding: '0.4rem 0.95rem',
-                    backgroundColor: 'rgba(248, 245, 241, 0.92)',
-                    backdropFilter: 'blur(8px)',
-                    borderRadius: '20px',
-                    border: `1px solid rgba(122, 90, 58, 0.2)`,
-                    color: colors.accentWalnut,
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                  }}
-                >
-                  <FileText size={13} color={colors.accentWalnut} />
-                  <span>PDF CATALOG • {catalog.fileSize}</span>
-                </div>
               </div>
 
               {/* Card Content */}
