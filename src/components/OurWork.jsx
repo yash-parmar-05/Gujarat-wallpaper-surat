@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Play, X, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
@@ -76,7 +77,37 @@ export const WORK_ITEMS = [
 
 export default function OurWork({ id = 'our-work' }) {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [mounted, setMounted] = useState(false);
   const { isDark } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (selectedItem) {
+      document.body.classList.add('modal-open');
+      if (window.lenis) {
+        window.lenis.stop();
+      }
+      const origOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKey = (e) => {
+        if (e.key === 'Escape') setSelectedItem(null);
+      };
+      window.addEventListener('keydown', handleKey);
+
+      return () => {
+        document.body.classList.remove('modal-open');
+        if (window.lenis) {
+          window.lenis.start();
+        }
+        document.body.style.overflow = origOverflow;
+        window.removeEventListener('keydown', handleKey);
+      };
+    }
+  }, [selectedItem]);
 
   const colors = {
     bgMain: '#F8F5F1',
@@ -93,7 +124,7 @@ export default function OurWork({ id = 'our-work' }) {
     <section
       id={id}
       style={{
-        padding: '7.5rem 0',
+        padding: '72px 0',
         backgroundColor: colors.bgMain,
         borderTop: `1px solid ${colors.borderSubtle}`,
         position: 'relative',
@@ -402,144 +433,173 @@ export default function OurWork({ id = 'our-work' }) {
         </div>
       </div>
 
-      <AnimatePresence>
-        {selectedItem && (
-          <div
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 350,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '1.25rem',
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedItem(null)}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedItem && (
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label={selectedItem.title}
+              data-lenis-prevent="true"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
               style={{
-                position: 'absolute',
+                position: 'fixed',
                 inset: 0,
-                backgroundColor: 'rgba(10, 9, 8, 0.92)',
-                backdropFilter: 'blur(10px)',
-              }}
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                position: 'relative',
-                maxWidth: '520px',
-                width: '100%',
-                maxHeight: '92vh',
-                backgroundColor: isDark ? '#171614' : '#FFFFFF',
-                borderRadius: '14px',
-                overflow: 'hidden',
-                border: `1px solid ${colors.borderCard}`,
-                boxShadow: '0 30px 80px rgba(0, 0, 0, 0.8)',
-                zIndex: 10,
+                zIndex: 999999,
                 display: 'flex',
-                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '16px',
+                boxSizing: 'border-box',
               }}
+              className="our-work-modal-overlay"
             >
+              {/* Dark blurred backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedItem(null)}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundColor: 'rgba(10, 9, 8, 0.94)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                }}
+              />
+
+              {/* Floating Close Button in top corner */}
               <button
                 onClick={() => setSelectedItem(null)}
                 aria-label="Close Video Player"
+                className="our-work-modal-close-btn"
                 style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  right: '1rem',
-                  zIndex: 20,
-                  width: '38px',
-                  height: '38px',
+                  position: 'fixed',
+                  top: '20px',
+                  right: '20px',
+                  zIndex: 1000000,
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '50%',
-                  backgroundColor: 'rgba(18, 17, 16, 0.85)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
                   color: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
+                  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.6)',
                   transition: 'all 0.25s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.accentGold;
-                  e.currentTarget.style.color = '#121110';
+                  e.currentTarget.style.backgroundColor = colors.accentWalnut;
+                  e.currentTarget.style.borderColor = colors.accentWalnut;
+                  e.currentTarget.style.transform = 'scale(1.08)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(18, 17, 16, 0.85)';
-                  e.currentTarget.style.color = '#FFFFFF';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                  e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
-                <X size={18} />
+                <X size={22} />
               </button>
-              <div
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.94, y: 16 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.94, y: 16 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="our-work-modal-card"
                 style={{
+                  position: 'relative',
+                  maxWidth: '480px',
                   width: '100%',
-                  maxHeight: '68vh',
-                  backgroundColor: '#000000',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  maxHeight: '90vh',
+                  backgroundColor: isDark ? '#171614' : '#FFFFFF',
+                  borderRadius: '16px',
                   overflow: 'hidden',
+                  border: `1px solid ${colors.borderCard}`,
+                  boxShadow: '0 32px 80px rgba(0, 0, 0, 0.85)',
+                  zIndex: 10,
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
-                <video
-                  src={selectedItem.video}
-                  autoPlay
-                  controls
-                  playsInline
+                {/* Video Frame */}
+                <div
+                  className="our-work-modal-video-box"
                   style={{
                     width: '100%',
-                    maxHeight: '68vh',
-                    objectFit: 'contain',
-                    display: 'block',
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  padding: '1.25rem 1.5rem',
-                  borderTop: `1px solid ${colors.borderSubtle}`,
-                  backgroundColor: isDark ? '#171614' : '#FFFFFF',
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: '0.72rem',
-                    color: colors.accentWalnut,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    fontWeight: 700,
+                    maxHeight: '66vh',
+                    backgroundColor: '#000000',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    overflow: 'hidden',
                   }}
                 >
-                  Gujarat Wallpaper &amp; Decor • Surat
-                </span>
-                <h3
+                  <video
+                    src={selectedItem.video}
+                    autoPlay
+                    controls
+                    playsInline
+                    className="our-work-modal-video"
+                    style={{
+                      width: '100%',
+                      maxHeight: '66vh',
+                      objectFit: 'contain',
+                      display: 'block',
+                    }}
+                  />
+                </div>
+
+                {/* Video Info Strip */}
+                <div
                   style={{
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: '1.35rem',
-                    color: colors.textPrimary,
-                    marginTop: '0.25rem',
-                    marginBottom: '0.35rem',
-                    fontWeight: 600,
+                    padding: '1.1rem 1.4rem',
+                    borderTop: `1px solid ${colors.borderSubtle}`,
+                    backgroundColor: isDark ? '#171614' : '#FFFFFF',
                   }}
                 >
-                  {selectedItem.title}
-                </h3>
-                <p style={{ fontSize: '0.88rem', color: colors.textSecondary, margin: 0, lineHeight: 1.55 }}>
-                  {selectedItem.description}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                  <span
+                    style={{
+                      fontSize: '0.7rem',
+                      color: colors.accentWalnut,
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      fontWeight: 700,
+                    }}
+                  >
+                    Gujarat Wallpaper &amp; Decor • Surat
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: "'Cormorant Garamond', Georgia, serif",
+                      fontSize: '1.25rem',
+                      color: colors.textPrimary,
+                      marginTop: '0.2rem',
+                      marginBottom: '0.3rem',
+                      fontWeight: 600,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {selectedItem.title}
+                  </h3>
+                  <p style={{ fontSize: '0.84rem', color: colors.textSecondary, margin: 0, lineHeight: 1.5 }}>
+                    {selectedItem.description}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
       <style>{`
         .our-work-card:hover {
@@ -560,8 +620,9 @@ export default function OurWork({ id = 'our-work' }) {
         }
 
         @media (max-width: 768px) {
-          #our-work {
-            padding: 4.5rem 0 !important;
+          #our-work,
+          #our-work-page {
+            padding: 44px 0 !important;
           }
           .our-work-grid {
             grid-template-columns: 1fr !important;
@@ -575,6 +636,16 @@ export default function OurWork({ id = 'our-work' }) {
           .our-work-insta-btn {
             width: 100% !important;
             justify-content: center !important;
+          }
+          .our-work-modal-card {
+            max-width: 95vw !important;
+            max-height: 88vh !important;
+          }
+          .our-work-modal-video-box {
+            max-height: 58vh !important;
+          }
+          .our-work-modal-video {
+            max-height: 58vh !important;
           }
         }
       `}</style>

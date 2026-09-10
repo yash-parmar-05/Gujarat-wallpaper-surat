@@ -5,7 +5,7 @@ import { X, ChevronLeft, ChevronRight, Maximize2, Sparkles } from 'lucide-react'
 import { GALLERY_ITEMS } from '../data/products';
 import { useTheme } from '../context/ThemeContext';
 
-export default function Gallery() {
+export default function Gallery({ id = 'gallery' }) {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const [mounted, setMounted] = useState(false);
   const { isDark } = useTheme();
@@ -57,9 +57,9 @@ export default function Gallery() {
 
   return (
     <section
-      id="gallery"
+      id={id}
       style={{
-        padding: '8rem 0',
+        padding: '72px 0',
         backgroundColor: bg,
         color: textPrimary,
         position: 'relative',
@@ -247,6 +247,9 @@ export default function Gallery() {
               role="dialog"
               aria-modal="true"
               aria-label="Gallery Image Lightbox"
+              data-lenis-prevent="true"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
               style={{
                 position: 'fixed',
                 inset: 0,
@@ -507,8 +510,9 @@ export default function Gallery() {
         }
 
         @media (max-width: 768px) {
-          #gallery {
-            padding: 4rem 0 !important;
+          #gallery,
+          #gallery-page {
+            padding: 44px 0 !important;
           }
           .gallery-item-card {
             height: 240px !important;
@@ -523,20 +527,24 @@ export default function Gallery() {
             height: 44px !important;
           }
           .gallery-lightbox-nav-btn {
-            width: 40px !important;
-            height: 40px !important;
+            width: 42px !important;
+            height: 42px !important;
           }
           .gallery-nav-prev {
-            left: 10px !important;
+            left: 12px !important;
           }
           .gallery-nav-next {
-            right: 10px !important;
+            right: 12px !important;
           }
           .gallery-lightbox-img-frame {
-            max-height: 60vh !important;
+            max-height: 75vh !important;
+            width: 100% !important;
           }
           .gallery-lightbox-img {
-            max-height: 60vh !important;
+            max-height: 75vh !important;
+            width: auto !important;
+            max-width: 100% !important;
+            object-fit: contain !important;
           }
         }
 
@@ -552,33 +560,38 @@ export default function Gallery() {
         }
 
         @media (max-width: 480px) {
-          #gallery {
-            padding: 3rem 0 !important;
+          #gallery,
+          #gallery-page {
+            padding: 36px 0 !important;
           }
           .gallery-item-card {
             height: 220px !important;
           }
           .gallery-lightbox-close {
-            top: 14px !important;
-            right: 14px !important;
+            top: 16px !important;
+            right: 16px !important;
             width: 42px !important;
             height: 42px !important;
           }
           .gallery-lightbox-nav-btn {
-            width: 36px !important;
-            height: 36px !important;
+            width: 38px !important;
+            height: 38px !important;
           }
           .gallery-nav-prev {
-            left: 6px !important;
+            left: 8px !important;
           }
           .gallery-nav-next {
-            right: 6px !important;
+            right: 8px !important;
           }
           .gallery-lightbox-img-frame {
-            max-height: 55vh !important;
+            max-height: 70vh !important;
+            width: 100% !important;
           }
           .gallery-lightbox-img {
-            max-height: 55vh !important;
+            max-height: 70vh !important;
+            width: auto !important;
+            max-width: 100% !important;
+            object-fit: contain !important;
           }
         }
       `}</style>
