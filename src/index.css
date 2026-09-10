@@ -415,7 +415,15 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Hide fixed Navbar when full-screen Lightbox or Modal is active */
+/* Hide fixed Navbar and lock background scroll when full-screen Lightbox or Modal is active */
+html.modal-open,
+html.lightbox-open,
+body.lightbox-open,
+body.modal-open {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
 body.lightbox-open .navbar-fixed-root,
 body.modal-open .navbar-fixed-root {
   opacity: 0 !important;

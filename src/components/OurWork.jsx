@@ -201,7 +201,7 @@ export default function OurWork({ id = 'our-work' }) {
                     display: 'block',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.play().catch(() => {});
+                    e.currentTarget.play().catch(() => { });
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.pause();
