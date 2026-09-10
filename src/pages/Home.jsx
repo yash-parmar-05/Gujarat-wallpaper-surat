@@ -94,11 +94,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    HERO_SLIDES.forEach((slide) => {
-      const img = new Image();
-      img.src = slide.image;
-    });
-  }, []);
+    // Preload next upcoming slide sequentially to preserve bandwidth for initial critical render
+    const nextIndex = (activeHeroSlide + 1) % HERO_SLIDES.length;
+    const img = new Image();
+    img.src = HERO_SLIDES[nextIndex].image;
+  }, [activeHeroSlide]);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -204,6 +204,7 @@ export default function Home() {
                   }}
                   loading={slideIndex === 0 ? 'eager' : 'lazy'}
                   decoding="async"
+                  fetchPriority={slideIndex === 0 ? 'high' : 'auto'}
                 />
               </div>
             );
@@ -756,6 +757,8 @@ export default function Home() {
               <img
                 src="/assets/youtube-silver-play-button.jpg"
                 alt="Gujarat Wallpaper & Decor Surat Showroom Interior"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: '100%',

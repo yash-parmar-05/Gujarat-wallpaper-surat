@@ -14,7 +14,7 @@ export default function Navbar() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const isScrolled = window.scrollY > 20;
-          setScrolled(isScrolled);
+          setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
           ticking = false;
         });
         ticking = true;
@@ -27,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setMobileMenuOpen(false);
+    setMobileMenuOpen((open) => (open ? false : open));
   }, [location.pathname]);
 
   const navLinks = [

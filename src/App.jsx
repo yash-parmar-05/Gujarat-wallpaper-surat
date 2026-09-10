@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Lenis from 'lenis';
 
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
 import Layout from './components/Layout';
-
-import Home from './pages/Home';
-import CatalogsPage from './pages/CatalogsPage';
-import ProductsPage from './pages/ProductsPage';
-import ProductDetailPage from './pages/ProductDetailPage';
-import GalleryPage from './pages/GalleryPage';
-import OurWorkPage from './pages/OurWorkPage';
-import WhyChooseUsPage from './pages/WhyChooseUsPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import NotFoundPage from './pages/NotFoundPage';
 import { ThemeProvider } from './context/ThemeContext';
+
+const Home = lazy(() => import('./pages/Home'));
+const CatalogsPage = lazy(() => import('./pages/CatalogsPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const OurWorkPage = lazy(() => import('./pages/OurWorkPage'));
+const WhyChooseUsPage = lazy(() => import('./pages/WhyChooseUsPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 export default function App() {
   const [initialLoading, setInitialLoading] = useState(true);
@@ -81,28 +79,30 @@ export default function App() {
 
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route element={<Layout />}>
-            {/* Root redirect to /home */}
-            <Route path="/" element={<Navigate to="/home" replace />} />
+        <Suspense fallback={null}>
+          <Routes>
+            <Route element={<Layout />}>
+              {/* Root redirect to /home */}
+              <Route path="/" element={<Navigate to="/home" replace />} />
 
-            {/* Individual Page Routes */}
-            <Route path="/home" element={<Home />} />
-            <Route path="/catalogs" element={<CatalogsPage />} />
-            <Route path="/collections" element={<Navigate to="/catalogs" replace />} />
-            <Route path="/products" element={<Navigate to="/catalogs" replace />} />
-            <Route path="/products/:id" element={<Navigate to="/catalogs" replace />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/our-work" element={<OurWorkPage />} />
-            <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
-            <Route path="/about" element={<AboutPage />} />
+              {/* Individual Page Routes */}
+              <Route path="/home" element={<Home />} />
+              <Route path="/catalogs" element={<CatalogsPage />} />
+              <Route path="/collections" element={<Navigate to="/catalogs" replace />} />
+              <Route path="/products" element={<Navigate to="/catalogs" replace />} />
+              <Route path="/products/:id" element={<Navigate to="/catalogs" replace />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/our-work" element={<OurWorkPage />} />
+              <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
+              <Route path="/about" element={<AboutPage />} />
 
-            <Route path="/contact" element={<ContactPage />} />
+              <Route path="/contact" element={<ContactPage />} />
 
-            {/* 404 Fallback */}
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
-        </Routes>
+              {/* 404 Fallback */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </ThemeProvider>
   );

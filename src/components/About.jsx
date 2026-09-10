@@ -59,6 +59,8 @@ export default function About({ onVisitClick }) {
               <img
                 src="/assets/products/pvc-panel-showcase.jpg"
                 alt="Gujarat Wallpaper & Decor Showroom Architectural Finish"
+                loading="lazy"
+                decoding="async"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
@@ -82,6 +84,8 @@ export default function About({ onVisitClick }) {
               <img
                 src="/assets/products/wallpaper-card.jpg"
                 alt="Pichwai Gold Relief Detail"
+                loading="lazy"
+                decoding="async"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>

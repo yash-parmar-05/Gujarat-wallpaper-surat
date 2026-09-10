@@ -141,6 +141,8 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                 <img
                   src={catalog.coverImage}
                   alt={catalog.title}
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     width: '100%',
                     height: '100%',

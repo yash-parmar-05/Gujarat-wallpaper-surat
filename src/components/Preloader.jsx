@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Preloader({ isLoading }) {
-  const [fontsReady, setFontsReady] = useState(false);
+  const [fontsReady, setFontsReady] = useState(() => typeof document !== 'undefined' && !('fonts' in document));
 
   useEffect(() => {
     let active = true;
@@ -18,8 +18,6 @@ export default function Preloader({ isLoading }) {
         .catch(() => {
           if (active) setFontsReady(true);
         });
-    } else {
-      setFontsReady(true);
     }
 
     return () => {

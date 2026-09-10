@@ -3,7 +3,7 @@
   font-family: 'Cormorant Garamond';
   font-style: normal;
   font-weight: 300 400;
-  font-display: block;
+  font-display: swap;
   src: url('/fonts/cormorant-garamond-400.ttf') format('truetype');
 }
 
@@ -11,7 +11,7 @@
   font-family: 'Cormorant Garamond';
   font-style: normal;
   font-weight: 500 700;
-  font-display: block;
+  font-display: swap;
   src: url('/fonts/cormorant-garamond-600.ttf') format('truetype');
 }
 
@@ -19,7 +19,7 @@
   font-family: 'Cormorant Garamond';
   font-style: italic;
   font-weight: 300 700;
-  font-display: block;
+  font-display: swap;
   src: url('/fonts/cormorant-garamond-italic.ttf') format('truetype');
 }
 
@@ -27,7 +27,7 @@
   font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 300 400;
-  font-display: block;
+  font-display: swap;
   src: url('/fonts/plus-jakarta-sans-400.ttf') format('truetype');
 }
 
@@ -35,7 +35,7 @@
   font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 500;
-  font-display: block;
+  font-display: swap;
   src: url('/fonts/plus-jakarta-sans-500.ttf') format('truetype');
 }
 
@@ -43,7 +43,7 @@
   font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 600 700;
-  font-display: block;
+  font-display: swap;
   src: url('/fonts/plus-jakarta-sans-600.ttf') format('truetype');
 }
 

@@ -177,6 +177,7 @@ export default function Gallery() {
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
+                  decoding="async"
                   style={{
                     width: '100%',
                     height: '100%',
@@ -426,6 +427,7 @@ export default function Gallery() {
                   <img
                     src={activeItem.image}
                     alt={activeItem.title}
+                    decoding="async"
                     className="gallery-lightbox-img"
                     style={{
                       maxHeight: '75vh',

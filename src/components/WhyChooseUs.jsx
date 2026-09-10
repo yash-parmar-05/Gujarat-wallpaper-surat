@@ -675,6 +675,8 @@ export default function WhyChooseUs() {
               <img
                 src="/showroom/showroom-04.webp"
                 alt="Gujarat Wallpaper & Decor Grand Wallpaper Showcase Gallery"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: '100%',
