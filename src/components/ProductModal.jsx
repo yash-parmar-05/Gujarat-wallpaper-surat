@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MessageCircle, Check, ArrowRight, ShieldCheck, Sparkles, Layers } from 'lucide-react';
-import { SHOWROOM_INFO } from '../data/categories';
+import { X, MessageCircle, ShieldCheck, Layers } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function ProductModal({ product, onClose, onEnquire }) {
@@ -18,23 +18,42 @@ export default function ProductModal({ product, onClose, onEnquire }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
+  useEffect(() => {
+    if (product) {
+      document.body.classList.add('modal-open');
+      if (window.lenis) {
+        window.lenis.stop();
+      }
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.classList.remove('modal-open');
+        if (window.lenis) {
+          window.lenis.start();
+        }
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [product]);
+
   if (!product) return null;
 
   const currentImage = activeImageView === 'showcase' && product.showcaseImage
     ? product.showcaseImage
     : product.image;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <div
         style={{
           position: 'fixed',
           inset: 0,
-          zIndex: 200,
+          zIndex: 99999,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '1.5rem',
+          padding: '1.25rem',
+          boxSizing: 'border-box',
         }}
       >
         {/* Backdrop */}
@@ -59,7 +78,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
           initial={{ opacity: 0, scale: 0.94, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 20 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           style={{
             position: 'relative',
             width: '100%',
@@ -95,6 +114,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              cursor: 'pointer',
               transition: 'background-color 0.2s ease, transform 0.2s ease',
             }}
             onMouseEnter={(e) => {
@@ -155,19 +175,18 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.4rem',
-                    backgroundColor: 'rgba(248, 245, 241, 0.92)',
+                    backgroundColor: 'rgba(248, 245, 241, 0.85)',
                     backdropFilter: 'blur(8px)',
                     padding: '0.35rem',
                     borderRadius: '9999px',
-                    border: '1px solid rgba(122, 90, 58, 0.25)',
+                    border: '1px solid rgba(122, 90, 58, 0.16)',
                     zIndex: 2,
-                    boxShadow: '0 4px 14px rgba(122, 90, 58, 0.15)',
                   }}
                 >
                   <button
                     onClick={() => setActiveImageView('card')}
                     style={{
-                      padding: '0.4rem 1rem',
+                      padding: '0.45rem 1rem',
                       borderRadius: '9999px',
                       fontSize: '0.72rem',
                       fontWeight: 600,
@@ -185,7 +204,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
                   <button
                     onClick={() => setActiveImageView('showcase')}
                     style={{
-                      padding: '0.4rem 1rem',
+                      padding: '0.45rem 1rem',
                       borderRadius: '9999px',
                       fontSize: '0.72rem',
                       fontWeight: 600,
@@ -408,6 +427,7 @@ export default function ProductModal({ product, onClose, onEnquire }) {
           }
         }
       `}</style>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

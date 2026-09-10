@@ -249,7 +249,7 @@ export default function OurWork({ id = 'our-work' }) {
               </div>
               <div
                 style={{
-                  padding: '1.6rem 1.6rem',
+                  padding: '1.6rem',
                   display: 'flex',
                   flexDirection: 'column',
                   flexGrow: 1,
@@ -258,12 +258,12 @@ export default function OurWork({ id = 'our-work' }) {
               >
                 <div
                   style={{
-                    fontSize: '0.72rem',
+                    fontSize: '0.74rem',
                     color: colors.accentWalnut,
                     fontWeight: 700,
-                    letterSpacing: '0.1em',
+                    letterSpacing: '0.14em',
                     textTransform: 'uppercase',
-                    marginBottom: '0.35rem',
+                    marginBottom: '0.4rem',
                   }}
                 >
                   {item.subtitle}
@@ -271,7 +271,7 @@ export default function OurWork({ id = 'our-work' }) {
                 <h3
                   style={{
                     fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: '1.4rem',
+                    fontSize: '1.3rem',
                     color: colors.textPrimary,
                     fontWeight: 600,
                     lineHeight: 1.25,
@@ -505,17 +505,17 @@ export default function OurWork({ id = 'our-work' }) {
               <div
                 style={{
                   padding: '1.25rem 1.5rem',
-                  borderTop: isDark ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(0, 0, 0, 0.08)',
+                  borderTop: `1px solid ${colors.borderSubtle}`,
                   backgroundColor: isDark ? '#171614' : '#FFFFFF',
                 }}
               >
                 <span
                   style={{
                     fontSize: '0.72rem',
-                    color: colors.accentGold,
-                    letterSpacing: '0.1em',
+                    color: colors.accentWalnut,
+                    letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    fontWeight: 600,
+                    fontWeight: 700,
                   }}
                 >
                   Gujarat Wallpaper &amp; Decor • Surat
@@ -526,13 +526,13 @@ export default function OurWork({ id = 'our-work' }) {
                     fontSize: '1.35rem',
                     color: colors.textPrimary,
                     marginTop: '0.25rem',
-                    marginBottom: '0.3rem',
+                    marginBottom: '0.35rem',
                     fontWeight: 600,
                   }}
                 >
                   {selectedItem.title}
                 </h3>
-                <p style={{ fontSize: '0.86rem', color: colors.textSecondary, fontWeight: 300, margin: 0, lineHeight: 1.5 }}>
+                <p style={{ fontSize: '0.88rem', color: colors.textSecondary, margin: 0, lineHeight: 1.55 }}>
                   {selectedItem.description}
                 </p>
               </div>
@@ -543,19 +543,13 @@ export default function OurWork({ id = 'our-work' }) {
 
       <style>{`
         .our-work-card:hover {
-          transform: translateY(-5px);
-          border-color: ${colors.accentGold} !important;
-          box-shadow: ${isDark ? '0 16px 36px rgba(0, 0, 0, 0.55)' : '0 12px 28px rgba(0, 0, 0, 0.1)'} !important;
+          transform: translateY(-4px);
+          box-shadow: 0 20px 48px rgba(122, 90, 58, 0.16) !important;
+          border-color: rgba(122, 90, 58, 0.35) !important;
         }
         .our-work-card:hover .play-btn-circle {
           transform: scale(1.1);
           background-color: #FFFFFF !important;
-        }
-
-        .our-work-insta-btn:hover {
-          transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 12px 30px rgba(225, 48, 108, 0.5) !important;
-          filter: brightness(1.08);
         }
 
         @media (max-width: 1024px) {
@@ -567,26 +561,20 @@ export default function OurWork({ id = 'our-work' }) {
 
         @media (max-width: 768px) {
           #our-work {
-            padding: 4rem 0 !important;
+            padding: 4.5rem 0 !important;
           }
           .our-work-grid {
             grid-template-columns: 1fr !important;
-            gap: 1.35rem !important;
+            gap: 1.5rem !important;
           }
           .our-work-instagram-banner {
             flex-direction: column !important;
             align-items: flex-start !important;
-            padding: 1.75rem 1.35rem !important;
+            padding: 2rem 1.5rem !important;
           }
           .our-work-insta-btn {
             width: 100% !important;
             justify-content: center !important;
-          }
-        }
-
-        @media (max-width: 480px) {
-          #our-work {
-            padding: 3rem 0 !important;
           }
         }
       `}</style>

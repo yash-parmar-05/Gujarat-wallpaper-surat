@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Check, Sparkles, ChevronRight, Layers, Box, Maximize2, Wind } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { ArrowUpRight, Check } from 'lucide-react';
 
 export default function ShowcaseSection({ onExploreCategory, onOpenProductByName }) {
   const [activeTab, setActiveTab] = useState('wallpapers');
-  const { isDark } = useTheme();
 
   const showcaseChapters = [
     {
@@ -123,7 +121,6 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
   ];
 
   const current = showcaseChapters.find((c) => c.id === activeTab) || showcaseChapters[0];
-
   const colors = {
     bgSection: '#E7D7BE',
     textPrimary: '#2F2F2F',
@@ -484,27 +481,22 @@ export default function ShowcaseSection({ onExploreCategory, onOpenProductByName
           .showcase-grid-container {
             display: flex !important;
             flex-direction: column !important;
-            align-items: center !important;
             gap: 2.5rem !important;
-            width: 100% !important;
           }
-          .showcase-visual-col {
+          .showcase-visual-col, .showcase-info-col {
             width: 100% !important;
-            max-width: 100% !important;
-          }
-          .showcase-info-col {
-            width: 100% !important;
-            max-width: 100% !important;
           }
         }
+
         @media (max-width: 768px) {
           #showcase {
-            padding: 4rem 0 !important;
+            padding: 4.5rem 0 !important;
           }
         }
+
         @media (max-width: 480px) {
           #showcase {
-            padding: 3rem 0 !important;
+            padding: 3.5rem 0 !important;
           }
         }
       `}</style>

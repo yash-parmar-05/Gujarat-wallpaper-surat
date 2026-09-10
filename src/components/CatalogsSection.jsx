@@ -29,20 +29,6 @@ export const CATALOGS_DATA = [
 export default function CatalogsSection({ id = 'catalogs' }) {
   const { isDark } = useTheme();
 
-  const colors = {
-    bgMain: '#F8F5F1',
-    bgCard: '#FFFFFF',
-    bgCardHover: '#FCFAF7',
-    textPrimary: '#2F2F2F',
-    textSecondary: '#5A5652',
-    textMuted: '#87827C',
-    accentWalnut: '#7A5A3A',
-    accentGold: '#7A5A3A',
-    accentGoldHover: '#63472C',
-    borderSubtle: 'rgba(122, 90, 58, 0.12)',
-    borderCard: 'rgba(122, 90, 58, 0.16)',
-  };
-
   const handleViewCatalog = (pdfUrl) => {
     window.open(pdfUrl, '_blank', 'noopener,noreferrer');
   };
@@ -61,41 +47,40 @@ export default function CatalogsSection({ id = 'catalogs' }) {
     <section
       id={id}
       style={{
-        padding: '7.5rem 0',
-        backgroundColor: colors.bgMain,
+        padding: '72px 0',
+        backgroundColor: 'var(--bg-primary, #F8F5F1)',
         position: 'relative',
-        transition: 'background-color 0.35s ease',
       }}
     >
-      <div className="container-luxury">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4.5rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 48px' }}>
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.5rem',
-              fontSize: '0.74rem',
-              letterSpacing: '0.2em',
+              gap: '8px',
+              fontSize: '13px',
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
-              color: colors.accentWalnut,
-              fontWeight: 700,
-              marginBottom: '0.85rem',
+              color: 'var(--accent-walnut, #7A5A3A)',
+              fontWeight: 600,
+              marginBottom: '14px',
             }}
           >
-            <BookOpen size={14} color={colors.accentWalnut} />
-            <span>OFFICIAL WALLPAPER EDITIONS</span>
+            <BookOpen size={14} color="var(--accent-walnut, #7A5A3A)" />
+            <span>Official Wallpaper Editions</span>
           </div>
 
           <h2
             style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(2.35rem, 4vw, 3.4rem)',
-              color: colors.textPrimary,
+              fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
+              fontSize: 'clamp(32px, 4vw, 48px)',
+              color: 'var(--text-primary, #2F2F2F)',
               fontWeight: 500,
-              marginBottom: '0.85rem',
-              letterSpacing: '0.01em',
+              marginBottom: '16px',
               lineHeight: 1.15,
+              letterSpacing: '-0.01em',
             }}
           >
             Explore Our Catalogs
@@ -103,10 +88,9 @@ export default function CatalogsSection({ id = 'catalogs' }) {
 
           <p
             style={{
-              fontSize: '1rem',
-              color: colors.textSecondary,
-              lineHeight: 1.65,
-              fontWeight: 300,
+              fontSize: '16px',
+              color: 'var(--text-secondary, #5A5652)',
+              lineHeight: 1.6,
               margin: 0,
             }}
           >
@@ -119,7 +103,7 @@ export default function CatalogsSection({ id = 'catalogs' }) {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '2.5rem',
+            gap: '24px',
             maxWidth: '1120px',
             margin: '0 auto',
           }}
@@ -133,25 +117,25 @@ export default function CatalogsSection({ id = 'catalogs' }) {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.45, delay: idx * 0.1, ease: 'easeOut' }}
               style={{
-                backgroundColor: colors.bgCard,
-                border: `1px solid ${colors.borderCard}`,
-                borderRadius: '24px',
+                backgroundColor: 'var(--bg-surface, #FFFFFF)',
+                border: '1px solid var(--border-card, rgba(122, 90, 58, 0.16))',
+                borderRadius: '14px',
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
-                boxShadow: '0 12px 36px rgba(122, 90, 58, 0.08)',
-                transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-                willChange: 'transform, opacity',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+                transition: 'border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease',
               }}
               className="catalog-card"
             >
-              {/* Cover Preview Image with Gradient & Badge */}
+              {/* Cover Preview Image */}
               <div
+                className="catalog-cover-box"
                 style={{
                   position: 'relative',
-                  height: '260px',
+                  height: '240px',
                   overflow: 'hidden',
-                  backgroundColor: '#E7D7BE',
+                  backgroundColor: '#EAE3D9',
                 }}
               >
                 <img
@@ -161,25 +145,48 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    transition: 'transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)',
+                    transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                   className="catalog-cover-img"
                 />
 
-                {/* Soft warm gradient overlay for luxury depth */}
                 <div
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(180deg, rgba(122, 90, 58, 0.04) 0%, rgba(30, 24, 18, 0.35) 100%)',
+                    background: 'linear-gradient(180deg, rgba(24, 20, 16, 0.05) 0%, rgba(24, 20, 16, 0.6) 100%)',
                   }}
                 />
+
+                {/* File size pill */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '16px',
+                    right: '16px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                    backdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(122, 90, 58, 0.22)',
+                    borderRadius: '9999px',
+                    padding: '6px 14px',
+                    fontSize: '12px',
+                    color: 'var(--text-primary, #2F2F2F)',
+                    fontWeight: 500,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <FileText size={12} color="var(--accent-walnut, #7A5A3A)" />
+                  <span>{catalog.fileSize}</span>
+                </div>
               </div>
 
               {/* Card Content */}
               <div
+                className="catalog-content-box"
                 style={{
-                  padding: '2rem 2.25rem 2.25rem',
+                  padding: '32px',
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
@@ -189,12 +196,11 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                 <div>
                   <h3
                     style={{
-                      fontFamily: "'Cormorant Garamond', Georgia, serif",
-                      fontSize: '1.75rem',
-                      fontWeight: 600,
-                      color: colors.textPrimary,
-                      margin: '0 0 0.5rem',
-                      letterSpacing: '0.01em',
+                      fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
+                      fontSize: '24px',
+                      fontWeight: 500,
+                      color: 'var(--text-primary, #2F2F2F)',
+                      margin: '0 0 10px',
                       lineHeight: 1.25,
                     }}
                   >
@@ -203,11 +209,10 @@ export default function CatalogsSection({ id = 'catalogs' }) {
 
                   <p
                     style={{
-                      fontSize: '0.92rem',
+                      fontSize: '14px',
                       lineHeight: 1.6,
-                      color: colors.textSecondary,
-                      margin: '0 0 1.5rem',
-                      fontWeight: 300,
+                      color: 'var(--text-secondary, #5A5652)',
+                      margin: '0 0 24px',
                     }}
                   >
                     {catalog.tagline}
@@ -218,20 +223,20 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                     style={{
                       display: 'flex',
                       flexWrap: 'wrap',
-                      gap: '0.5rem',
-                      marginBottom: '2rem',
+                      gap: '8px',
+                      marginBottom: '28px',
                     }}
                   >
                     {catalog.features.map((feat) => (
                       <span
                         key={feat}
                         style={{
-                          fontSize: '0.75rem',
-                          color: colors.accentWalnut,
-                          backgroundColor: '#F8F5F1',
-                          border: `1px solid rgba(122, 90, 58, 0.15)`,
-                          padding: '0.35rem 0.8rem',
-                          borderRadius: '20px',
+                          fontSize: '12px',
+                          color: 'var(--text-secondary, #5A5652)',
+                          backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                          border: '1px solid rgba(122, 90, 58, 0.16)',
+                          padding: '6px 14px',
+                          borderRadius: '9999px',
                           fontWeight: 500,
                         }}
                       >
@@ -246,7 +251,7 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                   style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(2, 1fr)',
-                    gap: '1rem',
+                    gap: '12px',
                   }}
                   className="catalog-btn-row"
                 >
@@ -257,37 +262,29 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                       display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '0.55rem',
-                      padding: '0.92rem 1.1rem',
+                      gap: '8px',
+                      padding: '12px 18px',
                       backgroundColor: '#FFFFFF',
-                      color: colors.textPrimary,
-                      border: `1px solid ${colors.borderCard}`,
-                      borderRadius: '22px',
-                      fontSize: '0.78rem',
-                      fontWeight: 600,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
+                      color: 'var(--text-primary, #2F2F2F)',
+                      border: '1px solid rgba(122, 90, 58, 0.3)',
+                      borderRadius: '9999px',
+                      fontSize: '13px',
+                      fontWeight: 500,
                       cursor: 'pointer',
-                      transition: 'all 0.25s ease',
+                      transition: 'all 0.2s ease',
                       width: '100%',
-                      boxShadow: '0 2px 8px rgba(122, 90, 58, 0.06)',
                     }}
-                    className="catalog-btn-view"
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = colors.accentWalnut;
-                      e.currentTarget.style.backgroundColor = '#F8F5F1';
-                      e.currentTarget.style.color = colors.accentWalnut;
-                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.backgroundColor = 'rgba(122, 90, 58, 0.08)';
+                      e.currentTarget.style.borderColor = 'var(--accent-walnut, #7A5A3A)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = colors.borderCard;
                       e.currentTarget.style.backgroundColor = '#FFFFFF';
-                      e.currentTarget.style.color = colors.textPrimary;
-                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.borderColor = 'rgba(122, 90, 58, 0.3)';
                     }}
                   >
                     <Eye size={15} />
-                    <span>VIEW CATALOG</span>
+                    <span>View Catalog</span>
                   </button>
 
                   {/* DOWNLOAD PDF */}
@@ -297,37 +294,32 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                       display: 'inline-flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '0.55rem',
-                      padding: '0.92rem 1.1rem',
-                      backgroundColor: colors.accentWalnut,
+                      gap: '8px',
+                      padding: '12px 18px',
+                      backgroundColor: 'var(--accent-walnut, #7A5A3A)',
                       color: '#FFFFFF',
-                      border: `1px solid ${colors.accentWalnut}`,
-                      borderRadius: '22px',
-                      fontSize: '0.78rem',
+                      border: '1px solid var(--accent-walnut, #7A5A3A)',
+                      borderRadius: '9999px',
+                      fontSize: '13px',
                       fontWeight: 600,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
                       cursor: 'pointer',
-                      transition: 'all 0.25s ease',
+                      boxShadow: '0 4px 14px rgba(122, 90, 58, 0.25)',
+                      transition: 'all 0.2s ease',
                       width: '100%',
-                      boxShadow: '0 4px 14px rgba(122, 90, 58, 0.22)',
                     }}
-                    className="catalog-btn-download"
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.accentGoldHover;
-                      e.currentTarget.style.borderColor = colors.accentGoldHover;
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 8px 20px rgba(122, 90, 58, 0.35)';
+                      e.currentTarget.style.backgroundColor = 'var(--accent-walnut-hover, #63472C)';
+                      e.currentTarget.style.borderColor = 'var(--accent-walnut-hover, #63472C)';
+                      e.currentTarget.style.boxShadow = '0 6px 18px rgba(122, 90, 58, 0.35)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.accentWalnut;
-                      e.currentTarget.style.borderColor = colors.accentWalnut;
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 90, 58, 0.22)';
+                      e.currentTarget.style.backgroundColor = 'var(--accent-walnut, #7A5A3A)';
+                      e.currentTarget.style.borderColor = 'var(--accent-walnut, #7A5A3A)';
+                      e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 90, 58, 0.25)';
                     }}
                   >
                     <Download size={15} />
-                    <span>DOWNLOAD PDF</span>
+                    <span>Download PDF</span>
                   </button>
                 </div>
               </div>
@@ -339,11 +331,11 @@ export default function CatalogsSection({ id = 'catalogs' }) {
       <style>{`
         @media (hover: hover) {
           .catalog-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(197, 168, 128, 0.5) !important;
+            border-color: rgba(122, 90, 58, 0.4) !important;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
           }
           .catalog-card:hover .catalog-cover-img {
-            transform: scale(1.05);
+            transform: scale(1.04);
           }
         }
 
@@ -351,17 +343,33 @@ export default function CatalogsSection({ id = 'catalogs' }) {
           .catalogs-grid {
             grid-template-columns: 1fr !important;
             max-width: 580px !important;
-            gap: 1.5rem !important;
+            gap: 20px !important;
           }
-          .catalog-card {
-            box-shadow: ${isDark ? '0 8px 24px rgba(0, 0, 0, 0.35)' : '0 4px 16px rgba(0, 0, 0, 0.04)'} !important;
+        }
+
+        @media (max-width: 768px) {
+          #catalogs,
+          #catalogs-page {
+            padding: 48px 0 !important;
+          }
+          .catalog-content-box {
+            padding: 24px 20px !important;
+          }
+          .catalog-cover-box {
+            height: 200px !important;
           }
         }
 
         @media (max-width: 480px) {
           .catalog-btn-row {
             grid-template-columns: 1fr !important;
-            gap: 0.65rem !important;
+            gap: 10px !important;
+          }
+          .catalog-content-box {
+            padding: 20px 16px !important;
+          }
+          .catalog-cover-box {
+            height: 180px !important;
           }
         }
       `}</style>

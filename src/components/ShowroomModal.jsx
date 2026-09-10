@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MapPin, Navigation } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
@@ -32,6 +33,11 @@ export const SHOWROOM_BRANCHES = [
 
 export default function ShowroomModal({ isOpen, onClose }) {
   const { isDark } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close on Escape key
   useEffect(() => {
@@ -46,12 +52,20 @@ export default function ShowroomModal({ isOpen, onClose }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Lock body scroll when modal is active
+  // Lock body scroll and pause smooth scroll when modal is active
   useEffect(() => {
     if (isOpen) {
+      document.body.classList.add('modal-open');
+      if (window.lenis) {
+        window.lenis.stop();
+      }
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       return () => {
+        document.body.classList.remove('modal-open');
+        if (window.lenis) {
+          window.lenis.start();
+        }
         document.body.style.overflow = originalOverflow;
       };
     }
@@ -64,7 +78,9 @@ export default function ShowroomModal({ isOpen, onClose }) {
     window.open(mapsUrl, '_blank', 'noopener,noreferrer');
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div
@@ -75,7 +91,7 @@ export default function ShowroomModal({ isOpen, onClose }) {
           style={{
             position: 'fixed',
             inset: 0,
-            zIndex: 300,
+            zIndex: 99999,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -89,14 +105,14 @@ export default function ShowroomModal({ isOpen, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             onClick={onClose}
             style={{
               position: 'absolute',
               inset: 0,
               backgroundColor: 'rgba(12, 11, 10, 0.78)',
-              backdropFilter: 'blur(6px)',
-              WebkitBackdropFilter: 'blur(6px)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
             }}
           />
 
@@ -104,24 +120,19 @@ export default function ShowroomModal({ isOpen, onClose }) {
           <motion.div
             key="showroom-window"
             data-lenis-prevent="true"
-            initial={{ opacity: 0, scale: 0.94, y: 24 }}
+            initial={{ opacity: 0, scale: 0.96, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 16 }}
-            transition={{
-              type: 'spring',
-              damping: 28,
-              stiffness: 300,
-              mass: 0.8,
-            }}
+            exit={{ opacity: 0, scale: 0.96, y: 16 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             style={{
               position: 'relative',
               width: '100%',
-              maxWidth: '960px',
+              maxWidth: '920px',
               maxHeight: '88vh',
               backgroundColor: '#F8F5F1',
-              borderRadius: '24px',
+              borderRadius: '16px',
               border: '1px solid rgba(122, 90, 58, 0.2)',
-              boxShadow: '0 30px 70px -15px rgba(0, 0, 0, 0.45)',
+              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.2)',
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',
@@ -132,13 +143,13 @@ export default function ShowroomModal({ isOpen, onClose }) {
             {/* Modal Header */}
             <div
               style={{
-                padding: '1.75rem 2.25rem 1.25rem',
+                padding: '24px 32px 18px',
                 borderBottom: '1px solid rgba(122, 90, 58, 0.12)',
                 position: 'relative',
                 display: 'flex',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
-                gap: '1.5rem',
+                gap: '20px',
                 flexShrink: 0,
               }}
             >
@@ -147,38 +158,37 @@ export default function ShowroomModal({ isOpen, onClose }) {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.45rem',
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.18em',
+                    gap: '8px',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    letterSpacing: '0.06em',
                     textTransform: 'uppercase',
                     color: '#7A5A3A',
-                    marginBottom: '0.4rem',
+                    marginBottom: '6px',
                   }}
                 >
-                  <MapPin size={14} color="#7A5A3A" />
-                  <span>OUR SHOWROOM LOCATIONS</span>
+                  <MapPin size={13} color="#7A5A3A" />
+                  <span>Our Showroom Locations</span>
                 </div>
                 <h2
                   id="showroom-modal-title"
                   style={{
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: 'clamp(1.65rem, 3.2vw, 2.35rem)',
-                    fontWeight: 600,
+                    fontSize: 'clamp(22px, 3vw, 28px)',
+                    fontWeight: 500,
                     color: '#2F2F2F',
-                    margin: '0 0 0.4rem 0',
-                    lineHeight: 1.15,
+                    margin: '0 0 6px 0',
+                    lineHeight: 1.2,
+                    letterSpacing: '0.01em',
                   }}
                 >
                   Visit Gujarat Wallpaper &amp; Decor
                 </h2>
                 <p
                   style={{
-                    fontSize: '0.9rem',
+                    fontSize: '14px',
                     color: '#5A5652',
                     margin: 0,
                     lineHeight: 1.5,
-                    fontWeight: 400,
                   }}
                 >
                   Select a branch below to get direct turn-by-turn directions in Google Maps.
@@ -190,8 +200,8 @@ export default function ShowroomModal({ isOpen, onClose }) {
                 onClick={onClose}
                 aria-label="Close Showroom Locations Modal"
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '36px',
+                  height: '36px',
                   borderRadius: '50%',
                   backgroundColor: 'rgba(122, 90, 58, 0.08)',
                   border: '1px solid rgba(122, 90, 58, 0.16)',
@@ -201,22 +211,16 @@ export default function ShowroomModal({ isOpen, onClose }) {
                   justifyContent: 'center',
                   cursor: 'pointer',
                   flexShrink: 0,
-                  transition: 'all 0.25s ease',
+                  transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#7A5A3A';
-                  e.currentTarget.style.borderColor = '#7A5A3A';
-                  e.currentTarget.style.color = '#FFFFFF';
-                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.backgroundColor = 'rgba(122, 90, 58, 0.16)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = 'rgba(122, 90, 58, 0.08)';
-                  e.currentTarget.style.borderColor = 'rgba(122, 90, 58, 0.16)';
-                  e.currentTarget.style.color = '#2F2F2F';
-                  e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
@@ -224,7 +228,7 @@ export default function ShowroomModal({ isOpen, onClose }) {
             <div
               data-lenis-prevent="true"
               style={{
-                padding: '1.75rem 2.25rem 2.25rem',
+                padding: '24px 32px 32px',
                 overflowY: 'auto',
                 overflowX: 'hidden',
                 WebkitOverflowScrolling: 'touch',
@@ -238,7 +242,7 @@ export default function ShowroomModal({ isOpen, onClose }) {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '1.5rem',
+                  gap: '20px',
                 }}
                 className="showroom-branch-grid"
               >
@@ -249,14 +253,14 @@ export default function ShowroomModal({ isOpen, onClose }) {
                       style={{
                         backgroundColor: '#FFFFFF',
                         border: '1px solid rgba(122, 90, 58, 0.16)',
-                        borderRadius: '20px',
-                        padding: '1.6rem 1.6rem',
+                        borderRadius: '12px',
+                        padding: '24px',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        gap: '1.25rem',
-                        boxShadow: '0 8px 24px rgba(122, 90, 58, 0.06)',
-                        transition: 'transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
+                        gap: '16px',
+                        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
+                        transition: 'border-color 0.2s ease, transform 0.2s ease',
                       }}
                       className="showroom-branch-card"
                     >
@@ -267,23 +271,23 @@ export default function ShowroomModal({ isOpen, onClose }) {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            marginBottom: '0.85rem',
+                            marginBottom: '12px',
                           }}
                         >
                           <div
                             style={{
                               display: 'flex',
                               alignItems: 'center',
-                              gap: '0.65rem',
+                              gap: '10px',
                             }}
                           >
                             <div
                               style={{
-                                width: '38px',
-                                height: '38px',
-                                borderRadius: '12px',
-                                backgroundColor: 'rgba(122, 90, 58, 0.1)',
-                                border: '1px solid rgba(122, 90, 58, 0.25)',
+                                width: '36px',
+                                height: '36px',
+                                borderRadius: '8px',
+                                backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                                border: '1px solid rgba(122, 90, 58, 0.18)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -291,12 +295,11 @@ export default function ShowroomModal({ isOpen, onClose }) {
                                 flexShrink: 0,
                               }}
                             >
-                              <MapPin size={18} />
+                              <MapPin size={16} />
                             </div>
                             <h3
                               style={{
-                                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                                fontSize: '1.45rem',
+                                fontSize: '18px',
                                 fontWeight: 600,
                                 color: '#2F2F2F',
                                 margin: 0,
@@ -311,22 +314,21 @@ export default function ShowroomModal({ isOpen, onClose }) {
                         {/* Full Address */}
                         <p
                           style={{
-                            fontSize: '0.9rem',
+                            fontSize: '13px',
                             lineHeight: 1.6,
                             color: '#5A5652',
                             margin: 0,
                             whiteSpace: 'pre-line',
-                            fontWeight: 400,
                           }}
                         >
                           {branch.address}
                         </p>
                       </div>
 
-                      {/* Action Button - GET DIRECTIONS ONLY */}
+                      {/* Action Button - GET DIRECTIONS */}
                       <div
                         style={{
-                          paddingTop: '0.75rem',
+                          paddingTop: '12px',
                           borderTop: '1px solid rgba(122, 90, 58, 0.1)',
                         }}
                       >
@@ -336,36 +338,32 @@ export default function ShowroomModal({ isOpen, onClose }) {
                             display: 'inline-flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            gap: '0.65rem',
-                            padding: '0.9rem 1.35rem',
+                            gap: '8px',
+                            padding: '11px 20px',
                             backgroundColor: '#7A5A3A',
-                            color: '#FFFFFF',
+                            color: '#ffffff',
                             border: 'none',
-                            borderRadius: '20px',
-                            fontSize: '0.82rem',
+                            borderRadius: '9999px',
+                            fontSize: '13px',
                             fontWeight: 600,
-                            letterSpacing: '0.1em',
+                            letterSpacing: '0.04em',
                             textTransform: 'uppercase',
                             cursor: 'pointer',
-                            transition: 'all 0.25s ease',
+                            boxShadow: '0 4px 14px rgba(122, 90, 58, 0.25)',
+                            transition: 'all 0.2s ease',
                             width: '100%',
                             boxSizing: 'border-box',
-                            boxShadow: '0 4px 14px rgba(122, 90, 58, 0.25)',
                           }}
                           className="branch-btn-directions"
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = '#5E4329';
-                            e.currentTarget.style.transform = 'translateY(-1px)';
-                            e.currentTarget.style.boxShadow = '0 6px 18px rgba(122, 90, 58, 0.35)';
+                            e.currentTarget.style.backgroundColor = '#63472C';
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.backgroundColor = '#7A5A3A';
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 90, 58, 0.25)';
                           }}
                         >
-                          <Navigation size={16} />
-                          <span>GET DIRECTIONS</span>
+                          <Navigation size={15} />
+                          <span>Get Directions</span>
                         </button>
                       </div>
                     </div>
@@ -375,7 +373,7 @@ export default function ShowroomModal({ isOpen, onClose }) {
             </div>
           </motion.div>
 
-          {/* Scoped CSS for Modal Responsiveness and Animations */}
+          {/* Scoped CSS for Modal Responsiveness */}
           <style>{`
             .showroom-modal-scroll {
               overflow-y: auto !important;
@@ -383,7 +381,7 @@ export default function ShowroomModal({ isOpen, onClose }) {
               -webkit-overflow-scrolling: touch !important;
               touch-action: pan-y !important;
               scrollbar-width: thin;
-              scrollbar-color: rgba(122, 90, 58, 0.3) transparent;
+              scrollbar-color: rgba(122, 90, 58, 0.2) transparent;
             }
             .showroom-modal-scroll::-webkit-scrollbar {
               width: 6px;
@@ -392,33 +390,30 @@ export default function ShowroomModal({ isOpen, onClose }) {
               background: transparent;
             }
             .showroom-modal-scroll::-webkit-scrollbar-thumb {
-              background: rgba(122, 90, 58, 0.28);
+              background: rgba(122, 90, 58, 0.2);
               border-radius: 6px;
             }
-            .showroom-modal-scroll::-webkit-scrollbar-thumb:hover {
-              background: rgba(122, 90, 58, 0.45);
-            }
             .showroom-branch-card:hover {
-              border-color: rgba(122, 90, 58, 0.35) !important;
+              border-color: rgba(122, 90, 58, 0.4) !important;
               transform: translateY(-2px);
-              box-shadow: 0 12px 28px rgba(122, 90, 58, 0.12) !important;
             }
 
             @media (max-width: 768px) {
               .showroom-branch-grid {
                 grid-template-columns: 1fr !important;
-                gap: 1rem !important;
+                gap: 14px !important;
               }
             }
 
             @media (max-width: 480px) {
               .showroom-branch-card {
-                padding: 1.2rem 1.1rem !important;
+                padding: 16px !important;
               }
             }
           `}</style>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

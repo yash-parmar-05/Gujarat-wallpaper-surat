@@ -13,6 +13,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import GalleryPage from './pages/GalleryPage';
 import OurWorkPage from './pages/OurWorkPage';
 import WhyChooseUsPage from './pages/WhyChooseUsPage';
+import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { ThemeProvider } from './context/ThemeContext';
@@ -42,33 +43,34 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // Check if device is mobile or touch device
-    const isTouchOrMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024;
-    
-    // If mobile/touch, use ultra-responsive native browser momentum scrolling (zero lag)
-    if (isTouchOrMobile) {
-      return;
-    }
-
-    // Initialize Lenis smooth scroll for Desktop/Laptop only
+    // Initialize Lenis buttery-smooth inertial scroll engine
+    // syncTouch: false ensures mobile touch keeps 100% native 120Hz momentum scrolling
+    // smoothWheel: true ensures desktop and laptop mouse wheels glide with silky luxury inertia
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: 0.88,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
+      wheelMultiplier: 1.05,
       touchMultiplier: 1.0,
+      syncTouch: false,
     });
 
+    window.lenis = lenis;
+
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    const rafId = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      delete window.lenis;
     };
   }, []);
 
@@ -93,6 +95,7 @@ export default function App() {
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/our-work" element={<OurWorkPage />} />
             <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
+            <Route path="/about" element={<AboutPage />} />
 
             <Route path="/contact" element={<ContactPage />} />
 

@@ -29,22 +29,21 @@ export default function Footer() {
       style={{
         backgroundColor: bg,
         color: textPrimary,
-        paddingTop: '3.5rem',
-        paddingBottom: '1.75rem',
+        paddingTop: '64px',
+        paddingBottom: '32px',
         borderTop: border,
         position: 'relative',
         overflow: 'hidden',
-        transition: 'background-color 0.35s ease, color 0.3s ease, border-color 0.3s ease',
       }}
     >
-      <div className="container-luxury" style={{ position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2 }}>
         {/* Main Footer Grid */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '2.5rem 2rem',
-            paddingBottom: '2.5rem',
+            gap: '40px 24px',
+            paddingBottom: '48px',
             borderBottom: border,
           }}
         >
@@ -59,38 +58,36 @@ export default function Footer() {
           >
             <h3
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: '1.75rem',
-                fontWeight: 600,
+                fontFamily: 'Cormorant Garamond, serif',
+                fontSize: '26px',
+                fontWeight: 500,
                 color: textPrimary,
-                marginBottom: '0.35rem',
-                letterSpacing: '0.02em',
+                marginBottom: '6px',
                 lineHeight: 1.2,
+                letterSpacing: '0.02em',
               }}
             >
               Gujarat Wallpaper &amp; Decor
             </h3>
             <div
               style={{
-                fontSize: '0.7rem',
-                letterSpacing: '0.18em',
+                fontSize: '12px',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
                 color: walnut,
-                marginBottom: '0.85rem',
-                fontWeight: 700,
+                marginBottom: '14px',
+                fontWeight: 600,
               }}
             >
               Surat, Gujarat, India
             </div>
             <p
               style={{
-                fontSize: '0.86rem',
+                fontSize: '14px',
                 color: textSecondary,
-                lineHeight: 1.55,
+                lineHeight: 1.6,
                 maxWidth: '340px',
-                fontWeight: 400,
-                marginBottom: '1.25rem',
-                margin: '0 0 1.25rem 0',
+                margin: '0 0 20px 0',
               }}
             >
               Surat's premier luxury interior decor showroom, delivering designer wallpapers, architectural PVC wall panels, hand-crafted carpets, and bespoke decor for residential and commercial spaces.
@@ -102,20 +99,30 @@ export default function Footer() {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
-                fontSize: '0.75rem',
-                letterSpacing: '0.12em',
+                gap: '8px',
+                fontSize: '12px',
+                letterSpacing: '0.04em',
                 textTransform: 'uppercase',
-                color: walnut,
+                color: textPrimary,
                 cursor: 'pointer',
-                padding: '0.4rem 0',
+                padding: '8px 16px',
                 alignSelf: 'flex-start',
-                backgroundColor: 'transparent',
-                border: 'none',
-                fontWeight: 700,
+                backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                border: '1px solid rgba(122, 90, 58, 0.22)',
+                borderRadius: '9999px',
+                fontWeight: 500,
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(122, 90, 58, 0.16)';
+                e.currentTarget.style.borderColor = 'rgba(122, 90, 58, 0.38)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(122, 90, 58, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(122, 90, 58, 0.22)';
               }}
             >
-              <ArrowUp size={14} />
+              <ArrowUp size={14} color={walnut} />
               <span>Back to Top</span>
             </button>
           </div>
@@ -129,17 +136,17 @@ export default function Footer() {
           >
             <div
               style={{
-                fontSize: '0.75rem',
-                letterSpacing: '0.18em',
+                fontSize: '12px',
+                letterSpacing: '0.06em',
                 textTransform: 'uppercase',
-                color: walnut,
-                fontWeight: 700,
-                marginBottom: '1.5rem',
+                color: textPrimary,
+                fontWeight: 600,
+                marginBottom: '20px',
               }}
             >
               Navigation
             </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
                 { label: 'Home', path: '/home' },
                 { label: 'Catalogs', path: '/catalogs' },
@@ -152,11 +159,10 @@ export default function Footer() {
                   <Link
                     to={link.path}
                     style={{
-                      fontSize: '0.88rem',
+                      fontSize: '14px',
                       color: textSecondary,
                       textDecoration: 'none',
                       transition: 'color 0.2s ease',
-                      fontWeight: 500,
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = walnut)}
                     onMouseLeave={(e) => (e.currentTarget.style.color = textSecondary)}
@@ -177,23 +183,23 @@ export default function Footer() {
           >
             <div
               style={{
-                fontSize: '0.75rem',
-                letterSpacing: '0.18em',
+                fontSize: '12px',
+                letterSpacing: '0.06em',
                 textTransform: 'uppercase',
-                color: walnut,
-                fontWeight: 700,
-                marginBottom: '1.5rem',
+                color: textPrimary,
+                fontWeight: 600,
+                marginBottom: '20px',
               }}
             >
               Approved Categories
             </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {CATEGORIES.map((cat) => (
                 <li key={cat.id}>
                   <button
                     onClick={() => handleCategoryClick(cat.name)}
                     style={{
-                      fontSize: '0.88rem',
+                      fontSize: '14px',
                       color: textSecondary,
                       backgroundColor: 'transparent',
                       border: 'none',
@@ -201,7 +207,6 @@ export default function Footer() {
                       padding: 0,
                       cursor: 'pointer',
                       transition: 'color 0.2s ease',
-                      fontWeight: 500,
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = walnut)}
                     onMouseLeave={(e) => (e.currentTarget.style.color = textSecondary)}
@@ -222,12 +227,12 @@ export default function Footer() {
           >
             <div
               style={{
-                fontSize: '0.75rem',
-                letterSpacing: '0.18em',
+                fontSize: '12px',
+                letterSpacing: '0.06em',
                 textTransform: 'uppercase',
-                color: walnut,
-                fontWeight: 700,
-                marginBottom: '1.5rem',
+                color: textPrimary,
+                fontWeight: 600,
+                marginBottom: '20px',
               }}
             >
               Our Branches
@@ -237,7 +242,7 @@ export default function Footer() {
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '1.5rem 1.25rem',
+                gap: '20px 20px',
               }}
               className="footer-branches-grid"
             >
@@ -247,28 +252,31 @@ export default function Footer() {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '0.35rem',
-                    fontSize: '0.85rem',
+                    gap: '6px',
+                    fontSize: '14px',
                   }}
                   className="footer-branch-item"
                 >
                   <div
                     style={{
-                      fontSize: '0.74rem',
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: walnut,
-                      fontWeight: 700,
+                      fontSize: '13px',
+                      letterSpacing: '0.02em',
+                      color: textPrimary,
+                      fontWeight: 600,
                       lineHeight: 1.3,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
                     }}
                   >
-                    {branch.name}
+                    <MapPin size={13} color={walnut} />
+                    <span>{branch.name}</span>
                   </div>
                   <div
                     style={{
                       color: textSecondary,
                       lineHeight: 1.5,
-                      fontWeight: 300,
+                      fontSize: '13px',
                     }}
                   >
                     {branch.addressLines.map((line, lIdx) => (
@@ -284,26 +292,26 @@ export default function Footer() {
         {/* Bottom Legal / Copyright Bar */}
         <div
           style={{
-            paddingTop: '1.5rem',
-            paddingBottom: '1.25rem',
+            paddingTop: '24px',
+            paddingBottom: '20px',
             display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '1rem',
-            fontSize: '0.8rem',
+            gap: '16px',
+            fontSize: '13px',
             color: textSecondary,
             position: 'relative',
             zIndex: 2,
           }}
         >
-          <div style={{ fontWeight: 400 }}>
+          <div>
             &copy; {new Date().getFullYear()} Gujarat Wallpaper &amp; Decor. All Rights Reserved. Surat, Gujarat, India.
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontWeight: 400 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <span>Architectural Surface Solutions</span>
-            <span style={{ width: '1px', height: '12px', backgroundColor: 'rgba(122, 90, 58, 0.3)' }} />
+            <span style={{ width: '1px', height: '12px', backgroundColor: 'rgba(122, 90, 58, 0.25)' }} />
             <span>Residential &amp; Commercial</span>
           </div>
         </div>
@@ -315,8 +323,8 @@ export default function Footer() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            paddingTop: '0.75rem',
-            paddingBottom: '0.5rem',
+            paddingTop: '16px',
+            paddingBottom: '8px',
             zIndex: 2,
             width: '100%',
             overflow: 'hidden',
@@ -329,7 +337,7 @@ export default function Footer() {
               flex: 1,
               height: '1px',
               backgroundColor: 'rgba(122, 90, 58, 0.22)',
-              marginRight: '1.5rem',
+              marginRight: '24px',
               display: 'block',
             }}
             className="footer-flank-line"
@@ -340,10 +348,10 @@ export default function Footer() {
             className="footer-hero-brand-text"
             style={{
               margin: 0,
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontFamily: 'Cormorant Garamond, serif',
               fontWeight: 500,
-              color: 'rgba(122, 90, 58, 0.42)',
-              letterSpacing: '0.01em',
+              color: 'rgba(122, 90, 58, 0.25)',
+              letterSpacing: '0.04em',
               lineHeight: 1,
               whiteSpace: 'nowrap',
               textAlign: 'center',
@@ -359,7 +367,7 @@ export default function Footer() {
               flex: 1,
               height: '1px',
               backgroundColor: 'rgba(122, 90, 58, 0.22)',
-              marginLeft: '1.5rem',
+              marginLeft: '24px',
               display: 'block',
             }}
             className="footer-flank-line"

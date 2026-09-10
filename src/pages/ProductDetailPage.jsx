@@ -10,13 +10,11 @@ import {
 } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import ProductCard from '../components/ProductCard';
-import { useTheme } from '../context/ThemeContext';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeImageView, setActiveImageView] = useState('card');
-  const { isDark } = useTheme();
 
   const product = PRODUCTS.find((p) => p.id === id);
 
@@ -202,7 +200,7 @@ export default function ProductDetailPage() {
                     backgroundColor: activeImageView === 'card' ? colors.accentWalnut : 'transparent',
                     border: 'none',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
+                    transition: 'all 0.25s ease',
                   }}
                 >
                   Detail View
@@ -220,7 +218,7 @@ export default function ProductDetailPage() {
                     backgroundColor: activeImageView === 'showcase' ? colors.accentWalnut : 'transparent',
                     border: 'none',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
+                    transition: 'all 0.25s ease',
                   }}
                 >
                   Interior Spread
@@ -243,7 +241,7 @@ export default function ProductDetailPage() {
             {/* Category / Subcategory Path */}
             <div
               style={{
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
                 fontSize: '0.75rem',
@@ -251,11 +249,11 @@ export default function ProductDetailPage() {
                 textTransform: 'uppercase',
                 color: colors.accentWalnut,
                 fontWeight: 700,
-                marginBottom: '0.75rem',
+                marginBottom: '0.8rem',
               }}
             >
               <span>{product.category}</span>
-              <span>/</span>
+              <span style={{ opacity: 0.5 }}>/</span>
               <span>{product.subcategory}</span>
             </div>
 
@@ -263,7 +261,7 @@ export default function ProductDetailPage() {
             <h1
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(2.2rem, 3.2vw, 3.2rem)',
+                fontSize: 'clamp(2.4rem, 3.5vw, 3.5rem)',
                 color: colors.textPrimary,
                 marginBottom: '1.25rem',
                 lineHeight: 1.12,

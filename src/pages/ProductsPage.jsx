@@ -5,12 +5,10 @@ import ShowcaseSection from '../components/ShowcaseSection';
 import CinematicScroll from '../components/CinematicScroll';
 import ProductModal from '../components/ProductModal';
 import { PRODUCTS } from '../data/products';
-import { useTheme } from '../context/ThemeContext';
 
 export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { isDark } = useTheme();
 
   const categoryParam = searchParams.get('category') || 'All';
   const [selectedCategory, setSelectedCategory] = useState(categoryParam);

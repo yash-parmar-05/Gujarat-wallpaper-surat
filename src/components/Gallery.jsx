@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Maximize2, Sparkles } from 'lucide-react';
 import { GALLERY_ITEMS } from '../data/products';
@@ -6,7 +7,30 @@ import { useTheme } from '../context/ThemeContext';
 
 export default function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [mounted, setMounted] = useState(false);
   const { isDark } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (lightboxIndex !== null) {
+      document.body.classList.add('lightbox-open');
+      if (window.lenis) {
+        window.lenis.stop();
+      }
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.classList.remove('lightbox-open');
+        if (window.lenis) {
+          window.lenis.start();
+        }
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [lightboxIndex]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -61,27 +85,32 @@ export default function Gallery() {
             <h2
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
+                fontSize: 'clamp(2.4rem, 4.5vw, 3.75rem)',
                 color: textPrimary,
                 marginBottom: '1rem',
                 letterSpacing: '-0.02em',
-                lineHeight: 1.08,
+                lineHeight: 1.1,
+                fontWeight: 600,
               }}
             >
               The Visual Gallery
             </h2>
-            <p style={{ fontSize: '1.05rem', color: textSecondary, lineHeight: 1.7, fontWeight: 400 }}>
+            <p style={{ fontSize: '1.05rem', color: textSecondary, lineHeight: 1.7, margin: 0, fontWeight: 400 }}>
               A curated visual anthology of luxury Italian textures, embossed damasks, marble wallcoverings, and designer living room walls from our signature catalogs.
             </p>
           </div>
 
           <div
             style={{
-              fontSize: '0.8rem',
-              letterSpacing: '0.14em',
+              fontSize: '0.75rem',
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
               color: walnut,
-              fontWeight: 600,
+              fontWeight: 700,
+              padding: '0.5rem 1.15rem',
+              backgroundColor: '#E7D7BE',
+              borderRadius: '20px',
+              border: '1px solid rgba(122, 90, 58, 0.2)',
             }}
           >
             Click Any Image for Full-Screen View
@@ -93,7 +122,7 @@ export default function Gallery() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '1.75rem',
+            gap: '1.5rem',
           }}
           className="gallery-masonry-grid"
         >
@@ -104,31 +133,31 @@ export default function Gallery() {
 
             if (index === 0) {
               colSpan = 'span 8';
-              height = '460px';
+              height = '440px';
             } else if (index === 1) {
               colSpan = 'span 4';
-              height = '460px';
+              height = '440px';
             } else if (index === 2) {
               colSpan = 'span 5';
-              height = '420px';
+              height = '400px';
             } else if (index === 3) {
               colSpan = 'span 7';
-              height = '420px';
+              height = '400px';
             } else if (index === 4) {
               colSpan = 'span 7';
-              height = '440px';
+              height = '420px';
             } else if (index === 5) {
               colSpan = 'span 5';
-              height = '440px';
+              height = '420px';
             }
 
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.65, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, delay: index * 0.06, ease: 'easeOut' }}
                 onClick={() => setLightboxIndex(index)}
                 style={{
                   gridColumn: colSpan,
@@ -138,8 +167,9 @@ export default function Gallery() {
                   cursor: 'pointer',
                   height: height,
                   backgroundColor: '#E7D7BE',
-                  boxShadow: '0 12px 32px rgba(122, 90, 58, 0.08)',
-                  border: '1px solid rgba(122, 90, 58, 0.12)',
+                  boxShadow: '0 8px 24px rgba(122, 90, 58, 0.06)',
+                  border: '1px solid rgba(122, 90, 58, 0.16)',
+                  transition: 'box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease',
                 }}
                 className="gallery-item-card"
               >
@@ -151,7 +181,7 @@ export default function Gallery() {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+                    transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                   className="gallery-zoom-img"
                 />
@@ -162,9 +192,9 @@ export default function Gallery() {
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, rgba(47, 47, 47, 0.92) 0%, rgba(47, 47, 47, 0.35) 60%, rgba(47, 47, 47, 0) 100%)',
+                    background: 'linear-gradient(to top, rgba(20, 19, 18, 0.95) 0%, rgba(20, 19, 18, 0.4) 60%, transparent 100%)',
                     opacity: 0,
-                    transition: 'opacity 0.35s ease',
+                    transition: 'opacity 0.3s ease',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-end',
@@ -177,8 +207,8 @@ export default function Gallery() {
                       letterSpacing: '0.15em',
                       textTransform: 'uppercase',
                       color: '#C8A96A',
-                      marginBottom: '0.35rem',
-                      fontWeight: 600,
+                      marginBottom: '0.4rem',
+                      fontWeight: 700,
                     }}
                   >
                     {item.category}
@@ -186,18 +216,19 @@ export default function Gallery() {
                   <h4
                     style={{
                       fontFamily: "'Cormorant Garamond', Georgia, serif",
-                      fontSize: '1.45rem',
-                      color: '#F8F5F1',
+                      fontSize: '1.4rem',
+                      color: '#FFFFFF',
                       marginBottom: '0.4rem',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
+                      fontWeight: 600,
                     }}
                   >
                     <span>{item.title}</span>
                     <Maximize2 size={18} color="#C8A96A" />
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: '#E7D7BE', lineHeight: 1.5, fontWeight: 300 }}>
+                  <p style={{ fontSize: '0.85rem', color: '#E7D7BE', lineHeight: 1.5, margin: 0, fontWeight: 300 }}>
                     {item.caption}
                   </p>
                 </div>
@@ -207,87 +238,96 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {activeItem && (
-          <div
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 300,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '1.5rem',
-            }}
-          >
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setLightboxIndex(null)}
+      {/* Lightbox Modal Portaled Directly to document.body */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {activeItem && (
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Gallery Image Lightbox"
               style={{
-                position: 'absolute',
+                position: 'fixed',
                 inset: 0,
-                backgroundColor: 'rgba(14, 13, 12, 0.95)',
-                backdropFilter: 'blur(16px)',
-              }}
-            />
-
-            {/* Lightbox Content */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                position: 'relative',
-                maxWidth: '1200px',
-                width: '100%',
-                maxHeight: '92vh',
+                zIndex: 999999,
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
-                zIndex: 10,
+                justifyContent: 'center',
+                padding: '24px',
+                boxSizing: 'border-box',
               }}
+              className="gallery-lightbox-overlay"
             >
-              {/* Close Button */}
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setLightboxIndex(null)}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundColor: 'rgba(14, 13, 12, 0.95)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                }}
+              />
+
+              {/* Viewport Top-Right Close Button */}
               <button
                 onClick={() => setLightboxIndex(null)}
                 aria-label="Close Lightbox"
-                className="lightbox-close-btn"
+                className="gallery-lightbox-close"
                 style={{
-                  position: 'absolute',
-                  top: '-3.5rem',
-                  right: 0,
+                  position: 'fixed',
+                  top: '24px',
+                  right: '24px',
+                  zIndex: 1000000,
                   color: '#F7F4EE',
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   borderRadius: '50%',
-                  width: '42px',
-                  height: '42px',
+                  width: '44px',
+                  height: '44px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transition: 'background-color 0.2s ease',
+                  cursor: 'pointer',
+                  boxShadow: '0 6px 24px rgba(0, 0, 0, 0.65)',
+                  transition: 'all 0.2s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#C5A880')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = walnut;
+                  e.currentTarget.style.borderColor = walnut;
+                  e.currentTarget.style.transform = 'scale(1.08)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
               >
-                <X size={20} />
+                <X size={22} color="#ffffff" />
               </button>
 
-              {/* Navigation Controls */}
+              {/* Viewport Fixed Navigation Controls */}
               <button
                 onClick={() => setLightboxIndex((prev) => (prev > 0 ? prev - 1 : GALLERY_ITEMS.length - 1))}
                 aria-label="Previous image"
+                className="gallery-lightbox-nav-btn gallery-nav-prev"
                 style={{
-                  position: 'absolute',
-                  left: '-3.5rem',
+                  position: 'fixed',
+                  left: '24px',
                   top: '50%',
                   transform: 'translateY(-50%)',
+                  zIndex: 100000,
                   color: '#F7F4EE',
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   borderRadius: '50%',
                   width: '48px',
                   height: '48px',
@@ -295,9 +335,19 @@ export default function Gallery() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  zIndex: 20,
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+                  transition: 'all 0.2s ease',
                 }}
-                className="lightbox-nav-btn"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = walnut;
+                  e.currentTarget.style.borderColor = walnut;
+                  e.currentTarget.style.transform = 'translateY(-50%) scale(1.06)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                }}
               >
                 <ChevronLeft size={24} />
               </button>
@@ -305,13 +355,18 @@ export default function Gallery() {
               <button
                 onClick={() => setLightboxIndex((prev) => (prev < GALLERY_ITEMS.length - 1 ? prev + 1 : 0))}
                 aria-label="Next image"
+                className="gallery-lightbox-nav-btn gallery-nav-next"
                 style={{
-                  position: 'absolute',
-                  right: '-3.5rem',
+                  position: 'fixed',
+                  right: '24px',
                   top: '50%',
                   transform: 'translateY(-50%)',
+                  zIndex: 100000,
                   color: '#F7F4EE',
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   borderRadius: '50%',
                   width: '48px',
                   height: '48px',
@@ -319,75 +374,118 @@ export default function Gallery() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  zIndex: 20,
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+                  transition: 'all 0.2s ease',
                 }}
-                className="lightbox-nav-btn"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = walnut;
+                  e.currentTarget.style.borderColor = walnut;
+                  e.currentTarget.style.transform = 'translateY(-50%) scale(1.06)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+                }}
               >
                 <ChevronRight size={24} />
               </button>
 
-              {/* Main Lightbox Image Frame */}
-              <div
+              {/* Lightbox Content Frame */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 12 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="gallery-lightbox-card"
                 style={{
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  backgroundColor: '#141312',
-                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  maxHeight: '75vh',
+                  position: 'relative',
+                  maxWidth: '1200px',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  zIndex: 10,
                 }}
               >
-                <img
-                  src={activeItem.image}
-                  alt={activeItem.title}
+                {/* Main Lightbox Image Frame */}
+                <div
+                  className="gallery-lightbox-img-frame"
                   style={{
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    backgroundColor: '#141312',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
                     maxHeight: '75vh',
-                    width: 'auto',
-                    maxWidth: '100%',
-                    objectFit: 'contain',
-                    display: 'block',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
-                />
-              </div>
+                >
+                  <img
+                    src={activeItem.image}
+                    alt={activeItem.title}
+                    className="gallery-lightbox-img"
+                    style={{
+                      maxHeight: '75vh',
+                      width: 'auto',
+                      maxWidth: '100%',
+                      objectFit: 'contain',
+                      display: 'block',
+                    }}
+                  />
+                </div>
 
-              {/* Caption Strip */}
-              <div
-                style={{
-                  marginTop: '1.25rem',
-                  textAlign: 'center',
-                  maxWidth: '700px',
-                }}
-              >
-                <span
+                {/* Caption Strip */}
+                <div
+                  className="gallery-lightbox-caption"
                   style={{
-                    fontSize: '0.72rem',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    color: '#C5A880',
+                    marginTop: '1.25rem',
+                    textAlign: 'center',
+                    maxWidth: '700px',
+                    padding: '0 16px',
                   }}
                 >
-                  {activeItem.category} • Image {lightboxIndex + 1} of {GALLERY_ITEMS.length}
-                </span>
-                <h3
-                  style={{
-                    fontSize: '1.5rem',
-                    color: '#F7F4EE',
-                    marginTop: '0.25rem',
-                    marginBottom: '0.25rem',
-                  }}
-                >
-                  {activeItem.title}
-                </h3>
-                <p style={{ fontSize: '0.88rem', color: '#A8A29E', fontWeight: 300 }}>
-                  {activeItem.caption}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                  <span
+                    style={{
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      color: gold,
+                      fontWeight: 600,
+                    }}
+                  >
+                    {activeItem.category} • Image {lightboxIndex + 1} of {GALLERY_ITEMS.length}
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: "'Cormorant Garamond', Georgia, serif",
+                      fontSize: '1.5rem',
+                      color: '#F7F4EE',
+                      marginTop: '0.25rem',
+                      marginBottom: '0.25rem',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {activeItem.title}
+                  </h3>
+                  <p style={{ fontSize: '0.88rem', color: '#A8A29E', margin: 0, fontWeight: 300 }}>
+                    {activeItem.caption}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
       <style>{`
+        .gallery-item-card:hover {
+          border-color: rgba(122, 90, 58, 0.4) !important;
+          transform: translateY(-4px);
+        }
         .gallery-item-card:hover .gallery-zoom-img {
           transform: scale(1.05);
         }
@@ -404,9 +502,6 @@ export default function Gallery() {
             grid-column: span 1 !important;
             height: 300px !important;
           }
-          .lightbox-nav-btn {
-            display: none !important;
-          }
         }
 
         @media (max-width: 768px) {
@@ -415,6 +510,31 @@ export default function Gallery() {
           }
           .gallery-item-card {
             height: 240px !important;
+          }
+          .gallery-lightbox-overlay {
+            padding: 16px !important;
+          }
+          .gallery-lightbox-close {
+            top: 18px !important;
+            right: 18px !important;
+            width: 44px !important;
+            height: 44px !important;
+          }
+          .gallery-lightbox-nav-btn {
+            width: 40px !important;
+            height: 40px !important;
+          }
+          .gallery-nav-prev {
+            left: 10px !important;
+          }
+          .gallery-nav-next {
+            right: 10px !important;
+          }
+          .gallery-lightbox-img-frame {
+            max-height: 60vh !important;
+          }
+          .gallery-lightbox-img {
+            max-height: 60vh !important;
           }
         }
 
@@ -436,10 +556,27 @@ export default function Gallery() {
           .gallery-item-card {
             height: 220px !important;
           }
-          .lightbox-close-btn {
-            top: 0.75rem !important;
-            right: 0.75rem !important;
-            position: fixed !important;
+          .gallery-lightbox-close {
+            top: 14px !important;
+            right: 14px !important;
+            width: 42px !important;
+            height: 42px !important;
+          }
+          .gallery-lightbox-nav-btn {
+            width: 36px !important;
+            height: 36px !important;
+          }
+          .gallery-nav-prev {
+            left: 6px !important;
+          }
+          .gallery-nav-next {
+            right: 6px !important;
+          }
+          .gallery-lightbox-img-frame {
+            max-height: 55vh !important;
+          }
+          .gallery-lightbox-img {
+            max-height: 55vh !important;
           }
         }
       `}</style>

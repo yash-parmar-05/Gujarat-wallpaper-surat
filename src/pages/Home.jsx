@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
   Sparkles,
   MessageCircle,
   ShieldCheck,
@@ -16,12 +14,9 @@ import {
   Users
 } from 'lucide-react';
 
-import { useTheme } from '../context/ThemeContext';
 import ShowroomModal from '../components/ShowroomModal';
 import CatalogsSection from '../components/CatalogsSection';
 
-// 6 actual showroom photos converted from HEIC to JPEG (browser-compatible)
-// showroom-06 is placed first as requested, followed by 01, 02, 03, 04, 05
 const HERO_SLIDES = [
   {
     image: '/showroom/showroom-06.webp',
@@ -61,10 +56,9 @@ const HERO_SLIDES = [
   },
 ];
 
-// Custom SVG Icons for Instagram & YouTube for precision luxury styling
-function InstagramIcon({ size = 22, color = 'currentColor' }) {
+function InstagramIcon({ size = 20, color = 'currentColor' }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -72,7 +66,7 @@ function InstagramIcon({ size = 22, color = 'currentColor' }) {
   );
 }
 
-function YouTubeIcon({ size = 22, color = 'currentColor' }) {
+function YouTubeIcon({ size = 20, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -80,9 +74,9 @@ function YouTubeIcon({ size = 22, color = 'currentColor' }) {
   );
 }
 
-function FacebookIcon({ size = 22, color = 'currentColor' }) {
+function FacebookIcon({ size = 20, color = 'currentColor' }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
   );
@@ -90,18 +84,15 @@ function FacebookIcon({ size = 22, color = 'currentColor' }) {
 
 export default function Home() {
   const navigate = useNavigate();
-  const { isDark } = useTheme();
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const [isShowroomModalOpen, setIsShowroomModalOpen] = useState(false);
 
-  // Allow other components/buttons to trigger the showroom modal
   useEffect(() => {
     const handleOpenModal = () => setIsShowroomModalOpen(true);
     window.addEventListener('open-showroom-modal', handleOpenModal);
     return () => window.removeEventListener('open-showroom-modal', handleOpenModal);
   }, []);
 
-  // Pre-cache all 6 showroom images once on mount
   useEffect(() => {
     HERO_SLIDES.forEach((slide) => {
       const img = new Image();
@@ -109,51 +100,32 @@ export default function Home() {
     });
   }, []);
 
-  // Smooth automatic slideshow rotation (Every 4 seconds)
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveHeroSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 4000);
+    }, 4500);
 
     return () => window.clearInterval(timer);
   }, []);
 
-  const changeHeroSlide = (direction) => {
-    setActiveHeroSlide((prev) => (prev + direction + HERO_SLIDES.length) % HERO_SLIDES.length);
-  };
-
-  // Signature Luxury Ivory + Warm Beige + Walnut Theme Colors
-  const colors = {
-    bgMain: '#F8F5F1',
-    bgSectionAlt: '#E7D7BE',
-    bgCard: '#FFFFFF',
-    bgCardHover: '#FCFAF7',
-    textPrimary: '#2F2F2F',
-    textSecondary: '#5A5652',
-    textMuted: '#87827C',
-    accentWalnut: '#7A5A3A',
-    accentGold: '#7A5A3A',
-    accentGoldHover: '#63472C',
-    borderSubtle: 'rgba(122, 90, 58, 0.12)',
-    borderCard: 'rgba(122, 90, 58, 0.18)',
-  };
-
-  // 3 Why Choose Us Highlights
   const whyHighlights = [
     {
       icon: Award,
-      title: 'Premium Selection',
-      desc: 'Carefully curated patterns from around the world, authentic textures, and fire & water-resistant materials.',
+      tag: '5,000+ Ready Rolls',
+      title: '5,000+ Ready Stock in Surat',
+      desc: 'No waiting for weeks. Take your favorite wallpaper home today or get same-day delivery across Surat.',
     },
     {
       icon: ShieldCheck,
-      title: 'Expert Guidance',
-      desc: 'Personalized assistance from experienced showroom specialists for residential bungalows, apartments, and commercial projects.',
+      tag: 'Fast 24-Hr Fitting',
+      title: 'Quick Fitting by Trained Staff',
+      desc: 'Our staff installs your wallpaper cleanly in 24 hours with zero bubbles and safe, odorless German glue.',
     },
     {
       icon: Layers,
-      title: 'Complete Wall & Decor Solutions',
-      desc: 'From designer wallpapers and PVC panels to turf and bespoke carpets, everything under one roof in Surat.',
+      tag: '100% Washable',
+      title: 'Easy to Clean & Long Lasting',
+      desc: 'Wipe clean easily with a wet cloth. Safe from moisture and water, made to last 10 to 15 years.',
     },
   ];
 
@@ -163,12 +135,13 @@ export default function Home() {
         position: 'relative',
         width: '100%',
         overflowX: 'hidden',
-        backgroundColor: colors.bgMain,
-        color: colors.textPrimary,
-        transition: 'background-color 0.35s ease, color 0.3s ease',
+        backgroundColor: 'var(--bg-primary, #F8F5F1)',
+        color: 'var(--text-primary, #2F2F2F)',
       }}
     >
-
+      {/* =========================================
+          HERO SECTION — Full-Bleed Luxury Showroom Showcase
+          ========================================= */}
       {/* =========================================
           HERO SECTION — High-End Luxury Showroom Experience
           ========================================= */}
@@ -281,11 +254,12 @@ export default function Home() {
             width: '100%',
             maxWidth: '1440px',
             margin: '0 auto',
-            padding: '7rem 2rem 2.5rem',
+            padding: '7.5rem 2rem 2.5rem',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             flex: 1,
+            boxSizing: 'border-box',
           }}
         >
           {/* Upper Row: Brand Content */}
@@ -300,7 +274,7 @@ export default function Home() {
             }}
           >
             {/* Brand Content & Action */}
-            <div style={{ width: '100%' }} className="hero-text-block">
+            <div style={{ width: '100%', textAlign: 'left' }} className="hero-text-block">
               {/* Eyebrow badge */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -328,7 +302,7 @@ export default function Home() {
                 }}
               >
                 <Sparkles size={14} color="#C8A96A" />
-                SURAT • GUJARAT WALLPAPER &amp; DECOR
+                <span>SURAT • GUJARAT WALLPAPER &amp; DECOR</span>
               </motion.div>
 
               {/* Main Heading */}
@@ -345,6 +319,7 @@ export default function Home() {
                   fontWeight: 500,
                   letterSpacing: '-0.01em',
                   marginBottom: '1.4rem',
+                  textAlign: 'left',
                   textShadow: '0 4px 24px rgba(0, 0, 0, 0.6)',
                 }}
               >
@@ -375,6 +350,7 @@ export default function Home() {
                   maxWidth: '560px',
                   fontWeight: 300,
                   marginBottom: '2.2rem',
+                  textAlign: 'left',
                   textShadow: '0 2px 12px rgba(0, 0, 0, 0.5)',
                 }}
               >
@@ -476,9 +452,9 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
                   gap: '1.25rem',
-                  maxWidth: '580px',
+                  maxWidth: '680px',
                   paddingTop: '1.4rem',
                   borderTop: '1px solid rgba(255, 255, 255, 0.18)',
                 }}
@@ -621,7 +597,7 @@ export default function Home() {
               </div>
 
               {/* Stat 2: YouTube */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item hero-stat-divider" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
@@ -649,7 +625,7 @@ export default function Home() {
               </div>
 
               {/* Stat 3: Facebook */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item hero-stat-divider" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
@@ -677,7 +653,7 @@ export default function Home() {
               </div>
 
               {/* Stat 4: Customers */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item hero-stat-divider" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
@@ -705,7 +681,7 @@ export default function Home() {
               </div>
 
               {/* Stat 5: Excellence */}
-              <div className="hero-stat-card hero-stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
+              <div className="hero-stat-card hero-stat-item hero-stat-divider hero-stat-last" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', borderLeft: '1px solid rgba(255, 255, 255, 0.15)', paddingLeft: '1.25rem' }}>
                 <div
                   className="hero-stat-icon"
                   style={{
@@ -737,23 +713,21 @@ export default function Home() {
       </section>
 
       {/* ==================================================
-          3. CATALOGS SECTION (2 EXCLUSIVE WALLPAPER PDFS)
+          2. OFFICIAL CATALOGS SECTION (Graphite Cards)
           ================================================== */}
       <CatalogsSection id="catalogs" />
 
-
       {/* ==================================================
-          4. FEATURED SHOWROOM EXPERIENCE (SPLIT LAYOUT)
+          3. FEATURED SHOWROOM EXPERIENCE (SPLIT LAYOUT)
           ================================================== */}
       <section
         id="showroom-experience"
         style={{
           padding: '6.5rem 0',
-          backgroundColor: colors.bgSectionAlt,
-          borderTop: `1px solid ${colors.borderSubtle}`,
-          borderBottom: `1px solid ${colors.borderSubtle}`,
+          backgroundColor: 'var(--bg-secondary, #E7D7BE)',
+          borderTop: '1px solid rgba(122, 90, 58, 0.12)',
+          borderBottom: '1px solid rgba(122, 90, 58, 0.12)',
           position: 'relative',
-          transition: 'background-color 0.35s ease, border-color 0.3s ease',
         }}
       >
         <div className="container-luxury">
@@ -766,22 +740,18 @@ export default function Home() {
             }}
             className="showroom-split-grid"
           >
-            {/* LEFT: REAL SHOWROOM PHOTO */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+            {/* Left Photo */}
+            <div
               style={{
                 position: 'relative',
                 borderRadius: '14px',
                 overflow: 'hidden',
-                border: `1px solid ${colors.borderCard}`,
-                boxShadow: isDark ? '0 20px 50px rgba(0, 0, 0, 0.5)' : '0 15px 40px rgba(0, 0, 0, 0.09)',
+                border: '1px solid rgba(122, 90, 58, 0.18)',
+                boxShadow: '0 15px 40px rgba(0, 0, 0, 0.09)',
                 height: '420px',
-                backgroundColor: isDark ? '#0D0C0B' : '#EAE3D9',
+                backgroundColor: '#EAE3D9',
               }}
-              className="showroom-photo-wrapper"
+              className="showroom-photo-box"
             >
               <img
                 src="/assets/youtube-silver-play-button.jpg"
@@ -793,37 +763,32 @@ export default function Home() {
                   objectPosition: 'center 20%',
                 }}
               />
-            </motion.div>
+            </div>
 
-            {/* RIGHT: CONTENT & SHOWROOM DETAILS */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            {/* Right Content */}
+            <div className="showroom-content-box">
               <div
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
+                  gap: '0.45rem',
                   fontSize: '0.72rem',
-                  letterSpacing: '0.2em',
+                  letterSpacing: '0.18em',
                   textTransform: 'uppercase',
-                  color: colors.accentGold,
+                  color: '#7A5A3A',
                   fontWeight: 600,
-                  marginBottom: '0.85rem',
+                  marginBottom: '1rem',
                 }}
               >
-                <Eye size={14} />
-                THE PHYSICAL EXPERIENCE
+                <Eye size={14} color="#7A5A3A" />
+                <span>[ The Physical Experience ]</span>
               </div>
 
               <h2
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: 'clamp(2.35rem, 3.8vw, 3.25rem)',
-                  color: colors.textPrimary,
+                  fontSize: 'clamp(2.2rem, 3.4vw, 3rem)',
+                  color: '#2F2F2F',
                   fontWeight: 500,
                   lineHeight: 1.15,
                   marginBottom: '1rem',
@@ -835,9 +800,9 @@ export default function Home() {
               <p
                 style={{
                   fontSize: '1.02rem',
-                  color: colors.textSecondary,
+                  color: '#5A5652',
                   lineHeight: 1.7,
-                  fontWeight: 300,
+                  fontWeight: 400,
                   marginBottom: '1.75rem',
                   maxWidth: '520px',
                 }}
@@ -848,48 +813,64 @@ export default function Home() {
               {/* Showroom Bullet Points */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', marginBottom: '2.25rem' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <CheckCircle2 size={18} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <span style={{ fontSize: '0.88rem', color: colors.textSecondary, lineHeight: 1.5 }}>
-                    <strong style={{ color: colors.textPrimary }}>Touch &amp; Feel Quality:</strong> Inspect authentic metallic wallpapers, 3D PVC fluted slats, and hand-tufted carpets.
+                  <CheckCircle2 size={18} color="#7A5A3A" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <span style={{ fontSize: '0.88rem', color: '#5A5652', lineHeight: 1.5 }}>
+                    <strong style={{ color: '#2F2F2F' }}>Touch &amp; Feel Quality:</strong> Inspect authentic metallic wallpapers, 3D PVC fluted slats, and hand-tufted carpets.
                   </span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <CheckCircle2 size={18} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <span style={{ fontSize: '0.88rem', color: colors.textSecondary, lineHeight: 1.5 }}>
-                    <strong style={{ color: colors.textPrimary }}>Architectural Lighting:</strong> Observe true-to-life color reproduction under specialized showroom illumination.
+                  <CheckCircle2 size={18} color="#7A5A3A" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <span style={{ fontSize: '0.88rem', color: '#5A5652', lineHeight: 1.5 }}>
+                    <strong style={{ color: '#2F2F2F' }}>Architectural Lighting:</strong> Observe true-to-life color reproduction under specialized showroom illumination.
                   </span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <CheckCircle2 size={18} color={colors.accentGold} style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <span style={{ fontSize: '0.88rem', color: colors.textSecondary, lineHeight: 1.5 }}>
-                    <strong style={{ color: colors.textPrimary }}>Main Polaris Branch:</strong> Shop No. 154, Polaris Mall, Puna Canal Road, Surat.
+                  <CheckCircle2 size={18} color="#7A5A3A" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <span style={{ fontSize: '0.88rem', color: '#2F2F2F' }}>
+                    <strong style={{ color: '#2F2F2F' }}>Main Polaris Branch:</strong> Shop No. 154, Polaris Mall, Puna Canal Road, Surat.
                   </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: '1rem',
+                }}
+                className="showroom-action-btns"
+              >
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=Shop+No.+154+Polaris+Mall+Puna+Canal+Road+Surat"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="btn-primary"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.65rem',
-                    padding: '0.85rem 1.8rem',
-                    backgroundColor: colors.accentGold,
-                    color: isDark ? '#141312' : '#FFFFFF',
-                    fontSize: '0.8rem',
+                    gap: '0.55rem',
+                    padding: '0.95rem 2.2rem',
+                    backgroundColor: '#7A5A3A',
+                    color: '#FFFFFF',
+                    fontSize: '0.82rem',
                     fontWeight: 600,
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
-                    borderRadius: '4px',
+                    borderRadius: '24px',
                     textDecoration: 'none',
                     transition: 'all 0.3s ease',
+                    boxShadow: '0 6px 20px rgba(122, 90, 58, 0.25)',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.accentGoldHover)}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.accentGold)}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#63472C';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#7A5A3A';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
                 >
                   <Navigation size={15} />
                   <span>GET DIRECTIONS</span>
@@ -902,82 +883,72 @@ export default function Home() {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.65rem',
-                    padding: '0.85rem 1.8rem',
+                    gap: '0.55rem',
+                    padding: '0.95rem 2.2rem',
                     backgroundColor: 'transparent',
-                    color: colors.textPrimary,
-                    fontSize: '0.8rem',
-                    fontWeight: 500,
+                    color: '#2F2F2F',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
-                    borderRadius: '4px',
-                    border: `1px solid ${colors.borderCard}`,
+                    borderRadius: '24px',
+                    border: '1px solid rgba(122, 90, 58, 0.3)',
                     textDecoration: 'none',
                     transition: 'all 0.3s ease',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)';
-                    e.currentTarget.style.borderColor = colors.accentGold;
+                    e.currentTarget.style.borderColor = '#7A5A3A';
+                    e.currentTarget.style.color = '#7A5A3A';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                    e.currentTarget.style.borderColor = colors.borderCard;
+                    e.currentTarget.style.borderColor = 'rgba(122, 90, 58, 0.3)';
+                    e.currentTarget.style.color = '#2F2F2F';
+                    e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  <MessageCircle size={15} color="#25D366" />
+                  <MessageCircle size={15} />
                   <span>WHATSAPP ENQUIRY</span>
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ==================================================
-          5. WHY CHOOSE US PREVIEW (3 CONCISE POINTS + CTA)
+          4. WHY CHOOSE US PREVIEW (3 Cards)
           ================================================== */}
       <section
         id="why-choose-us-preview"
         style={{
-          padding: '6.5rem 0',
-          backgroundColor: colors.bgMain,
-          position: 'relative',
-          transition: 'background-color 0.35s ease',
+          padding: '72px 0',
+          backgroundColor: 'var(--bg-primary, #F8F5F1)',
         }}
       >
         <div className="container-luxury">
           <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3.5rem' }}>
-            <div
-              style={{
-                fontSize: '0.72rem',
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
-                color: colors.accentGold,
-                fontWeight: 600,
-                marginBottom: '0.75rem',
-              }}
-            >
-              SHOWROOM EXCELLENCE
+            <div className="editorial-eyebrow" style={{ marginBottom: '0.85rem', color: 'var(--accent-walnut, #7A5A3A)' }}>
+              <span>[ SHOWROOM EXCELLENCE ]</span>
             </div>
 
             <h2
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(2.35rem, 4vw, 3.4rem)',
-                color: colors.textPrimary,
+                fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
+                fontSize: 'clamp(2.3rem, 3.6vw, 3.2rem)',
+                color: 'var(--text-primary, #2F2F2F)',
                 fontWeight: 500,
-                marginBottom: '0.85rem',
+                marginBottom: '1rem',
               }}
             >
               Why Gujarat Wallpaper &amp; Decor?
             </h2>
 
-            <p style={{ fontSize: '0.98rem', color: colors.textSecondary, lineHeight: 1.65, fontWeight: 300 }}>
+            <p style={{ fontSize: '1rem', color: 'var(--text-secondary, #5A5652)', lineHeight: 1.65, fontWeight: 400 }}>
               Trusted by Surat's top architects, interior decorators, and discerning homeowners.
             </p>
           </div>
 
-          {/* 3 Concise Highlight Cards */}
           <div
             style={{
               display: 'grid',
@@ -987,51 +958,71 @@ export default function Home() {
             }}
             className="why-preview-grid"
           >
-            {whyHighlights.map((item, idx) => {
+            {whyHighlights.map((item) => {
               const IconComponent = item.icon;
               return (
-                <motion.div
+                <div
                   key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  className="why-preview-card"
                   style={{
-                    backgroundColor: colors.bgCard,
-                    border: `1px solid ${colors.borderCard}`,
-                    borderRadius: '10px',
-                    padding: '2.5rem 2rem',
                     display: 'flex',
                     flexDirection: 'column',
-                    boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.04)',
-                    transition: 'all 0.3s ease',
+                    backgroundColor: 'var(--bg-surface, #FFFFFF)',
+                    border: '1px solid var(--border-card, rgba(122, 90, 58, 0.16))',
+                    borderRadius: '12px',
+                    padding: '2.25rem 1.75rem',
+                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
                   }}
-                  className="why-preview-card"
                 >
                   <div
                     style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '8px',
-                      backgroundColor: isDark ? 'rgba(197, 168, 128, 0.12)' : 'rgba(166, 131, 83, 0.12)',
-                      border: `1px solid ${colors.borderCard}`,
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      color: colors.accentGold,
-                      marginBottom: '1.5rem',
+                      justifyContent: 'space-between',
+                      marginBottom: '1.25rem',
                     }}
                   >
-                    <IconComponent size={20} />
+                    <div
+                      style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '10px',
+                        backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--accent-walnut, #7A5A3A)',
+                        border: '1px solid rgba(122, 90, 58, 0.16)',
+                      }}
+                    >
+                      <IconComponent size={20} />
+                    </div>
+
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                        color: 'var(--accent-walnut, #7A5A3A)',
+                        backgroundColor: 'rgba(122, 90, 58, 0.06)',
+                        padding: '4px 10px',
+                        borderRadius: '9999px',
+                        border: '1px solid rgba(122, 90, 58, 0.14)',
+                      }}
+                    >
+                      {item.tag}
+                    </span>
                   </div>
 
                   <h3
                     style={{
-                      fontFamily: "'Cormorant Garamond', Georgia, serif",
-                      fontSize: '1.45rem',
-                      color: colors.textPrimary,
+                      fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
+                      fontSize: '1.35rem',
+                      color: 'var(--text-primary, #2F2F2F)',
                       fontWeight: 600,
                       marginBottom: '0.75rem',
+                      lineHeight: 1.25,
                     }}
                   >
                     {item.title}
@@ -1040,78 +1031,50 @@ export default function Home() {
                   <p
                     style={{
                       fontSize: '0.88rem',
-                      color: colors.textSecondary,
-                      lineHeight: 1.65,
-                      fontWeight: 300,
+                      color: 'var(--text-secondary, #5A5652)',
+                      lineHeight: 1.6,
+                      fontWeight: 400,
                       margin: 0,
                     }}
                   >
                     {item.desc}
                   </p>
-                </motion.div>
+                </div>
               );
             })}
           </div>
 
-          {/* VIEW WHY CHOOSE US BUTTON */}
           <div style={{ textAlign: 'center' }}>
             <button
               onClick={() => navigate('/why-choose-us')}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.65rem',
-                padding: '0.9rem 2.25rem',
-                backgroundColor: 'transparent',
-                color: colors.accentGold,
-                fontSize: '0.82rem',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                border: `1px solid ${colors.accentGold}`,
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = colors.accentGold;
-                e.currentTarget.style.color = isDark ? '#141312' : '#FFFFFF';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.color = colors.accentGold;
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+              className="btn-secondary"
             >
               <span>VIEW WHY CHOOSE US</span>
-              <ArrowUpRight size={16} />
+              <ArrowUpRight size={15} />
             </button>
           </div>
         </div>
       </section>
 
       {/* ==================================================
-          6. SOCIAL PROOF (COMPACT SOCIAL PRESENCE)
+          5. SOCIAL PRESENCE (3 Cards)
           ================================================== */}
       <section
         id="social-presence"
         style={{
-          padding: '5.5rem 0',
-          backgroundColor: colors.bgSectionAlt,
-          borderTop: `1px solid ${colors.borderSubtle}`,
-          borderBottom: `1px solid ${colors.borderSubtle}`,
-          position: 'relative',
-          transition: 'background-color 0.35s ease, border-color 0.3s ease',
+          padding: '72px 0',
+          backgroundColor: 'var(--bg-secondary, #E7D7BE)',
+          borderTop: '1px solid rgba(122, 90, 58, 0.12)',
+          borderBottom: '1px solid rgba(122, 90, 58, 0.12)',
         }}
       >
         <div className="container-luxury">
-          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3rem' }}>
+          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3.5rem' }}>
             <h2
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(2.2rem, 3.5vw, 3rem)',
-                color: colors.textPrimary,
+                fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
+                fontSize: 'clamp(2.2rem, 3.4vw, 3rem)',
+                color: 'var(--text-primary, #2F2F2F)',
                 fontWeight: 500,
                 marginBottom: '0.75rem',
               }}
@@ -1119,19 +1082,16 @@ export default function Home() {
               Follow Our Work
             </h2>
 
-            <p style={{ fontSize: '0.98rem', color: colors.textSecondary, lineHeight: 1.6, fontWeight: 300 }}>
+            <p style={{ fontSize: '1rem', color: 'var(--text-secondary, #5A5652)', lineHeight: 1.6, fontWeight: 400 }}>
               See our latest wallpaper installations, showroom updates and interior transformations.
             </p>
           </div>
 
-          {/* THREE PREMIUM SOCIAL CTA CARDS */}
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '1.5rem',
-              maxWidth: '1160px',
-              margin: '0 auto',
             }}
             className="social-cta-grid"
           >
@@ -1142,25 +1102,26 @@ export default function Home() {
               rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                backgroundColor: colors.bgCard,
-                border: '1px solid rgba(225, 48, 108, 0.3)',
-                borderRadius: '12px',
-                padding: '1.5rem 1.85rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 gap: '1rem',
-                boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.04)',
-                transition: 'all 0.35s ease',
+                backgroundColor: 'var(--bg-surface, #FFFFFF)',
+                border: '1px solid rgba(225, 48, 108, 0.3)',
+                borderRadius: '12px',
+                padding: '1.5rem 1.85rem',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+                transition: 'all 0.3s ease',
               }}
-              className="social-strip-card instagram-strip-card"
+              className="social-strip-card"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.1rem' }}>
                 <div
+                  className="social-icon-box"
                   style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '12px',
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '10px',
                     background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
                     display: 'flex',
                     alignItems: 'center',
@@ -1169,34 +1130,34 @@ export default function Home() {
                     flexShrink: 0,
                   }}
                 >
-                  <InstagramIcon size={22} color="#FFFFFF" />
+                  <InstagramIcon size={20} color="#FFFFFF" />
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.05rem', fontWeight: 600, color: colors.textPrimary, marginBottom: '0.15rem' }}>
-                    Follow Us on Instagram
+                  <div style={{ fontSize: '0.98rem', fontWeight: 600, color: 'var(--text-primary, #2F2F2F)', marginBottom: '0.15rem' }}>
+                    Follow on Instagram
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: colors.accentGold }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--accent-walnut, #7A5A3A)' }}>
                     @gujarat_wallpaper_decor
                   </div>
                 </div>
               </div>
 
               <div
+                className="social-arrow-btn"
                 style={{
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '50%',
-                  backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
-                  border: `1px solid ${colors.borderCard}`,
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '9999px',
+                  backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                  border: '1px solid rgba(122, 90, 58, 0.16)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: colors.textPrimary,
+                  color: 'var(--accent-walnut, #7A5A3A)',
                   flexShrink: 0,
                 }}
-                className="social-strip-arrow"
               >
-                <ArrowUpRight size={18} />
+                <ArrowUpRight size={16} />
               </div>
             </a>
 
@@ -1207,25 +1168,26 @@ export default function Home() {
               rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                backgroundColor: colors.bgCard,
-                border: '1px solid rgba(255, 0, 0, 0.3)',
-                borderRadius: '12px',
-                padding: '1.5rem 1.85rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 gap: '1rem',
-                boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.04)',
-                transition: 'all 0.35s ease',
+                backgroundColor: 'var(--bg-surface, #FFFFFF)',
+                border: '1px solid rgba(255, 0, 0, 0.3)',
+                borderRadius: '12px',
+                padding: '1.5rem 1.85rem',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+                transition: 'all 0.3s ease',
               }}
-              className="social-strip-card youtube-strip-card"
+              className="social-strip-card"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.1rem' }}>
                 <div
+                  className="social-icon-box"
                   style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '12px',
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '10px',
                     backgroundColor: '#FF0000',
                     display: 'flex',
                     alignItems: 'center',
@@ -1234,34 +1196,34 @@ export default function Home() {
                     flexShrink: 0,
                   }}
                 >
-                  <YouTubeIcon size={22} color="#FFFFFF" />
+                  <YouTubeIcon size={20} color="#FFFFFF" />
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.05rem', fontWeight: 600, color: colors.textPrimary, marginBottom: '0.15rem' }}>
+                  <div style={{ fontSize: '0.98rem', fontWeight: 600, color: 'var(--text-primary, #2F2F2F)', marginBottom: '0.15rem' }}>
                     Subscribe on YouTube
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: colors.accentGold }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--accent-walnut, #7A5A3A)' }}>
                     @Gujaratwallpaper
                   </div>
                 </div>
               </div>
 
               <div
+                className="social-arrow-btn"
                 style={{
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '50%',
-                  backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
-                  border: `1px solid ${colors.borderCard}`,
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '9999px',
+                  backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                  border: '1px solid rgba(122, 90, 58, 0.16)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: colors.textPrimary,
+                  color: 'var(--accent-walnut, #7A5A3A)',
                   flexShrink: 0,
                 }}
-                className="social-strip-arrow"
               >
-                <ArrowUpRight size={18} />
+                <ArrowUpRight size={16} />
               </div>
             </a>
 
@@ -1272,25 +1234,26 @@ export default function Home() {
               rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                backgroundColor: colors.bgCard,
-                border: '1px solid rgba(24, 119, 242, 0.3)',
-                borderRadius: '12px',
-                padding: '1.5rem 1.85rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 gap: '1rem',
-                boxShadow: isDark ? '0 8px 24px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.04)',
-                transition: 'all 0.35s ease',
+                backgroundColor: 'var(--bg-surface, #FFFFFF)',
+                border: '1px solid rgba(24, 119, 242, 0.3)',
+                borderRadius: '12px',
+                padding: '1.5rem 1.85rem',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+                transition: 'all 0.3s ease',
               }}
-              className="social-strip-card facebook-strip-card"
+              className="social-strip-card"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.1rem' }}>
                 <div
+                  className="social-icon-box"
                   style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '12px',
+                    width: '44px',
+                    height: '44px',
+                    borderRadius: '10px',
                     backgroundColor: '#1877F2',
                     display: 'flex',
                     alignItems: 'center',
@@ -1299,34 +1262,34 @@ export default function Home() {
                     flexShrink: 0,
                   }}
                 >
-                  <FacebookIcon size={22} color="#FFFFFF" />
+                  <FacebookIcon size={20} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.05rem', fontWeight: 600, color: colors.textPrimary, marginBottom: '0.15rem' }}>
-                    Follow Us on Facebook
+                  <div style={{ fontSize: '0.98rem', fontWeight: 600, color: 'var(--text-primary, #2F2F2F)', marginBottom: '0.15rem' }}>
+                    Follow on Facebook
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: colors.accentGold }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--accent-walnut, #7A5A3A)' }}>
                     Arun Vala
                   </div>
                 </div>
               </div>
 
               <div
+                className="social-arrow-btn"
                 style={{
-                  width: '38px',
-                  height: '38px',
-                  borderRadius: '50%',
-                  backgroundColor: isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)',
-                  border: `1px solid ${colors.borderCard}`,
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '9999px',
+                  backgroundColor: 'rgba(122, 90, 58, 0.08)',
+                  border: '1px solid rgba(122, 90, 58, 0.16)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: colors.textPrimary,
+                  color: 'var(--accent-walnut, #7A5A3A)',
                   flexShrink: 0,
                 }}
-                className="social-strip-arrow"
               >
-                <ArrowUpRight size={18} />
+                <ArrowUpRight size={16} />
               </div>
             </a>
           </div>
@@ -1334,128 +1297,97 @@ export default function Home() {
       </section>
 
       {/* ==================================================
-          7. FINAL CTA
+          6. FINAL CTA
           ================================================== */}
       <section
         id="final-cta"
         style={{
-          padding: '6rem 0',
-          backgroundColor: colors.bgMain,
-          position: 'relative',
-          textAlign: 'center',
-          transition: 'background-color 0.35s ease',
+          padding: '72px 0 96px',
+          backgroundColor: 'var(--bg-primary, #F8F5F1)',
         }}
       >
-        <div className="container-luxury" style={{ maxWidth: '780px' }}>
-          <h2
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(2.4rem, 4vw, 3.5rem)',
-              color: colors.textPrimary,
-              fontWeight: 500,
-              marginBottom: '1rem',
-              lineHeight: 1.2,
-            }}
-          >
-            Ready to Transform Your Space?
-          </h2>
-
-          <p
-            style={{
-              fontSize: '1.05rem',
-              color: colors.textSecondary,
-              lineHeight: 1.7,
-              fontWeight: 300,
-              marginBottom: '2.5rem',
-            }}
-          >
-            Visit our showroom or connect with us to explore the right wallpaper and decor solution for your space.
-          </p>
-
+        <div className="container-luxury" style={{ maxWidth: '840px', margin: '0 auto' }}>
           <div
+            className="final-cta-card"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              gap: '1.25rem',
+              padding: '3.5rem 2.5rem',
+              textAlign: 'center',
+              backgroundColor: 'var(--bg-surface, #FFFFFF)',
+              border: '1px solid var(--border-card, rgba(122, 90, 58, 0.16))',
+              borderRadius: '16px',
+              boxShadow: '0 6px 24px rgba(0, 0, 0, 0.04)',
             }}
           >
-            <a
-              href="https://wa.me/918320802633?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20enquire%20about%20your%20decor%20solutions."
-              target="_blank"
-              rel="noopener noreferrer"
+            <h2
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.65rem',
-                padding: '0.95rem 2.2rem',
-                backgroundColor: '#25D366',
-                color: '#FFFFFF',
-                fontSize: '0.82rem',
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                textDecoration: 'none',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 6px 20px rgba(37, 211, 102, 0.25)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#1EBE5D';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#25D366';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              <MessageCircle size={17} />
-              <span>WHATSAPP ENQUIRY</span>
-            </a>
-
-            <button
-              onClick={() => setIsShowroomModalOpen(true)}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.65rem',
-                padding: '0.95rem 2.2rem',
-                backgroundColor: 'transparent',
-                color: colors.textPrimary,
-                fontSize: '0.82rem',
+                fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
+                fontSize: 'clamp(2.3rem, 3.6vw, 3.2rem)',
+                color: 'var(--text-primary, #2F2F2F)',
                 fontWeight: 500,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                borderRadius: '4px',
-                border: `1px solid ${colors.borderCard}`,
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = colors.accentGold;
-                e.currentTarget.style.backgroundColor = isDark ? 'rgba(197, 168, 128, 0.1)' : 'rgba(166, 131, 83, 0.1)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = colors.borderCard;
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.transform = 'translateY(0)';
+                marginBottom: '1rem',
+                lineHeight: 1.2,
               }}
             >
-              <span>VISIT SHOWROOM</span>
-            </button>
+              Ready to Transform Your Space?
+            </h2>
+
+            <p
+              style={{
+                fontSize: '1rem',
+                color: 'var(--text-secondary, #5A5652)',
+                lineHeight: 1.65,
+                fontWeight: 400,
+                marginBottom: '2.5rem',
+                maxWidth: '600px',
+                margin: '0 auto 2.5rem',
+              }}
+            >
+              Visit our showroom or connect with us to explore the right wallpaper and decor solution for your space.
+            </p>
+
+            <div
+              className="final-cta-btns"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+                gap: '1rem',
+              }}
+            >
+              <a
+                href="https://wa.me/918320802633?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20enquire%20about%20your%20decor%20solutions."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+                style={{
+                  backgroundColor: '#25D366',
+                  borderColor: '#25D366',
+                  color: '#FFFFFF',
+                  boxShadow: '0 4px 16px rgba(37, 211, 102, 0.3)',
+                }}
+              >
+                <MessageCircle size={15} />
+                <span>WHATSAPP ENQUIRY</span>
+              </a>
+
+              <button
+                onClick={() => setIsShowroomModalOpen(true)}
+                className="btn-secondary"
+              >
+                <span>VISIT SHOWROOM</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Showroom Location Modal */}
+      {/* Showroom Locations Modal */}
       <ShowroomModal
         isOpen={isShowroomModalOpen}
         onClose={() => setIsShowroomModalOpen(false)}
       />
 
-      {/* Scoped CSS for Home Page Interactive Elements & Responsiveness */}
       <style>{`
         /* -- Unified Full-Width Hero Styling -- */
         .hero-main-container {
@@ -1467,11 +1399,27 @@ export default function Home() {
           transition: all 0.3s ease;
         }
 
+        .hero-stat-card {
+          transition: transform 0.25s ease;
+        }
+        .hero-stat-icon {
+          transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+        }
+        .hero-stat-card:hover .hero-stat-icon {
+          border-color: rgba(200, 169, 106, 0.55) !important;
+          background-color: rgba(200, 169, 106, 0.25) !important;
+          transform: translateY(-2px);
+        }
+        .hero-stat-divider {
+          border-left: 1px solid rgba(255, 255, 255, 0.15);
+          padding-left: 1.25rem;
+        }
+
         /* Card hover effects */
         .why-preview-card:hover {
           transform: translateY(-5px);
-          border-color: ${colors.accentGold} !important;
-          box-shadow: ${isDark ? '0 16px 36px rgba(0, 0, 0, 0.5)' : '0 12px 28px rgba(0, 0, 0, 0.08)'};
+          border-color: #7A5A3A !important;
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
         }
 
         .social-strip-card:hover {
@@ -1479,7 +1427,7 @@ export default function Home() {
         }
         .instagram-strip-card:hover {
           border-color: rgba(225, 48, 108, 0.7) !important;
-          background-color: ${isDark ? 'rgba(35, 25, 30, 0.95)' : '#FFF0F5'} !important;
+          background-color: #FFF0F5 !important;
         }
         .instagram-strip-card:hover .social-strip-arrow {
           background-color: #E1306C !important;
@@ -1488,7 +1436,7 @@ export default function Home() {
         }
         .youtube-strip-card:hover {
           border-color: rgba(255, 0, 0, 0.7) !important;
-          background-color: ${isDark ? 'rgba(35, 20, 20, 0.95)' : '#FFF5F5'} !important;
+          background-color: #FFF5F5 !important;
         }
         .youtube-strip-card:hover .social-strip-arrow {
           background-color: #FF0000 !important;
@@ -1497,7 +1445,7 @@ export default function Home() {
         }
         .facebook-strip-card:hover {
           border-color: rgba(24, 119, 242, 0.7) !important;
-          background-color: ${isDark ? 'rgba(18, 30, 48, 0.95)' : '#F0F5FF'} !important;
+          background-color: #F0F5FF !important;
         }
         .facebook-strip-card:hover .social-strip-arrow {
           background-color: #1877F2 !important;
@@ -1522,33 +1470,16 @@ export default function Home() {
           }
         }
 
-        .hero-stat-card {
-          transition: transform 0.25s ease;
-        }
-        .hero-stat-icon {
-          transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-        }
-        .hero-stat-card:hover .hero-stat-icon {
-          border-color: rgba(197, 168, 128, 0.55) !important;
-          background-color: rgba(197, 168, 128, 0.16) !important;
-          transform: translateY(-2px);
-        }
-
         /* Tablet Portrait & Large Mobile */
         @media (max-width: 991px) {
           .hero-upper-grid {
-            grid-template-columns: 1fr !important;
-            gap: 1.5rem !important;
             margin-bottom: 1.5rem !important;
-          }
-          .hero-text-block {
-            max-width: 100% !important;
           }
           .hero-stats-grid {
             grid-template-columns: repeat(3, 1fr) !important;
             gap: 1rem !important;
           }
-          .hero-stat-item {
+          .hero-stat-divider {
             border-left: none !important;
             padding-left: 0 !important;
           }
@@ -1613,9 +1544,9 @@ export default function Home() {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 1rem !important;
           }
-          .hero-stat-item {
-            border-left: none !important;
-            padding-left: 0 !important;
+          .hero-stat-last {
+            grid-column: span 2 !important;
+            justify-content: center !important;
           }
           .social-cta-grid {
             grid-template-columns: 1fr !important;
@@ -1623,9 +1554,7 @@ export default function Home() {
           .why-preview-grid {
             grid-template-columns: 1fr !important;
           }
-          #showroom-location,
-          #social-cta,
-          #why-preview {
+          #showroom-experience {
             padding: 4.5rem 0 !important;
           }
         }
@@ -1678,6 +1607,10 @@ export default function Home() {
             font-size: 0.8rem !important;
             letter-spacing: 0.1em !important;
           }
+          .hero-badges-row {
+            grid-template-columns: 1fr !important;
+            gap: 0.6rem !important;
+          }
           .hero-stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 0.75rem 0.85rem !important;
@@ -1705,9 +1638,7 @@ export default function Home() {
           .social-cta-grid {
             grid-template-columns: 1fr !important;
           }
-          #showroom-location,
-          #social-cta,
-          #why-preview {
+          #showroom-experience {
             padding: 4rem 0 !important;
           }
         }
@@ -1731,5 +1662,3 @@ export default function Home() {
     </div>
   );
 }
-
-

@@ -198,73 +198,87 @@ export default function Contact({ prefilledProduct }) {
                 color: colors.textPrimary,
                 marginBottom: '0.75rem',
                 fontWeight: 600,
-                lineHeight: 1.15,
               }}
             >
-              WhatsApp Enquiry &amp; Call Desk
+              Instant Specification Concierge
             </h3>
-            <p style={{ fontSize: '0.94rem', color: colors.textSecondary, marginBottom: '2rem', lineHeight: 1.6, fontWeight: 300 }}>
-              Need catalogue samples, price estimates, or site visit consultations? Message us directly or give us a call right now.
+            <p style={{ fontSize: '0.94rem', color: colors.textSecondary, lineHeight: 1.6, marginBottom: '2rem', fontWeight: 400 }}>
+              Send photos, room dimensions, or product codes directly to our design team. We offer instant roll calculations and complimentary fitting consultations.
             </p>
 
-            {/* Premium WhatsApp Action Card */}
+            {/* Direct WhatsApp Callout Banner */}
             <div
-              style={{
-                backgroundColor: 'rgba(37, 211, 102, 0.06)',
-                border: '1px solid rgba(37, 211, 102, 0.3)',
-                borderRadius: '20px',
-                padding: '1.85rem',
-                marginBottom: '2rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1.25rem',
-              }}
               className="whatsapp-enquiry-box"
+              style={{
+                backgroundColor: '#F8F5F1',
+                borderRadius: '20px',
+                padding: '1.75rem',
+                border: `1px solid ${colors.borderCard}`,
+                marginBottom: '2rem',
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.03)',
+              }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
                 <div
                   style={{
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '14px',
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
                     backgroundColor: '#25D366',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#FFFFFF',
-                    flexShrink: 0,
-                    boxShadow: '0 6px 16px rgba(37, 211, 102, 0.35)',
                   }}
                 >
-                  <MessageCircle size={26} />
+                  <MessageCircle size={20} />
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.74rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: colors.textMuted, fontWeight: 700 }}>
-                    Official WhatsApp Enquiry
+                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: colors.textPrimary }}>
+                    Instant WhatsApp Architecture Desk
                   </div>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 700, color: colors.textPrimary }}>
-                    +91 {WHATSAPP_ENQUIRY_NUMBER}
+                  <div style={{ fontSize: '0.74rem', color: colors.textMuted }}>
+                    Typical response time: Under 15 minutes
                   </div>
                 </div>
               </div>
 
-              <p style={{ fontSize: '0.88rem', color: colors.textSecondary, margin: 0, lineHeight: 1.5 }}>
-                Click below to start an instant WhatsApp chat with our Surat showroom team:
+              {prefilledProduct && (
+                <div
+                  style={{
+                    backgroundColor: '#E7D7BE',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '12px',
+                    fontSize: '0.82rem',
+                    color: colors.textPrimary,
+                    marginBottom: '1rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    border: `1px solid ${colors.borderSubtle}`,
+                  }}
+                >
+                  <Sparkles size={14} color={colors.accentWalnut} />
+                  <span>Enquiring for: <strong>{prefilledProduct.name}</strong> ({prefilledProduct.category})</span>
+                </div>
+              )}
+
+              <p style={{ fontSize: '0.86rem', color: colors.textSecondary, lineHeight: 1.5, marginBottom: '1.25rem' }}>
+                Chat with an in-house expert regarding wallpaper rolls, acoustic 3D panels, or carpet orders.
               </p>
 
               <button
                 onClick={handleWhatsAppEnquiry}
                 style={{
                   width: '100%',
-                  padding: '1.05rem 1.5rem',
                   backgroundColor: '#25D366',
                   color: '#FFFFFF',
-                  borderRadius: '20px',
                   border: 'none',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
+                  padding: '0.95rem 1.75rem',
+                  borderRadius: '16px',
+                  fontWeight: 700,
+                  fontSize: '0.88rem',
+                  letterSpacing: '0.04em',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',

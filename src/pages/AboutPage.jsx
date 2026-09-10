@@ -3,11 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import About from '../components/About';
 import WhyChooseUs from '../components/WhyChooseUs';
 import CinematicScroll from '../components/CinematicScroll';
-import { useTheme } from '../context/ThemeContext';
 
 export default function AboutPage() {
   const navigate = useNavigate();
-  const { isDark } = useTheme();
 
   const handleVisitClick = () => {
     navigate('/contact');

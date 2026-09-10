@@ -137,31 +137,31 @@ export default function ProductExplorer({
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: '100%',
-                padding: '0.85rem 1.25rem 0.85rem 2.85rem',
-                borderRadius: '24px',
+                padding: '0.85rem 1.25rem 0.85rem 2.75rem',
+                borderRadius: '30px',
                 border: `1px solid ${colors.borderInput}`,
                 backgroundColor: colors.inputBg,
-                fontSize: '0.88rem',
+                fontSize: '0.9rem',
                 color: colors.textPrimary,
                 outline: 'none',
-                transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-                boxShadow: '0 4px 14px rgba(122, 90, 58, 0.05)',
+                transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               }}
               onFocus={(e) => {
                 e.currentTarget.style.borderColor = colors.accentWalnut;
-                e.currentTarget.style.boxShadow = '0 6px 18px rgba(122, 90, 58, 0.12)';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(122, 90, 58, 0.15)';
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = colors.borderInput;
-                e.currentTarget.style.boxShadow = '0 4px 14px rgba(122, 90, 58, 0.05)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.04)';
               }}
             />
             <Search
-              size={18}
-              color={colors.accentWalnut}
+              size={17}
+              color={colors.textSecondary}
               style={{
                 position: 'absolute',
-                left: '1.1rem',
+                left: '1rem',
                 top: '50%',
                 transform: 'translateY(-50%)',
                 pointerEvents: 'none',
@@ -178,8 +178,8 @@ export default function ProductExplorer({
             gap: '0.75rem',
             overflowX: 'auto',
             WebkitOverflowScrolling: 'touch',
-            paddingBottom: '0.85rem',
-            marginBottom: '2rem',
+            paddingBottom: '0.75rem',
+            marginBottom: '1.75rem',
             scrollbarWidth: 'none',
             flexWrap: 'nowrap',
           }}

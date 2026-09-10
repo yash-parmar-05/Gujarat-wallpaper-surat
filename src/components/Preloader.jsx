@@ -48,14 +48,14 @@ export default function Preloader({ isLoading }) {
           exit={{ 
             opacity: 0, 
             y: -20,
-            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+            transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } 
           }}
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: 9999,
             backgroundColor: '#141312',
-            color: '#F7F4EE',
+            color: '#F8F5F1',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -70,7 +70,7 @@ export default function Preloader({ isLoading }) {
               width: '320px',
               height: '320px',
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(197, 168, 128, 0.15) 0%, rgba(20, 19, 18, 0) 70%)',
+              background: 'radial-gradient(circle, rgba(200, 169, 106, 0.15) 0%, rgba(20, 19, 18, 0) 70%)',
               pointerEvents: 'none'
             }}
           />
@@ -84,11 +84,11 @@ export default function Preloader({ isLoading }) {
             <div 
               style={{
                 fontSize: '0.75rem',
-                letterSpacing: '0.3em',
+                letterSpacing: '0.25em',
                 textTransform: 'uppercase',
-                color: '#C5A880',
+                color: '#C8A96A',
                 marginBottom: '1rem',
-                fontWeight: 500
+                fontWeight: 600
               }}
             >
               Surat, Gujarat
@@ -98,9 +98,9 @@ export default function Preloader({ isLoading }) {
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
                 fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                fontWeight: 400,
-                letterSpacing: '0.04em',
-                color: '#F7F4EE',
+                fontWeight: 500,
+                letterSpacing: '-0.02em',
+                color: '#F8F5F1',
                 marginBottom: '0.5rem'
               }}
             >
@@ -126,10 +126,11 @@ export default function Preloader({ isLoading }) {
             transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{
               width: '120px',
-              height: '1.5px',
-              backgroundColor: '#C5A880',
+              height: '2px',
+              backgroundColor: '#C8A96A',
               marginTop: '2.5rem',
-              transformOrigin: 'left'
+              transformOrigin: 'left',
+              borderRadius: '9999px',
             }}
           />
         </motion.div>

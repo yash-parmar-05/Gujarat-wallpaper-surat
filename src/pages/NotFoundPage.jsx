@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
 
 export default function NotFoundPage() {
-  const { isDark } = useTheme();
-
   const bg = '#F8F5F1';
   const textPrimary = '#2F2F2F';
   const textSecondary = '#5A5652';
