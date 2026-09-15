@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import FloatingWhatsApp from './FloatingWhatsApp';
 
 export default function Layout() {
   const location = useLocation();
@@ -24,6 +25,7 @@ export default function Layout() {
         </motion.div>
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }

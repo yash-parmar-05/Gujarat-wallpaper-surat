@@ -880,7 +880,7 @@ export default function Home() {
                 </a>
 
                 <a
-                  href="https://wa.me/918320802633?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20visit%20your%20Surat%20showroom."
+                  href={`https://wa.me/918320802633?text=${encodeURIComponent('Hello Gujarat Wallpaper & Decor, I would like to plan a visit to your Surat showroom.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -911,7 +911,7 @@ export default function Home() {
                   }}
                 >
                   <MessageCircle size={15} />
-                  <span>WHATSAPP ENQUIRY</span>
+                  <span>PLAN YOUR VISIT → WHATSAPP</span>
                 </a>
               </div>
             </div>
@@ -1359,7 +1359,7 @@ export default function Home() {
               }}
             >
               <a
-                href="https://wa.me/918320802633?text=Hello%20Gujarat%20Wallpaper,%20I%20would%20like%20to%20enquire%20about%20your%20decor%20solutions."
+                href={`https://wa.me/918320802633?text=${encodeURIComponent('Hello Gujarat Wallpaper & Decor, I would like to get design guidance for my wallpaper and decor project.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
@@ -1371,7 +1371,7 @@ export default function Home() {
                 }}
               >
                 <MessageCircle size={15} />
-                <span>WHATSAPP ENQUIRY</span>
+                <span>GET DESIGN GUIDANCE ON WHATSAPP →</span>
               </a>
 
               <button

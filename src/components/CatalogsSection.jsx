@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Eye, Download, BookOpen } from 'lucide-react';
+import { FileText, Eye, Download, BookOpen, MessageCircle } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export const CATALOGS_DATA = [
@@ -324,6 +324,40 @@ export default function CatalogsSection({ id = 'catalogs' }) {
                     <span>Download PDF</span>
                   </button>
                 </div>
+
+                {/* Secondary High-Intent CTA: Enquire on WhatsApp */}
+                <a
+                  href={`https://wa.me/918320802633?text=${encodeURIComponent(`Hello Gujarat Wallpaper & Decor, I would like to enquire about the ${catalog.title}.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    marginTop: '12px',
+                    padding: '8px 14px',
+                    color: '#1EBE5D',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    borderRadius: '9999px',
+                    transition: 'all 0.2s ease',
+                    backgroundColor: 'rgba(37, 211, 102, 0.07)',
+                    border: '1px solid rgba(37, 211, 102, 0.2)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(37, 211, 102, 0.14)';
+                    e.currentTarget.style.borderColor = '#1EBE5D';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(37, 211, 102, 0.07)';
+                    e.currentTarget.style.borderColor = 'rgba(37, 211, 102, 0.2)';
+                  }}
+                >
+                  <MessageCircle size={14} />
+                  <span>Enquire on WhatsApp →</span>
+                </a>
               </div>
             </motion.div>
           ))}

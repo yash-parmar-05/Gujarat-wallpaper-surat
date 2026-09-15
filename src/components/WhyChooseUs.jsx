@@ -1104,7 +1104,7 @@ export default function WhyChooseUs() {
             </Link>
 
             <a
-              href="https://wa.me/918320802633?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Gujarat%20Wallpaper%20%26%20Decor%20collections"
+              href={`https://wa.me/918320802633?text=${encodeURIComponent('Hello Gujarat Wallpaper & Decor, I would like to get design guidance for my wallpaper and decor project.')}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1133,7 +1133,7 @@ export default function WhyChooseUs() {
               }}
             >
               <Phone size={15} />
-              <span>WhatsApp Us</span>
+              <span>Get Design Guidance on WhatsApp →</span>
             </a>
           </div>
         </motion.div>
