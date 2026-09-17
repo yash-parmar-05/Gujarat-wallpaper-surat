@@ -16,6 +16,7 @@ import {
 
 import ShowroomModal from '../components/ShowroomModal';
 import CatalogsSection from '../components/CatalogsSection';
+import BeforeAfterSection from '../components/BeforeAfterSection';
 
 const HERO_SLIDES = [
   {
@@ -918,6 +919,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ==================================================
+          BEFORE & AFTER TRANSFORMATIONS SHOWCASE
+          ================================================== */}
+      <BeforeAfterSection id="transformations" />
 
       {/* ==================================================
           4. WHY CHOOSE US PREVIEW (3 Cards)
