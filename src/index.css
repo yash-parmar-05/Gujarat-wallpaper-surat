@@ -434,3 +434,14 @@ body.modal-open .navbar-fixed-root {
   visibility: hidden !important;
   transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease !important;
 }
+
+/* Allow smooth touch scroll inside active modals & portals on mobile */
+body.modal-open .transformation-modal-portal,
+body.modal-open .transformation-modal-card,
+body.modal-open .transformation-modal-scroll,
+body.modal-open .modal-grid,
+body.modal-open .showroom-modal-scroll,
+body.modal-open [role="dialog"] {
+  touch-action: pan-y !important;
+}
+

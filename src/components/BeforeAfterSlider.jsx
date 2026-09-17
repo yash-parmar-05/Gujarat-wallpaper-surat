@@ -20,6 +20,9 @@ export default function BeforeAfterSlider({
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef(null);
 
+  const touchStartRef = useRef({ x: 0, y: 0 });
+  const touchDirectionRef = useRef(null); // 'horizontal' | 'vertical' | null
+
   const calculatePosition = useCallback((clientX) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -29,16 +32,57 @@ export default function BeforeAfterSlider({
   }, []);
 
   const handlePointerDown = (e) => {
-    // Only respond to main button
-    if (e.button !== 0 && e.pointerType === 'mouse') return;
-    setIsDragging(true);
-    e.currentTarget.setPointerCapture(e.pointerId);
-    calculatePosition(e.clientX);
+    // Only respond to primary click for mouse
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+    if (e.pointerType === 'mouse') {
+      setIsDragging(true);
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {}
+      calculatePosition(e.clientX);
+    } else {
+      // Touch interaction: track starting point to discern vertical scroll from horizontal drag
+      touchStartRef.current = { x: e.clientX, y: e.clientY };
+      touchDirectionRef.current = null;
+    }
   };
 
   const handlePointerMove = (e) => {
-    if (!isDragging) return;
-    calculatePosition(e.clientX);
+    if (e.pointerType === 'mouse') {
+      if (!isDragging) return;
+      calculatePosition(e.clientX);
+      return;
+    }
+
+    // Touch interaction
+    if (touchDirectionRef.current === 'vertical') {
+      // User is scrolling the page/modal vertically — do not interfere
+      return;
+    }
+
+    if (touchDirectionRef.current === 'horizontal') {
+      calculatePosition(e.clientX);
+      return;
+    }
+
+    // Determine direction on initial movement
+    const dx = Math.abs(e.clientX - touchStartRef.current.x);
+    const dy = Math.abs(e.clientY - touchStartRef.current.y);
+
+    if (dx > 7 && dx > dy) {
+      // Intent confirmed as horizontal slider interaction
+      touchDirectionRef.current = 'horizontal';
+      setIsDragging(true);
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {}
+      calculatePosition(e.clientX);
+    } else if (dy > 7 && dy > dx) {
+      // Intent confirmed as vertical page/modal scroll
+      touchDirectionRef.current = 'vertical';
+      setIsDragging(false);
+    }
   };
 
   const handlePointerUp = (e) => {
@@ -50,6 +94,7 @@ export default function BeforeAfterSlider({
         // ignore if already released
       }
     }
+    touchDirectionRef.current = null;
   };
 
   const handleKeyDown = (e) => {
@@ -92,7 +137,7 @@ export default function BeforeAfterSlider({
         cursor: isDragging ? 'ew-resize' : 'ew-resize',
         userSelect: 'none',
         WebkitUserSelect: 'none',
-        touchAction: 'none',
+        touchAction: 'pan-y',
         outline: 'none',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
       }}

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Sofa,
@@ -14,6 +15,7 @@ import {
   Clock,
   Layers,
   ShieldCheck,
+  Sparkles,
 } from 'lucide-react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import { TRANSFORMATIONS, TRANSFORMATION_CATEGORIES } from '../data/transformations';
@@ -544,7 +546,7 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
               gap: '20px',
             }}
           >
-            {/* Left: WhatsApp Icon + Text */}
+            {/* Left: Sparkles Badge + Text */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
               <div
                 style={{
@@ -552,16 +554,16 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
                   height: '52px',
                   minWidth: '52px',
                   borderRadius: '50%',
-                  border: '1.5px solid rgba(37, 211, 102, 0.35)',
-                  backgroundColor: 'rgba(37, 211, 102, 0.1)',
+                  border: '1.5px solid rgba(182, 141, 64, 0.35)',
+                  backgroundColor: 'rgba(182, 141, 64, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#25D366',
-                  boxShadow: '0 0 16px rgba(37, 211, 102, 0.18)',
+                  color: 'var(--accent-walnut, #7A5A3A)',
+                  boxShadow: '0 0 16px rgba(182, 141, 64, 0.14)',
                 }}
               >
-                <WhatsAppSvg size={26} color="#25D366" />
+                <Sparkles size={24} />
               </div>
 
               <div>
@@ -585,53 +587,50 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
                     margin: 0,
                   }}
                 >
-                  Get expert design guidance on WhatsApp.
+                  Get expert design guidance and customized wallpaper recommendations for your space.
                 </p>
               </div>
             </div>
 
-            {/* Right: WhatsApp Button */}
-            <a
-              href={`https://wa.me/918320802633?text=${encodeURIComponent(
-                'Hello Gujarat Wallpaper & Decor, I was viewing your Before & After Transformations and would like to get design guidance for a wall transformation in my space.'
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              id="before-after-whatsapp-btn"
+            {/* Right: Book Consultation Action */}
+            <Link
+              to="/contact"
+              id="before-after-consult-btn"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '10px',
-                padding: '13px 26px',
+                padding: '13px 28px',
                 borderRadius: '9999px',
-                backgroundColor: '#25D366',
-                backgroundImage: 'linear-gradient(135deg, #25D366 0%, #1EBE5D 100%)',
+                backgroundColor: 'var(--accent-walnut, #7A5A3A)',
+                backgroundImage: 'linear-gradient(135deg, #7A5A3A 0%, #5E432A 100%)',
                 color: '#FFFFFF',
                 fontFamily: 'var(--font-sans)',
-                fontSize: '0.92rem',
+                fontSize: '0.88rem',
                 fontWeight: 600,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
                 textDecoration: 'none',
-                boxShadow: '0 6px 20px rgba(37, 211, 102, 0.35)',
+                boxShadow: '0 6px 20px rgba(122, 90, 58, 0.28)',
                 transition: 'all 0.22s ease',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                border: '1px solid rgba(200, 169, 106, 0.35)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 10px 28px rgba(37, 211, 102, 0.48)';
+                e.currentTarget.style.boxShadow = '0 10px 28px rgba(122, 90, 58, 0.38)';
                 e.currentTarget.style.backgroundImage =
-                  'linear-gradient(135deg, #22C35E 0%, #18AA52 100%)';
+                  'linear-gradient(135deg, #8E6B46 0%, #6E4F32 100%)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 6px 20px rgba(37, 211, 102, 0.35)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(122, 90, 58, 0.28)';
                 e.currentTarget.style.backgroundImage =
-                  'linear-gradient(135deg, #25D366 0%, #1EBE5D 100%)';
+                  'linear-gradient(135deg, #7A5A3A 0%, #5E432A 100%)';
               }}
             >
-              <WhatsAppSvg size={19} color="#FFFFFF" />
-              <span>Chat on WhatsApp</span>
-              <span style={{ fontSize: '1.05rem', marginLeft: '2px' }}>→</span>
-            </a>
+              <span>Get Design Guidance</span>
+              <ArrowRight size={15} />
+            </Link>
           </div>
         </motion.div>
       </div>
@@ -644,6 +643,10 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
           <AnimatePresence>
             {selectedProject && (
               <div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="transformation-modal-title"
+                data-lenis-prevent="true"
                 className="transformation-modal-portal"
                 style={{
                   position: 'fixed',
@@ -659,16 +662,16 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
                   backgroundColor: 'rgba(14, 12, 10, 0.82)',
                   backdropFilter: 'blur(10px)',
                   WebkitBackdropFilter: 'blur(10px)',
-                  overscrollBehavior: 'contain',
+                  touchAction: 'pan-y',
                 }}
                 onClick={closeModal}
-                onWheel={(e) => e.stopPropagation()}
               >
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  initial={{ opacity: 0, scale: 0.96, y: 18 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 18 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  data-lenis-prevent="true"
                   className="transformation-modal-card"
                   style={{
                     position: 'relative',
@@ -676,246 +679,277 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
                     borderRadius: '24px',
                     maxWidth: '680px',
                     width: '100%',
-                    maxHeight: 'min(90vh, 760px)',
-                    overflowY: 'auto',
-                    overflowX: 'hidden',
-                    overscrollBehavior: 'contain',
+                    maxHeight: 'min(90dvh, 800px)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    overflow: 'hidden',
                     boxShadow: '0 24px 60px rgba(0, 0, 0, 0.35)',
                     border: '1px solid rgba(122, 90, 58, 0.18)',
-                    padding: '24px 24px 28px',
                     boxSizing: 'border-box',
-                    scrollbarWidth: 'none',
-                    msOverflowStyle: 'none',
+                    touchAction: 'pan-y',
+                    zIndex: 10,
                   }}
                   onClick={(e) => e.stopPropagation()}
-                  onWheel={(e) => e.stopPropagation()}
                 >
-                  {/* Clean Round Close Button */}
-                  <button
-                    onClick={closeModal}
-                    aria-label="Close transformation details"
+                  {/* Fixed Header: Category, Title, & Close Button (Always visible) */}
+                  <div
                     style={{
-                      position: 'absolute',
-                      top: '18px',
-                      right: '18px',
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '50%',
-                      backgroundColor: '#F5F2EC',
-                      border: '1px solid rgba(122, 90, 58, 0.18)',
+                      padding: '18px 24px 14px',
+                      borderBottom: '1px solid rgba(122, 90, 58, 0.12)',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      color: '#4A4641',
-                      transition: 'all 0.2s ease',
-                      zIndex: 20,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#ECE6DD';
-                      e.currentTarget.style.transform = 'scale(1.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#F5F2EC';
-                      e.currentTarget.style.transform = 'scale(1)';
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                      gap: '16px',
+                      flexShrink: 0,
+                      backgroundColor: '#FFFFFF',
+                      zIndex: 10,
                     }}
                   >
-                    <X size={17} />
-                  </button>
+                    <div style={{ minWidth: 0 }}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          padding: '3px 10px',
+                          borderRadius: '6px',
+                          backgroundColor: 'rgba(122, 90, 58, 0.1)',
+                          color: 'var(--accent-walnut, #7A5A3A)',
+                          fontSize: '0.74rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.1em',
+                          textTransform: 'uppercase',
+                          marginBottom: '4px',
+                        }}
+                      >
+                        {selectedProject.categoryLabel}
+                      </span>
+                      <h3
+                        id="transformation-modal-title"
+                        style={{
+                          fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
+                          fontSize: 'clamp(1.4rem, 2.2vw, 1.85rem)',
+                          color: 'var(--text-primary, #2F2F2F)',
+                          margin: 0,
+                          fontWeight: 600,
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {selectedProject.title} Transformation
+                      </h3>
+                    </div>
 
-                  {/* Category Pill + Title */}
-                  <div style={{ paddingRight: '44px', marginBottom: '16px' }}>
-                    <span
+                    {/* Close Button */}
+                    <button
+                      onClick={closeModal}
+                      aria-label="Close transformation details"
                       style={{
-                        display: 'inline-block',
-                        padding: '3px 10px',
-                        borderRadius: '6px',
-                        backgroundColor: 'rgba(122, 90, 58, 0.1)',
-                        color: 'var(--accent-walnut, #7A5A3A)',
-                        fontSize: '0.74rem',
-                        fontWeight: 700,
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase',
-                        marginBottom: '6px',
+                        width: '36px',
+                        height: '36px',
+                        minWidth: '36px',
+                        borderRadius: '50%',
+                        backgroundColor: '#F5F2EC',
+                        border: '1px solid rgba(122, 90, 58, 0.18)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        color: '#4A4641',
+                        transition: 'all 0.2s ease',
+                        flexShrink: 0,
+                        marginTop: '2px',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#ECE6DD';
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#F5F2EC';
+                        e.currentTarget.style.transform = 'scale(1)';
                       }}
                     >
-                      {selectedProject.categoryLabel}
-                    </span>
+                      <X size={17} />
+                    </button>
+                  </div>
 
-                    <h3
-                      style={{
-                        fontFamily: "'Cormorant Garamond', Garamond, Georgia, serif",
-                        fontSize: 'clamp(1.6rem, 2.5vw, 2.1rem)',
-                        color: 'var(--text-primary, #2F2F2F)',
-                        margin: '0 0 6px',
-                        fontWeight: 600,
-                        lineHeight: 1.2,
-                      }}
-                    >
-                      {selectedProject.title} Transformation
-                    </h3>
-
+                  {/* Scrollable Body: 100% Smooth Native Touch Scrolling */}
+                  <div
+                    data-lenis-prevent="true"
+                    className="transformation-modal-scroll"
+                    style={{
+                      padding: '20px 24px 28px',
+                      overflowY: 'auto',
+                      overflowX: 'hidden',
+                      WebkitOverflowScrolling: 'touch',
+                      overscrollBehavior: 'contain',
+                      touchAction: 'pan-y',
+                      flex: '1 1 auto',
+                      minHeight: 0,
+                    }}
+                  >
+                    {/* Story description */}
                     <p
                       style={{
                         fontFamily: 'var(--font-sans)',
-                        fontSize: '0.9rem',
+                        fontSize: '0.92rem',
                         color: 'var(--text-secondary, #5A5652)',
-                        lineHeight: 1.5,
-                        margin: 0,
+                        lineHeight: 1.55,
+                        margin: '0 0 16px',
                       }}
                     >
                       {selectedProject.fullStory}
                     </p>
-                  </div>
 
-                  {/* Interactive Slider Inside Modal */}
-                  <div style={{ marginBottom: '18px', borderRadius: '16px', overflow: 'hidden' }}>
-                    <BeforeAfterSlider
-                      beforeImage={selectedProject.beforeImage}
-                      beforeFallback={selectedProject.beforeFallback}
-                      afterImage={selectedProject.afterImage}
-                      afterFallback={selectedProject.afterFallback}
-                      beforeAlt={selectedProject.beforeAlt}
-                      afterAlt={selectedProject.afterAlt}
-                      title={selectedProject.title}
-                      aspectRatio="16 / 10"
-                    />
-                  </div>
-
-                  {/* 2-Column Info Grid */}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                      gap: '12px',
-                      marginBottom: '18px',
-                      padding: '14px',
-                      backgroundColor: '#FAF7F2',
-                      borderRadius: '12px',
-                      border: '1px solid rgba(122, 90, 58, 0.1)',
-                    }}
-                  >
-                    <div>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          color: 'var(--accent-walnut, #7A5A3A)',
-                          fontSize: '0.76rem',
-                          fontWeight: 700,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.08em',
-                          marginBottom: '4px',
-                        }}
-                      >
-                        <Clock size={14} />
-                        <span>Timeline</span>
-                      </div>
-                      <div style={{ fontSize: '0.88rem', color: '#2F2F2F', fontWeight: 600 }}>
-                        {selectedProject.duration}
-                      </div>
+                    {/* Interactive Slider Inside Modal */}
+                    <div style={{ marginBottom: '18px', borderRadius: '16px', overflow: 'hidden' }}>
+                      <BeforeAfterSlider
+                        beforeImage={selectedProject.beforeImage}
+                        beforeFallback={selectedProject.beforeFallback}
+                        afterImage={selectedProject.afterImage}
+                        afterFallback={selectedProject.afterFallback}
+                        beforeAlt={selectedProject.beforeAlt}
+                        afterAlt={selectedProject.afterAlt}
+                        title={selectedProject.title}
+                        aspectRatio="16 / 10"
+                      />
                     </div>
 
-                    <div>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          color: 'var(--accent-walnut, #7A5A3A)',
-                          fontSize: '0.76rem',
-                          fontWeight: 700,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.08em',
-                          marginBottom: '4px',
-                        }}
-                      >
-                        <ShieldCheck size={14} />
-                        <span>Key Benefit</span>
-                      </div>
-                      <div style={{ fontSize: '0.88rem', color: '#2F2F2F', fontWeight: 600 }}>
-                        {selectedProject.highlight}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Materials List */}
-                  <div style={{ marginBottom: '22px' }}>
+                    {/* 2-Column Info Grid */}
                     <div
                       style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        color: 'var(--accent-walnut, #7A5A3A)',
-                        fontSize: '0.76rem',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        marginBottom: '8px',
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                        gap: '12px',
+                        marginBottom: '18px',
+                        padding: '14px',
+                        backgroundColor: '#FAF7F2',
+                        borderRadius: '12px',
+                        border: '1px solid rgba(122, 90, 58, 0.1)',
                       }}
                     >
-                      <Layers size={14} />
-                      <span>Materials &amp; Decor Installed</span>
-                    </div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                      {selectedProject.materials.map((mat, i) => (
-                        <span
-                          key={i}
+                      <div>
+                        <div
                           style={{
-                            padding: '5px 12px',
-                            backgroundColor: '#F8F5F1',
-                            border: '1px solid rgba(122, 90, 58, 0.16)',
-                            borderRadius: '9999px',
-                            fontSize: '0.82rem',
-                            color: '#423E39',
-                            fontWeight: 500,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            color: 'var(--accent-walnut, #7A5A3A)',
+                            fontSize: '0.76rem',
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            marginBottom: '4px',
                           }}
                         >
-                          {mat}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                          <Clock size={14} />
+                          <span>Timeline</span>
+                        </div>
+                        <div style={{ fontSize: '0.88rem', color: '#2F2F2F', fontWeight: 600 }}>
+                          {selectedProject.duration}
+                        </div>
+                      </div>
 
-                  {/* Full-Width WhatsApp Inquiry Button */}
-                  <a
-                    href={`https://wa.me/918320802633?text=${encodeURIComponent(
-                      `Hello Gujarat Wallpaper & Decor, I am interested in a transformation like your "${selectedProject.title}" (${selectedProject.categoryLabel}). Please share details and an estimated estimate.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '9px',
-                      padding: '13px 20px',
-                      borderRadius: '12px',
-                      backgroundColor: '#25D366',
-                      backgroundImage: 'linear-gradient(135deg, #25D366 0%, #1EBE5D 100%)',
-                      color: '#FFFFFF',
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.94rem',
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                      boxShadow: '0 6px 20px rgba(37, 211, 102, 0.35)',
-                      transition: 'all 0.2s ease',
-                      boxSizing: 'border-box',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundImage = 'linear-gradient(135deg, #22C35E 0%, #18AA52 100%)';
-                      e.currentTarget.style.boxShadow = '0 10px 26px rgba(37, 211, 102, 0.48)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundImage = 'linear-gradient(135deg, #25D366 0%, #1EBE5D 100%)';
-                      e.currentTarget.style.boxShadow = '0 6px 20px rgba(37, 211, 102, 0.35)';
-                    }}
-                  >
-                    <WhatsAppSvg size={19} color="#FFFFFF" />
-                    <span>Get a Free Quote for This Transformation on WhatsApp</span>
-                  </a>
+                      <div>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            color: 'var(--accent-walnut, #7A5A3A)',
+                            fontSize: '0.76rem',
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            marginBottom: '4px',
+                          }}
+                        >
+                          <ShieldCheck size={14} />
+                          <span>Key Benefit</span>
+                        </div>
+                        <div style={{ fontSize: '0.88rem', color: '#2F2F2F', fontWeight: 600 }}>
+                          {selectedProject.highlight}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Materials List */}
+                    <div style={{ marginBottom: '22px' }}>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          color: 'var(--accent-walnut, #7A5A3A)',
+                          fontSize: '0.76rem',
+                          fontWeight: 700,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          marginBottom: '8px',
+                        }}
+                      >
+                        <Layers size={14} />
+                        <span>Materials &amp; Decor Installed</span>
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                        {selectedProject.materials.map((mat, i) => (
+                          <span
+                            key={i}
+                            style={{
+                              padding: '5px 12px',
+                              backgroundColor: '#F8F5F1',
+                              border: '1px solid rgba(122, 90, 58, 0.16)',
+                              borderRadius: '9999px',
+                              fontSize: '0.82rem',
+                              color: '#423E39',
+                              fontWeight: 500,
+                            }}
+                          >
+                            {mat}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Full-Width Luxury Consultation Action Button */}
+                    <Link
+                      to="/contact"
+                      onClick={closeModal}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '9px',
+                        padding: '14px 22px',
+                        borderRadius: '12px',
+                        backgroundColor: 'var(--accent-walnut, #7A5A3A)',
+                        backgroundImage: 'linear-gradient(135deg, #7A5A3A 0%, #5E432A 100%)',
+                        color: '#FFFFFF',
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.92rem',
+                        fontWeight: 600,
+                        letterSpacing: '0.04em',
+                        textTransform: 'uppercase',
+                        textDecoration: 'none',
+                        boxShadow: '0 6px 20px rgba(122, 90, 58, 0.28)',
+                        transition: 'all 0.22s ease',
+                        border: '1px solid rgba(200, 169, 106, 0.3)',
+                        boxSizing: 'border-box',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundImage =
+                          'linear-gradient(135deg, #8E6B46 0%, #6E4F32 100%)';
+                        e.currentTarget.style.boxShadow = '0 10px 26px rgba(122, 90, 58, 0.38)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundImage =
+                          'linear-gradient(135deg, #7A5A3A 0%, #5E432A 100%)';
+                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(122, 90, 58, 0.28)';
+                      }}
+                    >
+                      <Sparkles size={17} />
+                      <span>Book Design Consultation for This Space</span>
+                      <ArrowRight size={15} />
+                    </Link>
+                  </div>
                 </motion.div>
               </div>
             )}
@@ -925,15 +959,19 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
 
       {/* Scoped CSS for Perfect Scroll & Responsive Display */}
       <style>{`
-        /* Hide all raw scrollbars on the modal card */
-        .transformation-modal-card {
-          scrollbar-width: none !important;
-          -ms-overflow-style: none !important;
+        .transformation-modal-portal {
+          touch-action: pan-y !important;
+          -webkit-overflow-scrolling: touch !important;
         }
-        .transformation-modal-card::-webkit-scrollbar {
-          display: none !important;
-          width: 0 !important;
-          height: 0 !important;
+
+        .transformation-modal-card {
+          touch-action: pan-y !important;
+        }
+
+        .transformation-modal-scroll {
+          touch-action: pan-y !important;
+          -webkit-overflow-scrolling: touch !important;
+          overscroll-behavior: contain !important;
         }
 
         /* Responsive Breakpoints */
@@ -959,13 +997,25 @@ export default function BeforeAfterSection({ id = 'transformations' }) {
             max-width: 88vw !important;
             min-width: 270px !important;
           }
-          #before-after-whatsapp-btn {
+          #before-after-consult-btn {
             width: 100%;
             justify-content: center;
           }
+          .transformation-modal-portal {
+            padding: 10px !important;
+            align-items: flex-end !important;
+          }
           .transformation-modal-card {
-            padding: 20px 16px 22px !important;
-            border-radius: 18px !important;
+            max-height: 88dvh !important;
+            max-height: 88vh !important;
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-top-left-radius: 24px !important;
+            border-top-right-radius: 24px !important;
+            width: 100% !important;
+          }
+          .transformation-modal-scroll {
+            padding: 16px 16px 24px !important;
           }
         }
       `}</style>

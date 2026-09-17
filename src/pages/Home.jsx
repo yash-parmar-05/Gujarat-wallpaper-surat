@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowUpRight,
+  ArrowRight,
   Sparkles,
   MessageCircle,
   ShieldCheck,
@@ -1364,21 +1365,13 @@ export default function Home() {
                 gap: '1rem',
               }}
             >
-              <a
-                href={`https://wa.me/918320802633?text=${encodeURIComponent('Hello Gujarat Wallpaper & Decor, I would like to get design guidance for my wallpaper and decor project.')}`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact"
                 className="btn-primary"
-                style={{
-                  backgroundColor: '#25D366',
-                  borderColor: '#25D366',
-                  color: '#FFFFFF',
-                  boxShadow: '0 4px 16px rgba(37, 211, 102, 0.3)',
-                }}
               >
-                <MessageCircle size={15} />
-                <span>GET DESIGN GUIDANCE ON WHATSAPP →</span>
-              </a>
+                <span>BOOK DESIGN CONSULTATION</span>
+                <ArrowRight size={15} />
+              </Link>
 
               <button
                 onClick={() => setIsShowroomModalOpen(true)}
